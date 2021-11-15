@@ -8,6 +8,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "dev": "nodemon --exec babel-node src/server.js --delay 2",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
