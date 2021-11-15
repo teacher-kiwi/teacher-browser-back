@@ -2,12 +2,11 @@
   "name": "teacher-browser-back",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
-  "type": "module",
-  "dependencies": {
-    "express": "^4.17.1"
+  "engines": {
+    "node": "15.12.0"
   },
-  "devDependencies": {},
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
@@ -22,5 +21,21 @@
   "bugs": {
     "url": "https://github.com/teacher-kiwi/teacher-browser-back/issues"
   },
-  "homepage": "https://github.com/teacher-kiwi/teacher-browser-back#readme"
+  "homepage": "https://github.com/teacher-kiwi/teacher-browser-back#readme",
+  "dependencies": {
+    "apollo-server": "^3.5.0",
+    "apollo-server-express": "^3.5.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "graphql": "^15.7.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.4",
+    "@babel/core": "^7.14.6",
+    "@babel/node": "^7.14.7",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.14.7",
+    "nodemon": "^2.0.12"
+  }
 }
