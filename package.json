@@ -6,7 +6,6 @@
     "node": "15.12.0"
   },
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "dev": "nodemon --exec babel-node src/server.js --delay 2",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -25,6 +24,7 @@
   "homepage": "https://github.com/teacher-kiwi/teacher-browser-back#readme",
   "dependencies": {
     "apollo-server": "^3.5.0",
+    "apollo-server-core": "^3.5.0",
     "apollo-server-express": "^3.5.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
