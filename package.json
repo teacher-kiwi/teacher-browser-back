@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/teacher-kiwi/teacher-browser-back#readme",
   "dependencies": {
+    "@prisma/client": "^3.5.0",
     "apollo-server": "^3.5.0",
     "apollo-server-core": "^3.5.0",
     "apollo-server-express": "^3.5.0",
@@ -37,6 +38,7 @@
     "@babel/node": "^7.14.7",
     "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.14.7",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "prisma": "^3.5.0"
   }
 }
