@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/teacher-kiwi/teacher-browser-back#readme",
   "dependencies": {
+    "@graphql-tools/load-files": "^6.5.2",
+    "@graphql-tools/merge": "^8.2.1",
     "@prisma/client": "^3.5.0",
     "apollo-server": "^3.5.0",
     "apollo-server-core": "^3.5.0",
@@ -31,6 +33,8 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "graphql": "^15.7.2",
+    "graphql-tools": "^8.2.0",
+    "mongoose": "^6.0.13",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
