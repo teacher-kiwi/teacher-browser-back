@@ -1,10 +1,10 @@
-import user from "../../models/user"
+import User from "../../models/user"
 
 
 export default {
   Query: {
     seeUser: async () => {
-      return await user.find()
+      return await User.find()
     }
   }
 }
