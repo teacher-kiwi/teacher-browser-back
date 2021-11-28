@@ -3,7 +3,7 @@ import User from "../../models/user"
 import bcrypt from "bcrypt"
 
 export default {
-  Query: {
+  Mutation: {
     loginUser: async (_, { email, password }) => {
       const user = await User.findOne({ email })
       if (!user) {
