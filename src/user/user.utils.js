@@ -15,7 +15,7 @@ export const getUser = async (token) => {
 }
 
 export const protectedResovler = (ourResolver) => (root, args, context, info) => {
-  if (!context.loggedInuser) {
+  if (!context.loggedInUser) {
     return {
       ok: false,
       error: "로그인이 필요합니다."

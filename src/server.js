@@ -68,8 +68,9 @@ async function startApolloServer(typeDefs, resolvers) {
     introspection: true,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
     context: async ({ req }) => {
+      console.log(req.headers.token);
       return {
-        loggedInUser: await getUser(req.header.token)
+        loggedInUser: await getUser(req.headers.token)
       }
     }
   })
