@@ -1,20 +1,15 @@
 import ToDoList from "../../models/toDoList"
 import User from "../../models/user"
+import { protectedResovler } from "../../user/user.utils"
 
 export default {
   Mutation: {
-    createToDoList: async (_, { toDo, userEmail }, { loggedInUser }) => {
+    createToDoList: protectedResovler(async (_, { toDo, userEmail }, { loggedInUser }) => {
       const user = await User.findOne({ email: userEmail })
       if (!user) {
         return {
           ok: false,
           error: "사용자를 찾을 수 없습니다."
-        }
-      }
-      if (!loggedInUser) {
-        return {
-          ok: false,
-          error: "로그인이 필요합니다."
         }
       }
       if (user.email !== loggedInUser.email) {
@@ -30,6 +25,6 @@ export default {
       return {
         ok: true
       }
-    }
+    })
   }
 }
