@@ -6,6 +6,7 @@ import http from "http"
 import logger from "morgan"
 import { resolvers, typeDefs } from "./schema"
 import dbConnect from "./models/index"
+import { getUser } from "./user/user.utils"
 dbConnect()
 
 // // 타입 정의
@@ -65,7 +66,12 @@ async function startApolloServer(typeDefs, resolvers) {
     resolvers,
     playground: true,
     introspection: true,
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })]
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    context: async ({ req }) => {
+      return {
+        loggedInUser: await getUser(req.headers.token)
+      }
+    }
   })
   await server.start()
   // 필요한 미들웨어 작성
