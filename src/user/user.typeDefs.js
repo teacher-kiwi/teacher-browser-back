@@ -5,5 +5,6 @@ export default gql`
     _id: ID!
     email: String!
     password: String
+    school: String
   }
 `

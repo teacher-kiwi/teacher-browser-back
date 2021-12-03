@@ -9,6 +9,9 @@ const userSchema = new Schema({
   },
   password: {
     type: String
+  },
+  school: {
+    type: String
   }
 })
 
