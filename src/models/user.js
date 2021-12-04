@@ -10,7 +10,16 @@ const userSchema = new Schema({
   password: {
     type: String
   },
-  school: {
+  schoolName: {
+    type: String
+  },
+  schoolCode: {
+    type: String
+  },
+  areaCode: {
+    type: String
+  },
+  schoolAdress: {
     type: String
   }
 })
