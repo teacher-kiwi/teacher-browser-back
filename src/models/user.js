@@ -8,8 +8,19 @@ const userSchema = new Schema({
     required: true
   },
   password: {
-    type: String,
-    required: true
+    type: String
+  },
+  schoolName: {
+    type: String
+  },
+  schoolCode: {
+    type: String
+  },
+  areaCode: {
+    type: String
+  },
+  schoolAdress: {
+    type: String
   }
 })
 

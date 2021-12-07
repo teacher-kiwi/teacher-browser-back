@@ -4,6 +4,10 @@ export default gql`
   type User {
     _id: ID!
     email: String!
-    password: String!
+    password: String
+    schoolName: String
+    schoolCode: String
+    areaCode: String
+    schoolAdress: String
   }
 `
