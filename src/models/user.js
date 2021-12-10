@@ -21,6 +21,9 @@ const userSchema = new Schema({
   },
   schoolAdress: {
     type: String
+  },
+  studentsNum: {
+    type: Number
   }
 })
 
