@@ -22,7 +22,7 @@ const userSchema = new Schema({
   schoolAdress: {
     type: String
   },
-  studentsNum: {
+  studentNum: {
     type: Number
   }
 })

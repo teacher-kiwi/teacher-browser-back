@@ -3,7 +3,7 @@ import User from "../models/user"
 
 export default {
   User: {
-    studentsNum: async ({ email }) => {
+    studentNum: async ({ email }) => {
       const teacher = await User.findOne({ email })
       return await Student.count({ teacherEmail: teacher.email })
     }

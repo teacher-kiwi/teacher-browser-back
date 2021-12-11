@@ -9,6 +9,6 @@ export default gql`
     schoolCode: String
     areaCode: String
     schoolAdress: String
-    studentsNum: Int
+    studentNum: Int
   }
 `
