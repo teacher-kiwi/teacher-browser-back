@@ -22,7 +22,7 @@ export default {
       for (let i = 0; i < studentArr.length; i++) {
         await Student.create({
           teacherEmail,
-          name: studentArr[0]
+          name: studentArr[i]
         })
       }
       return {
