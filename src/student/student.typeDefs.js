@@ -5,5 +5,6 @@ export default gql`
     _id: ID!
     teacherEmail: String!
     name: String!
+    order: Int!
   }
 `

@@ -4,7 +4,7 @@ import { protectedResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
-    createStudent: protectedResovler(async (_, { teacherEmail, studentString }, { loggedInUser }) => {
+    addStudent: protectedResovler(async (_, { teacherEmail, name }, { loggedInUser }) => {
       const user = await User.findOne({ email: teacherEmail })
       if (!user) {
         return {
@@ -18,14 +18,13 @@ export default {
           error: "등록 권한이 없습니다."
         }
       }
-      const studentArr = studentString.split(",")
-      for (let i = 0; i < studentArr.length; i++) {
-        await Student.create({
-          teacherEmail,
-          name: studentArr[i],
-          order: i + 1
-        })
-      }
+      const student = await Student.find({ teacherEmail }).sort({ "order": 1 })
+      const lastStudent = student[student.length - 1]
+      await Student.create({
+        teacherEmail,
+        name,
+        order: lastStudent.order + 1
+      })
       return {
         ok: true
       }
