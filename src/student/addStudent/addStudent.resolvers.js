@@ -18,6 +18,14 @@ export default {
           error: "등록 권한이 없습니다."
         }
       }
+      const existStudent = await Student.findOne({ teacherEmail, name })
+      if (existStudent) {
+        return {
+          ok: false,
+          error: "같은 이름의 학생이 존재합니다."
+        }
+      }
+
       const student = await Student.find({ teacherEmail }).sort({ "order": 1 })
       const lastStudent = student[student.length - 1]
       await Student.create({

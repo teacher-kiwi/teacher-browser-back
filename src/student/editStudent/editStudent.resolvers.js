@@ -18,6 +18,13 @@ export default {
           error: "삭제 권한이 없습니다."
         }
       }
+      const existStudent = await Student.findOne({ teacherEmail, name })
+      if (existStudent) {
+        return {
+          ok: false,
+          error: "같은 이름의 학생이 존재합니다."
+        }
+      }
       await Student.updateOne({ _id: id }, { name })
       return {
         ok: true
