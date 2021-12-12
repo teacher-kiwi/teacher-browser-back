@@ -6,6 +6,10 @@ const studentSchema = new Schema({
   teacherEmail: {
     type: String,
     required: true
+  },
+  name: {
+    type: String,
+    required: true
   }
 })
 
