@@ -4,7 +4,7 @@ import { protectedResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
-    addStudent: protectedResovler(async (_, { teacherEmail, name }, { loggedInUser }) => {
+    addStudent: protectedResovler(async (_, { teacherEmail, name, order }, { loggedInUser }) => {
       const user = await User.findOne({ email: teacherEmail })
       if (!user) {
         return {
@@ -26,12 +26,18 @@ export default {
         }
       }
 
-      const student = await Student.find({ teacherEmail }).sort({ "order": 1 })
-      const lastStudent = student[student.length - 1]
+      const existStudent2 = await Student.findOne({ teacherEmail, order })
+      if (existStudent2) {
+        return {
+          ok: false,
+          error: "같은 번호의 학생이 존재합니다."
+        }
+      }
+
       await Student.create({
         teacherEmail,
         name,
-        order: lastStudent.order + 1
+        order
       })
       return {
         ok: true
