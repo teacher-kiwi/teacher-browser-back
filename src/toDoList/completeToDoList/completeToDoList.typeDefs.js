@@ -5,7 +5,7 @@ export default gql`
     completeToDoList(
       _id: ID!
       userEmail: String!
-      isComplete: Boolean
+      isComplete: Boolean!
     ): mutationResult
   }
 `;
