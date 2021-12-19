@@ -10,5 +10,6 @@ export default gql`
     areaCode: String
     schoolAdress: String
     studentNum: Int
+    bgTheme: String
   }
-`
+`;

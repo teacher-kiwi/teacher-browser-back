@@ -2,6 +2,13 @@ import { gql } from "apollo-server-core";
 
 export default gql`
   type Mutation {
-    updateUser(userEmail:String!, schoolName: String, schoolCode:String, areaCode:String, schoolAdress:String): mutationResult
+    updateUser(
+      userEmail: String!
+      schoolName: String
+      schoolCode: String
+      areaCode: String
+      schoolAdress: String
+      bgTheme: String
+    ): mutationResult
   }
-`
+`;
