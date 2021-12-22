@@ -1,22 +1,28 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
-const { Schema } = mongoose
+const { Schema } = mongoose;
 
 const toDoListSchema = new Schema({
   toDo: {
     type: String,
-    required: true
+    required: true,
   },
   userEmail: {
     type: String,
-    required: true
+    required: true,
   },
   isComplete: {
     type: Boolean,
-    default: false
-  }
-})
+    default: false,
+  },
+  startDate: {
+    type: String,
+  },
+  endDate: {
+    type: String,
+  },
+});
 
-const ToDoList = mongoose.model("ToDoList", toDoListSchema)
+const ToDoList = mongoose.model("ToDoList", toDoListSchema);
 
-export default ToDoList
+export default ToDoList;
