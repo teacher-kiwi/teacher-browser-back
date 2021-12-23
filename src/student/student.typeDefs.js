@@ -4,7 +4,7 @@ export default gql`
   type Student {
     _id: ID!
     teacherEmail: String!
-    name: String!
-    order: Int!
+    studentName: String!
+    studentOrder: Int!
   }
-`
+`;
