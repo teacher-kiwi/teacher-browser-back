@@ -2,24 +2,21 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const studentSchema = new Schema({
+const studentListSchema = new Schema({
   teacherEmail: {
     type: String,
     required: true,
   },
-  studentName: {
+  listName: {
     type: String,
     required: true,
   },
-  studentOrder: {
+  listOrder: {
     type: Number,
     required: true,
   },
-  listId: {
-    type: String,
-  },
 });
 
-const Student = mongoose.model("Student", studentSchema);
+const StudentList = mongoose.model("StudentList", studentListSchema);
 
-export default Student;
+export default StudentList;

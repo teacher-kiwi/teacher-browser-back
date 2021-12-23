@@ -6,5 +6,7 @@ export default gql`
     toDo: String!
     userEmail: String!
     isComplete: Boolean
+    startDate: String
+    endDate: String
   }
-`
+`;

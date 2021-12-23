@@ -1,11 +1,16 @@
+import StudentList from "../../models/studentList";
 import Student from "../../models/student";
 import User from "../../models/user";
 import { protectedResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
-    createStudent: protectedResovler(
-      async (_, { teacherEmail, studentString }, { loggedInUser }) => {
+    createStudentList: protectedResovler(
+      async (
+        _,
+        { teacherEmail, listName, listOrder, students },
+        { loggedInUser }
+      ) => {
         const user = await User.findOne({ email: teacherEmail });
         if (!user) {
           return {
@@ -19,14 +24,25 @@ export default {
             error: "등록 권한이 없습니다.",
           };
         }
-        const studentArr = studentString.split(",");
-        for (let i = 0; i < studentArr.length; i++) {
+        await StudentList.create({
+          teacherEmail,
+          listName,
+          listOrder,
+        });
+        const listId = await StudentList.findOne({
+          teacherEmail,
+          listName,
+          listOrder,
+        });
+        students.forEach(async (element) => {
           await Student.create({
             teacherEmail,
-            studentName: studentArr[i],
-            studentOrder: i + 1,
+            studentName: element.studentName,
+            studentOrder: element.studentOrder,
+            listId: listId._id,
           });
-        }
+        });
+
         return {
           ok: true,
         };

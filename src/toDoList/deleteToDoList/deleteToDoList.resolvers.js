@@ -1,12 +1,12 @@
-import Student from "../../models/student";
+import ToDoList from "../../models/toDoList";
 import User from "../../models/user";
 import { protectedResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
-    deleteStudent: protectedResovler(
-      async (_, { teacherEmail, studentName }, { loggedInUser }) => {
-        const user = await User.findOne({ email: teacherEmail });
+    deleteToDoList: protectedResovler(
+      async (_, { _id, userEmail }, { loggedInUser }) => {
+        const user = await User.findOne({ email: userEmail });
         if (!user) {
           return {
             ok: false,
@@ -16,10 +16,10 @@ export default {
         if (user.email !== loggedInUser.email) {
           return {
             ok: false,
-            error: "삭제 권한이 없습니다.",
+            error: "수정할 권한이 없습니다.",
           };
         }
-        await Student.deleteOne({ teacherEmail, studentName });
+        await ToDoList.deleteOne({ _id, userEmail });
         return {
           ok: true,
         };
