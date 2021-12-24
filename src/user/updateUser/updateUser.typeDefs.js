@@ -9,6 +9,7 @@ export default gql`
       areaCode: String
       schoolAdress: String
       bgTheme: String
+      alergy: [Int]
     ): mutationResult
   }
 `;

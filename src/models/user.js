@@ -28,6 +28,9 @@ const userSchema = new Schema({
   bgTheme: {
     type: String,
   },
+  alergy: {
+    type: [Number],
+  },
 });
 
 const User = mongoose.model("User", userSchema);
