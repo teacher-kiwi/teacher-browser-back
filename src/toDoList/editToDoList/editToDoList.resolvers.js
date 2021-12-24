@@ -25,7 +25,7 @@ export default {
         }
         await ToDoList.updateOne(
           { _id, userEmail },
-          { $set: { _id, userEmail, toDo, isComplete, startDate, endDate } }
+          { $set: { toDo, isComplete, startDate, endDate } }
         );
         return {
           ok: true,
