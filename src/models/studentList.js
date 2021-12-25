@@ -15,6 +15,9 @@ const studentListSchema = new Schema({
     type: Number,
     required: true,
   },
+  studentId: {
+    type: Array,
+  },
 });
 
 const StudentList = mongoose.model("StudentList", studentListSchema);
