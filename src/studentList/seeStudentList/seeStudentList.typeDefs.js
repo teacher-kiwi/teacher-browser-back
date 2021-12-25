@@ -5,6 +5,7 @@ export default gql`
     listId: String
     listOrder: Int
     listName: String
+    studentId: [ID]
     students: [Student]
   }
 

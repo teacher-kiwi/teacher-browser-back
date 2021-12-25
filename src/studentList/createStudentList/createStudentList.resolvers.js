@@ -62,7 +62,6 @@ export default {
           const createdStudent = await Student.find({
             listId: [createdList._id],
           });
-          console.log(createdStudent);
           const studentIdList = createdStudent.map((obj) => obj._id);
           await StudentList.updateOne(
             { _id: createdList._id },
