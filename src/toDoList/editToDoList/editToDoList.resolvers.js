@@ -4,8 +4,12 @@ import { protectedResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
-    completeToDoList: protectedResovler(
-      async (_, { _id, userEmail, isComplete }, { loggedInUser }) => {
+    editToDoList: protectedResovler(
+      async (
+        _,
+        { _id, userEmail, toDo, isComplete, startDate, endDate },
+        { loggedInUser }
+      ) => {
         const user = await User.findOne({ email: userEmail });
         if (!user) {
           return {
@@ -19,7 +23,10 @@ export default {
             error: "수정할 권한이 없습니다.",
           };
         }
-        await ToDoList.updateOne({ _id, userEmail }, { $set: { isComplete } });
+        await ToDoList.updateOne(
+          { _id, userEmail },
+          { $set: { toDo, isComplete, startDate, endDate } }
+        );
         return {
           ok: true,
         };

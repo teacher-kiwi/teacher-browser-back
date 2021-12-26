@@ -16,7 +16,7 @@ const studentSchema = new Schema({
     required: true,
   },
   listId: {
-    type: String,
+    type: Array,
   },
 });
 

@@ -6,7 +6,15 @@ export default {
     updateUser: protectedResovler(
       async (
         _,
-        { userEmail, schoolName, schoolCode, areaCode, schoolAdress, bgTheme },
+        {
+          userEmail,
+          schoolName,
+          schoolCode,
+          areaCode,
+          schoolAdress,
+          bgTheme,
+          alergy,
+        },
         { loggedInUser }
       ) => {
         const user = await User.findOne({ email: userEmail });
@@ -30,6 +38,7 @@ export default {
             areaCode,
             schoolAdress,
             bgTheme,
+            alergy,
           }
         );
         return {

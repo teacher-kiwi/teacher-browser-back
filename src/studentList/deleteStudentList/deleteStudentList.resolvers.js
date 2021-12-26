@@ -2,6 +2,7 @@ import StudentList from "../../models/studentList";
 import Student from "../../models/student";
 import User from "../../models/user";
 import { protectedResovler } from "../../user/user.utils";
+import mongoose from "mongoose";
 
 export default {
   Mutation: {
@@ -21,7 +22,8 @@ export default {
           };
         }
         await StudentList.deleteOne({ _id: listId });
-        await Student.deleteMany({ listId });
+        const id = mongoose.Types.ObjectId(listId);
+        await Student.updateMany({ $pull: { listId: id } });
 
         return {
           ok: true,

@@ -2,10 +2,13 @@ import { gql } from "apollo-server-core";
 
 export default gql`
   type Mutation {
-    completeToDoList(
+    editToDoList(
       _id: ID!
       userEmail: String!
-      isComplete: Boolean!
+      toDo: String
+      isComplete: Boolean
+      startDate: String
+      endDate: String
     ): mutationResult
   }
 `;
