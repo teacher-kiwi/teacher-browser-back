@@ -1,15 +1,12 @@
 import Student from "../../models/student";
+import StudentList from "../../models/studentList";
 import User from "../../models/user";
 import { protectedResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
     addStudent: protectedResovler(
-      async (
-        _,
-        { teacherEmail, studentName, studentOrder },
-        { loggedInUser }
-      ) => {
+      async (_, { teacherEmail, studentId, listId }, { loggedInUser }) => {
         const user = await User.findOne({ email: teacherEmail });
         if (!user) {
           return {
@@ -23,33 +20,14 @@ export default {
             error: "등록 권한이 없습니다.",
           };
         }
-        const existStudent = await Student.findOne({
-          teacherEmail,
-          studentName,
-        });
-        if (existStudent) {
-          return {
-            ok: false,
-            error: "같은 이름의 학생이 존재합니다.",
-          };
-        }
 
-        const existStudent2 = await Student.findOne({
-          teacherEmail,
-          studentOrder,
-        });
-        if (existStudent2) {
-          return {
-            ok: false,
-            error: "같은 번호의 학생이 존재합니다.",
-          };
-        }
+        const studentList = await StudentList.findOne({ _id: listId });
 
-        await Student.create({
-          teacherEmail,
-          studentName,
-          studentOrder,
-        });
+        //update 리스트에 학생 추가
+        await StudentList.updateOne({ _id: listId }, { $push: { studentId } });
+        //update 학생에 리스트 추가
+        await Student.updateOne({ _id: studentId }, { $push: { listId } });
+
         return {
           ok: true,
         };

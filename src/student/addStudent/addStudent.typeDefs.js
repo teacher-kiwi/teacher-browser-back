@@ -4,8 +4,8 @@ export default gql`
   type Mutation {
     addStudent(
       teacherEmail: String!
-      studentName: String!
-      studentOrder: Int!
+      studentId: ID!
+      listId: ID!
     ): mutationResult
   }
 `;
