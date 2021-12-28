@@ -22,15 +22,25 @@ export default {
         //const studentArr = studentString.split(",");
         const studentArr = JSON.parse(studentString);
 
+        const existStudent = [];
         for (let i = 0; i < studentArr.length; i++) {
-          await Student.create({
+          const student = await Student.findOne({
             teacherEmail,
             studentName: studentArr[i].name,
-            studentGender: studentArr[i].gender,
           });
+          if (!student) {
+            await Student.create({
+              teacherEmail,
+              studentName: studentArr[i].name,
+              studentGender: studentArr[i].gender,
+            });
+          } else {
+            existStudent.push(student.studentName);
+          }
         }
         return {
           ok: true,
+          error: `${existStudent.join(", ")}의 이름은 이미 존재합니다.`,
         };
       }
     ),
