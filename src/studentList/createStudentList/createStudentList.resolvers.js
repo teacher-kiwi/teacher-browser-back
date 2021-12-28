@@ -20,6 +20,14 @@ export default {
             error: "등록 권한이 없습니다.",
           };
         }
+
+        const existStudentList = await StudentList.findOne({
+          email: teacherEmail,
+          listName,
+        });
+        if (existStudentList)
+          return { ok: false, error: "리스트 이름이 존재합니다." };
+
         const studentListNum = await StudentList.count({ email: teacherEmail });
 
         await StudentList.create({
