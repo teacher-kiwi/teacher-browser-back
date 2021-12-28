@@ -13,7 +13,6 @@ const studentSchema = new Schema({
   },
   studentOrder: {
     type: Number,
-    required: true,
   },
   studentGender: {
     type: String,
