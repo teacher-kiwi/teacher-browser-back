@@ -1,11 +1,12 @@
 import Student from "../../models/student";
+import StudentList from "../../models/studentList";
 import User from "../../models/user";
 import { protectedResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
     deleteStudent: protectedResovler(
-      async (_, { teacherEmail, studentName }, { loggedInUser }) => {
+      async (_, { teacherEmail, studentId }, { loggedInUser }) => {
         const user = await User.findOne({ email: teacherEmail });
         if (!user) {
           return {
@@ -19,7 +20,10 @@ export default {
             error: "삭제 권한이 없습니다.",
           };
         }
-        await Student.deleteOne({ teacherEmail, studentName });
+        await Student.deleteOne({ _id: studentId });
+        const id = mongoose.Types.ObjectId(listId);
+        await StudentList.updateMany({ $pull: { studentId: id } });
+
         return {
           ok: true,
         };
