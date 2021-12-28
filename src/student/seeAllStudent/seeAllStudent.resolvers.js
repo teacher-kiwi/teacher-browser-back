@@ -5,7 +5,7 @@ export default {
   Query: {
     seeAllStudent: protectedResovler(async (_, __, { loggedInUser }) => {
       return await Student.find({ teacherEmail: loggedInUser.email }).sort({
-        studentOrder: 1,
+        _id: 1,
       });
     }),
   },
