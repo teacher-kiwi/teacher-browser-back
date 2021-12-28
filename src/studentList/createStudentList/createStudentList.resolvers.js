@@ -6,11 +6,7 @@ import { protectedResovler } from "../../user/user.utils";
 export default {
   Mutation: {
     createStudentList: protectedResovler(
-      async (
-        _,
-        { teacherEmail, listName, listOrder, students },
-        { loggedInUser }
-      ) => {
+      async (_, { teacherEmail, listName }, { loggedInUser }) => {
         const user = await User.findOne({ email: teacherEmail });
         if (!user) {
           return {
@@ -24,50 +20,14 @@ export default {
             error: "등록 권한이 없습니다.",
           };
         }
-        //studentList 생성
+        const studentListNum = await StudentList.count({ email: teacherEmail });
+
         await StudentList.create({
           teacherEmail,
           listName,
-          listOrder,
+          listOrder: studentListNum + 1,
         });
 
-        //studentId 값이 요청값에 있을 경우
-        if (students[0]?.studentId) {
-          const studentIdList = students.map((obj) => obj.studentId);
-          await StudentList.updateOne(
-            { _id: createdList._id },
-            { studentId: studentIdList }
-          );
-        }
-
-        //studentId 값이 요청값에 없을 경우
-        else if (students[0]?.studentName) {
-          //listId 불러오기
-          const createdList = await StudentList.findOne({
-            teacherEmail,
-            listName,
-            listOrder,
-          });
-          //입력된 student 생성하기
-          for (let element of students) {
-            await Student.create({
-              teacherEmail,
-              studentName: element.studentName,
-              studentOrder: element.studentOrder,
-              listId: createdList._id,
-            });
-          }
-
-          //studentId를 studentList에 저장
-          const createdStudent = await Student.find({
-            listId: [createdList._id],
-          });
-          const studentIdList = createdStudent.map((obj) => obj._id);
-          await StudentList.updateOne(
-            { _id: createdList._id },
-            { studentId: studentIdList }
-          );
-        }
         return {
           ok: true,
         };
