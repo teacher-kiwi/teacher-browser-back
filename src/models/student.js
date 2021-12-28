@@ -15,6 +15,10 @@ const studentSchema = new Schema({
     type: Number,
     required: true,
   },
+  studentGender: {
+    type: String,
+    required: true,
+  },
   listId: {
     type: Array,
   },

@@ -19,12 +19,14 @@ export default {
             error: "등록 권한이 없습니다.",
           };
         }
-        const studentArr = studentString.split(",");
+        //const studentArr = studentString.split(",");
+        const studentArr = JSON.parse(studentString);
+
         for (let i = 0; i < studentArr.length; i++) {
           await Student.create({
             teacherEmail,
-            studentName: studentArr[i],
-            studentOrder: i + 1,
+            studentName: studentArr[i].name,
+            studentGender: studentArr[i].gender,
           });
         }
         return {

@@ -6,6 +6,7 @@ export default gql`
     teacherEmail: String!
     studentName: String!
     studentOrder: Int!
+    studentGender: String!
     listId: [ID]
   }
 `;
