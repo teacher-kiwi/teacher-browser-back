@@ -21,12 +21,19 @@ export default {
           };
         }
 
-        const studentList = await StudentList.findOne({ _id: listId });
-
+        const studentList = await StudentList.findOne({
+          _id: listId,
+          studentId,
+        });
+        if (studentList)
+          return { ok: false, error: "리스트에 해당 학생이 존재합니다." };
         //update 리스트에 학생 추가
-        await StudentList.updateOne({ _id: listId }, { $push: { studentId } });
+        await StudentList.updateOne(
+          { _id: listId },
+          { $addToSet: { studentId } }
+        );
         //update 학생에 리스트 추가
-        await Student.updateOne({ _id: studentId }, { $push: { listId } });
+        await Student.updateOne({ _id: studentId }, { $addToSet: { listId } });
 
         return {
           ok: true,
