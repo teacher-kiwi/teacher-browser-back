@@ -28,7 +28,7 @@ export default {
         if (existStudentList)
           return { ok: false, error: "리스트 이름이 존재합니다." };
 
-        const studentListNum = await StudentList.count({ email: teacherEmail });
+        const studentListNum = await StudentList.count({ teacherEmail });
 
         await StudentList.create({
           teacherEmail,
