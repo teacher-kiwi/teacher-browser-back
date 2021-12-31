@@ -2,7 +2,7 @@ import { gql } from "apollo-server-core";
 
 export default gql`
   type StudentList {
-    listId: String
+    listId: ID
     listOrder: Int
     listName: String
     studentId: [ID]

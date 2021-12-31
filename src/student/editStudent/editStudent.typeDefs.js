@@ -4,7 +4,7 @@ export default gql`
   type Mutation {
     editStudent(
       teacherEmail: String!
-      studentId: String!
+      studentId: ID!
       studentName: String
       studentGender: String
     ): mutationResult

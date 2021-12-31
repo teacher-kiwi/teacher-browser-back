@@ -1,5 +1,4 @@
 import StudentList from "../../models/studentList";
-import Student from "../../models/student";
 import User from "../../models/user";
 import { protectedResovler } from "../../user/user.utils";
 
