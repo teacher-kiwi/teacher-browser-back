@@ -24,6 +24,7 @@ export default {
       if (listIcon) {
         await StudentList.updateOne({ _id: listId }, { listIcon });
       }
+      if (listIcon === "delete") await StudentList.updateOne({ _id: listId }, { listIcon: null });
 
       return { ok: true };
     }),
