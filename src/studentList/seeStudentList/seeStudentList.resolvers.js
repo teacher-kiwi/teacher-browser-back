@@ -11,8 +11,10 @@ export default {
         return [
           {
             listId: listId,
+            teacherEmail: studentList.teacherEmail,
             listOrder: studentList.listOrder,
             listName: studentList.listName,
+            listIcon: studentList.listIcon,
             studentId: studentList.studentId,
           },
         ];
@@ -24,8 +26,10 @@ export default {
           return {
             //_id로 리턴되는 key를 listId로 수정하기 위해서 map 메서드로 처리
             listId: obj._id,
+            teacherEmail: obj.teacherEmail,
             listOrder: obj.listOrder,
             listName: obj.listName,
+            listIcon: obj.listIcon,
             studentId: obj.studentId,
           };
         });

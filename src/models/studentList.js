@@ -7,13 +7,16 @@ const studentListSchema = new Schema({
     type: String,
     required: true,
   },
+  listOrder: {
+    type: Number,
+    required: true,
+  },
   listName: {
     type: String,
     required: true,
   },
-  listOrder: {
-    type: Number,
-    required: true,
+  listIcon: {
+    type: String,
   },
   studentId: {
     type: Array,
