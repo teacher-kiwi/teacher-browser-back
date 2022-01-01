@@ -3,9 +3,7 @@ import Student from "../models/student";
 export default {
   StudentList: {
     students: async ({ listId }) => {
-      return await Student.find({
-        listId: listId.toString(),
-      }).sort({ studentOrder: 1 });
+      return await Student.find({ listId: listId.toString() }).sort({ studentOrder: 1 });
     },
   },
 };
