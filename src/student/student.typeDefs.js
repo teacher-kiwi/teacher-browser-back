@@ -9,6 +9,7 @@ export default gql`
     studentGender: String!
     parentPhoneNum: String
     allergy: [Int]
+    tag: [String]
     listId: [ID]
   }
 `;

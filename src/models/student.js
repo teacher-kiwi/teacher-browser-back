@@ -24,6 +24,9 @@ const studentSchema = new Schema({
   allergy: {
     type: Array,
   },
+  tag: {
+    type: Array,
+  },
   listId: {
     type: Array,
   },
