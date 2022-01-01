@@ -3,7 +3,7 @@ import { protectedMutationResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
-    editStudentList: protectedMutationResovler(async (_, { teacherEmail, listId, listName }, { loggedInUser }) => {
+    editStudentList: protectedMutationResovler(async (_, { teacherEmail, listId, listName, listOrder }, { loggedInUser }) => {
       if (listName) {
         //
         // 바꿀 이름이 이미 있는지 검사
@@ -12,6 +12,10 @@ export default {
         //
         // 바꿀 이름이 없다면 수정
         await StudentList.updateOne({ _id: listId }, { listName });
+      }
+
+      if (listOrder) {
+        await StudentList.updateOne({ _id: listId }, { listOrder });
       }
 
       return { ok: true };
