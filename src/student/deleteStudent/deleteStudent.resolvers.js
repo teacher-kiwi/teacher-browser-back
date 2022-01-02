@@ -6,8 +6,7 @@ export default {
   Mutation: {
     deleteStudent: protectedMutationResovler(async (_, { teacherEmail, studentId }, { loggedInUser }) => {
       await Student.deleteOne({ _id: studentId });
-      const id = mongoose.Types.ObjectId(listId);
-      await StudentList.updateMany({ $pull: { studentId: id } });
+      await StudentList.updateMany({ $pull: { studentId } });
 
       return { ok: true };
     }),
