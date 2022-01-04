@@ -5,8 +5,11 @@ export default gql`
     _id: ID!
     teacherEmail: String!
     studentName: String!
-    studentOrder: Int!
+    studentOrder: Int
     studentGender: String!
+    parentPhoneNum: String
+    allergy: [Int]
+    tag: [String]
     listId: [ID]
   }
 `;

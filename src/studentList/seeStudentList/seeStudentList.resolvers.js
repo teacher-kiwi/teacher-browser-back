@@ -1,49 +1,40 @@
 import StudentList from "../../models/studentList";
-import Student from "../../models/student";
-import { protectedResovler } from "../../user/user.utils";
+import { protectedQueryResovler } from "../../user/user.utils";
 
 export default {
   Query: {
-    seeStudentList: protectedResovler(
-      async (_, { listId }, { loggedInUser }) => {
-        //listId를 입력한 경우,
-        if (listId) {
-          //특정 studentList를 검색
-          const studentList = await StudentList.findOne({
-            teacherEmail: loggedInUser.email,
-            _id: listId,
-          });
-
-          const modifiedList = {
+    seeStudentList: protectedQueryResovler(async (_, { listId }, { loggedInUser }) => {
+      //listId를 입력한 경우,
+      if (listId) {
+        //특정 studentList를 검색
+        const studentList = await StudentList.findOne({ teacherEmail: loggedInUser.email, _id: listId });
+        return [
+          {
             listId: listId,
+            teacherEmail: studentList.teacherEmail,
             listOrder: studentList.listOrder,
             listName: studentList.listName,
+            listIcon: studentList.listIcon,
             studentId: studentList.studentId,
-            students: await Student.find({ listId: listId }).sort({
-              studentOrder: 1,
-            }),
+          },
+        ];
+        //listId가 null인 경우,
+      } else {
+        //해당 유저의 모든 studentList를 검색
+        const studentList = await StudentList.find({ teacherEmail: loggedInUser.email }).sort({ listOrder: 1 });
+        const modifiedList = studentList.map(async (obj) => {
+          return {
+            //_id로 리턴되는 key를 listId로 수정하기 위해서 map 메서드로 처리
+            listId: obj._id,
+            teacherEmail: obj.teacherEmail,
+            listOrder: obj.listOrder,
+            listName: obj.listName,
+            listIcon: obj.listIcon,
+            studentId: obj.studentId,
           };
-          return [modifiedList];
-        } else {
-          //해당 유저의 모든 studentList를 검색
-          const studentList = await StudentList.find({
-            teacherEmail: loggedInUser.email,
-          }).sort({ listOrder: 1 });
-
-          const modifiedList = studentList.map(async (obj) => {
-            return {
-              listId: obj._id,
-              listOrder: obj.listOrder,
-              listName: obj.listName,
-              studentId: obj.studentId,
-              students: await Student.find({ listId: obj._id }).sort({
-                studentOrder: 1,
-              }),
-            };
-          });
-          return modifiedList;
-        }
+        });
+        return modifiedList;
       }
-    ),
+    }),
   },
 };

@@ -18,6 +18,15 @@ const studentSchema = new Schema({
     type: String,
     required: true,
   },
+  parentPhoneNum: {
+    type: String,
+  },
+  allergy: {
+    type: Array,
+  },
+  tag: {
+    type: Array,
+  },
   listId: {
     type: Array,
   },

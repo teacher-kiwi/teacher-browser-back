@@ -4,8 +4,13 @@ export default gql`
   type Mutation {
     editStudent(
       teacherEmail: String!
-      studentName: String!
-      id: String!
+      studentId: ID!
+      studentName: String
+      studentGender: String
+      parentPhoneNum: String
+      allergy: [Int]
+      tag: [String]
+      delTag: String
     ): mutationResult
   }
 `;
