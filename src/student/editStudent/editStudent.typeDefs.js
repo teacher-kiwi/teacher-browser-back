@@ -6,6 +6,7 @@ export default gql`
       teacherEmail: String!
       studentId: ID!
       studentName: String
+      studentNumber: Int
       studentGender: String
       parentPhoneNum: String
       allergy: [Int]
