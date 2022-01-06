@@ -19,7 +19,7 @@ const studentListSchema = new Schema({
     type: String,
   },
   studentId: {
-    type: Array,
+    type: [Schema.Types.ObjectId],
   },
 });
 

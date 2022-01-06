@@ -11,7 +11,7 @@ const studentSchema = new Schema({
     type: String,
     required: true,
   },
-  studentOrder: {
+  studentNumber: {
     type: Number,
   },
   studentGender: {
@@ -22,13 +22,13 @@ const studentSchema = new Schema({
     type: String,
   },
   allergy: {
-    type: Array,
+    type: [Number],
   },
   tag: {
-    type: Array,
+    type: [String],
   },
   listId: {
-    type: Array,
+    type: [Schema.Types.ObjectId],
   },
 });
 
