@@ -28,7 +28,7 @@ const userSchema = new Schema({
   bgTheme: {
     type: String,
   },
-  alergy: {
+  allergy: {
     type: [Number],
   },
 });

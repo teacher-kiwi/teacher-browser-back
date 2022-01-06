@@ -11,6 +11,6 @@ export default gql`
     schoolAdress: String
     studentNum: Int
     bgTheme: String
-    alergy: [Int]
+    allergy: [Int]
   }
 `;
