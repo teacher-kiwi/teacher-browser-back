@@ -28,8 +28,7 @@ const studentSchema = new Schema({
     type: [String],
   },
   listId: {
-    // type: [Schema.Types.ObjectId],
-    type: Array,
+    type: [String],
   },
 });
 

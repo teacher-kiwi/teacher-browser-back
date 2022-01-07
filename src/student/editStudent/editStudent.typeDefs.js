@@ -5,6 +5,7 @@ export default gql`
     editStudent(
       teacherEmail: String!
       studentId: ID!
+      studentOrder: Int
       studentName: String
       studentNumber: Int
       studentGender: String

@@ -31,6 +31,9 @@ const userSchema = new Schema({
   allergy: {
     type: [Number],
   },
+  tag: {
+    type: [String],
+  },
 });
 
 const User = mongoose.model("User", userSchema);
