@@ -28,12 +28,12 @@ const userSchema = new Schema({
   bgTheme: {
     type: String,
   },
-  alergy: {
+  allergy: {
     type: [Number],
   },
   tag: {
-    type: Array
-  }
+    type: [String],
+  },
 });
 
 const User = mongoose.model("User", userSchema);
