@@ -12,5 +12,6 @@ export default gql`
     studentNum: Int
     bgTheme: String
     alergy: [Int]
+    tag: [String]
   }
 `;

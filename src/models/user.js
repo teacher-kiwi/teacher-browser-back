@@ -31,6 +31,9 @@ const userSchema = new Schema({
   alergy: {
     type: [Number],
   },
+  tag: {
+    type: Array
+  }
 });
 
 const User = mongoose.model("User", userSchema);
