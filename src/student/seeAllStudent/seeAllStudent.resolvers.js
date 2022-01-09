@@ -3,7 +3,7 @@ import { protectedQueryResovler } from "../../user/user.utils";
 
 export default {
   Query: {
-    seeAllStudent: protectedQueryResovler(async (_, { studentId, allergy }, { loggedInUser }) => {
+    seeAllStudent: protectedQueryResovler(async (_, { studentId, allergy, tag }, { loggedInUser }) => {
       // tag 값이 있으면 tag가 있는 학생들 보기
       if (tag) return await Student.find({ teacherEmail: loggedInUser.email, tag: { $all: tag } });
 
