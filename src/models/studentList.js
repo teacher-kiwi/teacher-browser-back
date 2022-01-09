@@ -14,6 +14,7 @@ const studentListSchema = new Schema({
   listName: {
     type: String,
     required: true,
+    trim: true,
   },
   listIcon: {
     type: String,

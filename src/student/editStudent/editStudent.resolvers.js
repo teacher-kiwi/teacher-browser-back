@@ -18,10 +18,7 @@ export default {
         }
         //
         // 바꿀 이름이 없다면 수정(이름, 번호, 성별, 부모번호, 태그)
-        await Student.updateOne(
-          { _id: studentId },
-          { studentName: studentName.trim(), studentNumber, studentGender, parentPhoneNum, $addToSet: { tag }, $pull: { tag: delTag } }
-        );
+        await Student.updateOne({ _id: studentId }, { studentName, studentNumber, studentGender, parentPhoneNum, $addToSet: { tag }, $pull: { tag: delTag } });
         //
         // 알러지 값이 있을 경우
         if (allergy) {

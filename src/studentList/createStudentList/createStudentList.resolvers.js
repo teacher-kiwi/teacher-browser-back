@@ -18,7 +18,7 @@ export default {
           break;
         }
       }
-      await StudentList.create({ teacherEmail, listName: listName.trim(), listOrder: studentListNum });
+      await StudentList.create({ teacherEmail, listName, listOrder: studentListNum });
 
       return { ok: true };
     }),

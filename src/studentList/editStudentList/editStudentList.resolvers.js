@@ -10,7 +10,7 @@ export default {
       if (existStudentList) return { ok: false, error: "같은 이름의 리스트가 존재합니다." };
       //
       // 바꿀 이름이 없다면 수정
-      await StudentList.updateOne({ _id: listId }, { listName: listName.trim(), listOrder, listIcon });
+      await StudentList.updateOne({ _id: listId }, { listName, listOrder, listIcon });
       //
       // listIcon 값이 delete이면 null로 저장
       if (listIcon === "delete") await StudentList.updateOne({ _id: listId }, { listIcon: null });
