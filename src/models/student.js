@@ -10,9 +10,11 @@ const studentSchema = new Schema({
   studentName: {
     type: String,
     required: true,
+    trim: true,
   },
   studentNumber: {
-    type: Number,
+    type: String,
+    trim: true,
   },
   studentGender: {
     type: String,
@@ -26,6 +28,7 @@ const studentSchema = new Schema({
   },
   tag: {
     type: [String],
+    trim: true,
   },
   listId: {
     type: [String],
