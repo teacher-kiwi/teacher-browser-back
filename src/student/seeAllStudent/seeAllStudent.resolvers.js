@@ -9,7 +9,7 @@ export default {
       // studentId 값만 있으면 한 학생 보기
       if (studentId) return await Student.find({ _id: studentId, teacherEmail: loggedInUser.email });
       // 아무 값도 없으면 모든 학생 보기
-      else return await Student.find({ teacherEmail: loggedInUser.email }).sort({ _id: 1 });
+      else return await Student.find({ teacherEmail: loggedInUser.email }).sort({ studentNumber: 1 });
     }),
   },
 };

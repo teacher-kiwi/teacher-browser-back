@@ -12,7 +12,7 @@ const studentSchema = new Schema({
     required: true,
   },
   studentNumber: {
-    type: Number,
+    type: String,
   },
   studentGender: {
     type: String,
