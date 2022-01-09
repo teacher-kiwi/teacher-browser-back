@@ -8,8 +8,10 @@ export default {
       async (_, { teacherEmail, studentId, studentName, studentNumber, studentGender, parentPhoneNum, allergy, tag, delTag }, { loggedInUser }) => {
         //
         // 바꿀 이름이 이미 있는지 검사
-        const existStudent = await Student.findOne({ teacherEmail, studentName: studentName.trim() });
-        if (existStudent) return { ok: false, error: "같은 이름의 학생이 존재합니다." };
+        if (studentName) {
+          const existStudent = await Student.findOne({ teacherEmail, studentName: studentName.trim() });
+          if (existStudent) return { ok: false, error: "같은 이름의 학생이 존재합니다." };
+        }
         //
         // 번호에 숫자 이외의 문자가 있는지 검사
         if (studentNumber) {
