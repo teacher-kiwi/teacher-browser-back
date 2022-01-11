@@ -5,7 +5,7 @@ import { protectedMutationResovler } from "../../user/user.utils";
 export default {
   Mutation: {
     editStudent: protectedMutationResovler(
-      async (_, { teacherEmail, studentId, studentName, studentNumber, studentGender, parentPhoneNum, allergy, tag, delTag }, { loggedInUser }) => {
+      async (_, { teacherEmail, studentId, studentName, studentNumber, studentGender, parentPhoneNum, allergy, tag, delTag, trash }, { loggedInUser }) => {
         //
         // 바꿀 이름이 이미 있는지 검사
         if (studentName) {
@@ -32,6 +32,9 @@ export default {
           allergyInfo.sort((a, b) => a - b);
           await User.updateOne({ email: teacherEmail }, { allergy: allergyInfo });
         }
+        //
+        // 휴지통 보내기
+        if (trash !== null) await Student.updateOne({ _id: studentId }, { trash });
 
         return { ok: true };
       }
