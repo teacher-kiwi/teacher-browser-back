@@ -3,7 +3,7 @@ import { protectedQueryResovler } from "../../user/user.utils";
 
 export default {
   Query: {
-    seeAllStudent: protectedQueryResovler(async (_, { studentId, allergy, tag, sort }, { loggedInUser }) => {
+    seeAllStudent: protectedQueryResovler(async (_, { studentId, allergy, tag, sort, trash }, { loggedInUser }) => {
       let sortValue;
       sort === "name"
         ? // sort 값이 "name"일 경우 studentName으로 정렬
@@ -20,10 +20,12 @@ export default {
       // allergy 값이 있으면 allergy 모든 학생 보기
       if (allergy) return await Student.find({ teacherEmail: loggedInUser.email, allergy }).sort(sortValue).collation({ locale: "ko", numericOrdering: true });
 
+      if (trash) return await Student.find({ teacherEmail: loggedInUser.email, trash: true });
+
       // studentId 값만 있으면 한 학생 보기
       if (studentId) return await Student.find({ _id: studentId, teacherEmail: loggedInUser.email });
       // 아무 값도 없으면 모든 학생 보기
-      else return await Student.find({ teacherEmail: loggedInUser.email }).sort(sortValue).collation({ locale: "ko", numericOrdering: true });
+      else return await Student.find({ teacherEmail: loggedInUser.email, trash: false }).sort(sortValue).collation({ locale: "ko", numericOrdering: true });
     }),
   },
 };
