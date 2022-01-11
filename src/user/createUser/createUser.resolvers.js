@@ -18,7 +18,7 @@ export default {
       if (spe < 1) return { ok: false, error: "비밀번호는 특수문자 2자 이상을 포함해야 합니다." };
 
       const uglyPassword = await bcrypt.hash(password, 10);
-      const user = new User({ email, password: uglyPassword });
+      const user = new User({ email, password: uglyPassword, tag: ["남학생", "여학생", "홀수", "짝수"] });
       await user.save();
 
       return { ok: true };

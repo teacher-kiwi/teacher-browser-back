@@ -10,7 +10,13 @@ export default {
       for (let i = 0; i < studentArr.length; i++) {
         if (studentArr[i].name.trim() === "") continue;
         const student = await Student.findOne({ teacherEmail, studentName: studentArr[i].name });
-        if (!student) await Student.create({ teacherEmail, studentName: studentArr[i].name, studentGender: studentArr[i].gender });
+        if (!student)
+          await Student.create({
+            teacherEmail,
+            studentName: studentArr[i].name,
+            studentGender: studentArr[i].gender,
+            tag: [studentArr[i].gender === "male" ? "남학생" : "여학생"],
+          });
         else existStudent.push(student.studentName);
       }
 

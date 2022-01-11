@@ -11,5 +11,6 @@ export default gql`
     allergy: [Int]
     tag: [String]
     listId: [ID]
+    trash: Boolean
   }
 `;

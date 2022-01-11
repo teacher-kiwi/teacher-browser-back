@@ -12,6 +12,7 @@ export default gql`
       allergy: [Int]
       tag: [String]
       delTag: String
+      trash: Boolean
     ): mutationResult
   }
 `;
