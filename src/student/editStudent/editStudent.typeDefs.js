@@ -13,6 +13,7 @@ export default gql`
       tag: [String]
       delTag: String
       trash: Boolean
+      memo: String
     ): mutationResult
   }
 `;
