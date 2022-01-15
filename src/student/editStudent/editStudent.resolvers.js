@@ -7,7 +7,7 @@ export default {
     editStudent: protectedMutationResovler(
       async (
         _,
-        { teacherEmail, studentId, studentName, studentNumber, studentGender, parentPhoneNum, allergy, tag, delTag, trash, memo },
+        { teacherEmail, studentId, studentName, studentNumber, studentGender, parentPhoneNum, allergy, tag, delTag, trash, memo, restoreAll },
         { loggedInUser }
       ) => {
         //
@@ -49,6 +49,9 @@ export default {
         //
         // 휴지통 보내기
         if (trash !== null) await Student.updateOne({ _id: studentId }, { trash });
+        //
+        // 휴지통 전체 복구
+        if (restoreAll) await Student.updateMany({ teacherEmail }, { trash: false });
 
         return { ok: true };
       }
