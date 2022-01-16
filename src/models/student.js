@@ -32,6 +32,7 @@ const studentSchema = new Schema({
   },
   trash: {
     type: Boolean,
+    required: true,
     default: false,
   },
   memo: {
