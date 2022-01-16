@@ -20,6 +20,7 @@ export default {
       // allergy 값이 있으면 allergy 모든 학생 보기
       if (allergy) return await Student.find({ teacherEmail: loggedInUser.email, allergy }).sort(sortValue).collation({ locale: "ko", numericOrdering: true });
 
+      // trash 값이 true이면 휴지통에 있는 학생 보기
       if (trash) return await Student.find({ teacherEmail: loggedInUser.email, trash: true });
 
       // studentId 값만 있으면 한 학생 보기

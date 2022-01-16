@@ -20,9 +20,6 @@ const studentSchema = new Schema({
     type: String,
     required: true,
   },
-  parentPhoneNum: {
-    type: String,
-  },
   allergy: {
     type: [Number],
   },
@@ -36,6 +33,9 @@ const studentSchema = new Schema({
   trash: {
     type: Boolean,
     default: false,
+  },
+  memo: {
+    type: String,
   },
 });
 

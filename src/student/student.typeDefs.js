@@ -7,10 +7,10 @@ export default gql`
     studentName: String!
     studentNumber: String
     studentGender: String!
-    parentPhoneNum: String
     allergy: [Int]
     tag: [String]
     listId: [ID]
     trash: Boolean
+    memo: String
   }
 `;
