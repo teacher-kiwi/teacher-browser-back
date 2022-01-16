@@ -7,15 +7,18 @@ export default {
       let sortValue;
       sort === "name"
         ? // sort 값이 "name"일 경우 studentName으로 정렬
-        (sortValue = { studentName: 1 })
+          (sortValue = { studentName: 1 })
         : sort === "num"
-          ? // sort 값이 "num"일 경우 studentNumber로 정렬
+        ? // sort 값이 "num"일 경우 studentNumber로 정렬
           (sortValue = { studentNumber: 1 })
-          : // sort 값이 없거나 "name" 이나 "num" 값이 아닐 경우 id(생성일)순으로 보기
+        : // sort 값이 없거나 "name" 이나 "num" 값이 아닐 경우 id(생성일)순으로 보기
           (sortValue = { _id: 1 });
 
       // tag 값이 있으면 tag가 있는 학생들 보기
-      if (tag) return await Student.find({ teacherEmail: loggedInUser.email, tag: { $all: tag } }).sort(sortValue).collation({ locale: "ko", numericOrdering: true });
+      if (tag)
+        return await Student.find({ teacherEmail: loggedInUser.email, tag: { $all: tag }, trash: false })
+          .sort(sortValue)
+          .collation({ locale: "ko", numericOrdering: true });
 
       // allergy 값이 있으면 allergy 모든 학생 보기
       if (allergy) return await Student.find({ teacherEmail: loggedInUser.email, allergy }).sort(sortValue).collation({ locale: "ko", numericOrdering: true });
