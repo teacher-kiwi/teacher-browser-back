@@ -34,6 +34,9 @@ const userSchema = new Schema({
   tag: {
     type: [String],
   },
+  favoriteNews: {
+    type: [String]
+  }
 });
 
 const User = mongoose.model("User", userSchema);
