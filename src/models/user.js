@@ -10,6 +10,10 @@ const userSchema = new Schema({
   password: {
     type: String,
   },
+  certificate: {
+    type: String,
+    default: null,
+  },
   schoolName: {
     type: String,
   },
