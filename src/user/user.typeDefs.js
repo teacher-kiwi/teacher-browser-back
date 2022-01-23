@@ -13,5 +13,6 @@ export default gql`
     bgTheme: String
     allergy: [Int]
     tag: [String]
+    favoriteNews: [String]
   }
 `;
