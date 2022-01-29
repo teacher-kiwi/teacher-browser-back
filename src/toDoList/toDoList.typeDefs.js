@@ -5,8 +5,11 @@ export default gql`
     _id: ID!
     toDo: String!
     userEmail: String!
+    contents: String
     isComplete: Boolean
     startDate: String
     endDate: String
+    ingToDo: Boolean
+    notToDo: Boolean
   }
 `;

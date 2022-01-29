@@ -11,6 +11,9 @@ const toDoListSchema = new Schema({
     type: String,
     required: true,
   },
+  contents: {
+    type: String
+  },
   isComplete: {
     type: Boolean,
     default: false,
