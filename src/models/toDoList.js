@@ -29,6 +29,9 @@ const toDoListSchema = new Schema({
   },
   notToDo: {
     type: Boolean
+  },
+  inComingToDo: {
+    type: Boolean
   }
 });
 

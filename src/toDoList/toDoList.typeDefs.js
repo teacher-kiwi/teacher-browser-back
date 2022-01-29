@@ -11,5 +11,6 @@ export default gql`
     endDate: String
     ingToDo: Boolean
     notToDo: Boolean
+    inComingToDo: Boolean
   }
 `;
