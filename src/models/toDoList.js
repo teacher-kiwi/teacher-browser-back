@@ -21,6 +21,12 @@ const toDoListSchema = new Schema({
   endDate: {
     type: String,
   },
+  ingToDo: {
+    type: Boolean
+  },
+  notToDo: {
+    type: Boolean
+  }
 });
 
 const ToDoList = mongoose.model("ToDoList", toDoListSchema);
