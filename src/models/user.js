@@ -31,16 +31,18 @@ const userSchema = new Schema({
   },
   bgTheme: {
     type: String,
+    default: "nature",
   },
   allergy: {
     type: [Number],
   },
   tag: {
     type: [String],
+    default: ["남학생", "여학생", "홀수", "짝수"],
   },
   favoriteNews: {
-    type: [String]
-  }
+    type: [String],
+  },
 });
 
 const User = mongoose.model("User", userSchema);
