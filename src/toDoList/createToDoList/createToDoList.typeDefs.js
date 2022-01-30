@@ -7,6 +7,7 @@ export default gql`
       userEmail: String!
       startDate: String
       endDate: String
+      contents: String
     ): mutationResult
   }
 `;

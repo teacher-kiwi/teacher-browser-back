@@ -2,6 +2,7 @@ import { gql } from "apollo-server-core";
 
 export default gql`
   type Query {
-    seeToDoList: [ToDoList]
+    seeToDoList(
+      isComplete: Boolean): [ToDoList]
   }
 `;

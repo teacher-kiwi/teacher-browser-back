@@ -8,6 +8,6 @@ export default gql`
     listName: String!
     listIcon: String
     studentId: [ID]
-    students: [Student]
+    students(sort: String): [Student]
   }
 `;
