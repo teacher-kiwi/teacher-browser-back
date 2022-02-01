@@ -38,6 +38,9 @@ const studentSchema = new Schema({
   memo: {
     type: String,
   },
+  icon: {
+    type: Number
+  }
 });
 
 const Student = mongoose.model("Student", studentSchema);
