@@ -1,6 +1,11 @@
 import { gql } from "apollo-server-core";
 
 export default gql`
+  type Journal {
+    date: String
+    text: String
+  }
+
   type Student {
     _id: ID!
     teacherEmail: String!
@@ -12,6 +17,6 @@ export default gql`
     listId: [ID]
     trash: Boolean
     memo: String
-    journal: [String]
+    journal: [Journal]
   }
 `;

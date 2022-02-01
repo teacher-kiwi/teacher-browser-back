@@ -2,9 +2,14 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
+const Contents = new Schema({
+  date: { type: String },
+  text: { type: String, trim: true },
+});
+
 const journalSchema = new Schema({
   ownerId: { type: String, required: true },
-  contents: [{ type: String, trim: true }],
+  contents: [Contents],
 });
 
 const Journal = mongoose.model("Journal", journalSchema);
