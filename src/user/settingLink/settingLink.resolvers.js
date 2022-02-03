@@ -3,7 +3,7 @@ import { protectedMutationResovler } from "../user.utils";
 
 export default {
   Mutation: {
-    settingLink: protectedMutationResovler(async (_, { userEmail, link, memo }) => {
+    settingLink: protectedMutationResovler(async (_, { userEmail, siteName, memo }) => {
       const user = await User.findOne({ email: userEmail })
       if (!user.link || user.link.lenght === 0) {
         await User.updateOne({ email: userEmail }, { link })
@@ -12,11 +12,11 @@ export default {
         }
       }
       const userLinkSiteName = user.link.map((item) => item.siteName)
-      if (userLinkSiteName.includes(link.siteName)) {
-        const newUserLink = user.link.filter((item) => item.siteName !== link.siteName)
+      if (userLinkSiteName.includes(siteName)) {
+        const newUserLink = user.link.filter((item) => item.siteName !== siteName)
         await User.updateOne({ email: userEmail }, { link: newUserLink })
       } else {
-        const newUserLink = [...user.link, link]
+        const newUserLink = [...user.link, { siteName, memo }]
         await User.updateOne({ email: userEmail }, { link: newUserLink })
       }
       return {
