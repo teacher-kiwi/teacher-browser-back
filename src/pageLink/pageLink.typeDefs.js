@@ -8,5 +8,6 @@ export default gql`
     pageURL: String!
     folder: [String]!
     type: String
+    updateAt: String!
   }
 `

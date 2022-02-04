@@ -21,6 +21,10 @@ const pageLinkSchema = new Schema({
   },
   type: {
     type: String,
+  },
+  updateAt: {
+    type: Date,
+    required: true,
   }
 });
 

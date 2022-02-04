@@ -15,7 +15,8 @@ export default {
         pageDescription,
         pageURL,
         folder,
-        type
+        type,
+        updateAt: new Date()
       })
       return {
         ok: true
