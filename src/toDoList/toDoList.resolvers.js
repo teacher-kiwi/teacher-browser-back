@@ -1,3 +1,6 @@
+const midnightToday = new Date().setHours(24, 0, 0, 0)
+const midnightYesterDay = new Date().setHours(0, 0, 0, 0)
+
 export default {
   ToDoList: {
     ingToDo: ({ startDate, endDate, isComplete }) => {
@@ -9,10 +12,9 @@ export default {
         }
       }
       if (startDate) {
-        const curDate = new Date()
-        if (new Date(startDate) > curDate) {
+        if (new Date(startDate.setHours(0, 0, 0, 0)) > midnightYesterDay) {
           return false
-        } else if (new Date(endDate) < curDate) {
+        } else if (new Date(endDate).setHours(24, 0, 0, 0) < midnightToday) {
           return false
         } else {
           return true
@@ -26,8 +28,7 @@ export default {
       if (isComplete) {
         return false
       } else {
-        const curDate = new Date()
-        if (new Date(endDate) < curDate) {
+        if (new Date(endDate).setHours(24, 0, 0, 0) < midnightToday) {
           return true
         } else {
           return false
@@ -41,8 +42,7 @@ export default {
       if (isComplete) {
         return false
       } else {
-        const curDate = new Date()
-        if (new Date(startDate) > curDate) {
+        if (new Date(startDate).setHours(24, 0, 0, 0) > midnightToday) {
           return true
         } else {
           return false

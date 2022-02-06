@@ -6,7 +6,7 @@ export default gql`
       _id: ID!
       userEmail: String!
       toDo: String
-      isComplete: Boolean
+      star: Int
       startDate: String
       endDate: String
       contents: String
