@@ -40,6 +40,9 @@ const userSchema = new Schema({
   },
   favoriteNews: {
     type: [String]
+  },
+  link: {
+    type: [{ siteName: String, memo: String }]
   }
 });
 

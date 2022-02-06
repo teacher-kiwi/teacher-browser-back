@@ -8,6 +8,7 @@ export default gql`
       startDate: String
       endDate: String
       contents: String
+      star: Int
     ): mutationResult
   }
 `;

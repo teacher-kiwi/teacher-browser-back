@@ -5,7 +5,6 @@ export default {
   Mutation: {
     completeToDoList: protectedMutationResovler(async (_, { _id, userEmail }, { loggedInUser }) => {
       const toDoList = await ToDoList.findOne({ _id, userEmail })
-      console.log(toDoList);
       if (toDoList.isComplete) {
         await ToDoList.updateOne(
           { _id, userEmail },

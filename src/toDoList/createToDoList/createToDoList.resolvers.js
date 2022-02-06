@@ -3,10 +3,11 @@ import { protectedMutationResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
-    createToDoList: protectedMutationResovler(async (_, { toDo, userEmail, startDate, endDate, contents }, { loggedInUser }) => {
+    createToDoList: protectedMutationResovler(async (_, { toDo, userEmail, startDate, endDate, contents, star }, { loggedInUser }) => {
       await ToDoList.create({
         toDo,
         userEmail,
+        star,
         ...(startDate && { startDate }),
         ...(endDate && { endDate }),
         ...(contents && { contents })

@@ -7,7 +7,7 @@ export default {
     editStudent: protectedMutationResovler(
       async (
         _,
-        { teacherEmail, studentId, studentName, studentNumber, studentGender, parentPhoneNum, allergy, tag, delTag, trash, memo, restoreAll },
+        { teacherEmail, studentId, studentName, studentNumber, studentGender, parentPhoneNum, allergy, tag, delTag, trash, icon, memo, restoreAll, studentIcon },
         { loggedInUser }
       ) => {
         //
@@ -33,8 +33,8 @@ export default {
           await Student.updateOne({ _id: studentId }, { $pull: { tag: studentGender === "male" ? "여학생" : "남학생" } });
         }
         //
-        // 학생 정보 수정(이름, 부모번호, 태그, 메모)
-        await Student.updateOne({ _id: studentId }, { studentName, parentPhoneNum, $addToSet: { tag }, $pull: { tag: delTag }, memo });
+        // 학생 정보 수정(이름, 부모번호, 태그, 메모, 아이콘)
+        await Student.updateOne({ _id: studentId }, { studentName, parentPhoneNum, $addToSet: { tag }, $pull: { tag: delTag }, memo, icon });
         //
         // 알러지 값이 있을 경우
         if (allergy) {
@@ -52,7 +52,9 @@ export default {
         //
         // 휴지통 전체 복구
         if (restoreAll) await Student.updateMany({ teacherEmail }, { trash: false });
-
+        //
+        // listIcon 값이 delete이면 null로 저장
+        if (studentIcon === "delete") await Student.updateOne({ _id: studentId }, { icon: null });
         return { ok: true };
       }
     ),

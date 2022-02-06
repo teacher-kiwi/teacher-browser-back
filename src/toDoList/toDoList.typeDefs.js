@@ -12,5 +12,6 @@ export default gql`
     ingToDo: Boolean
     notToDo: Boolean
     inComingToDo: Boolean
+    star: Int
   }
 `;
