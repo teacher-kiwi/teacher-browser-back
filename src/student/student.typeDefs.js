@@ -12,7 +12,7 @@ export default gql`
     listId: [ID]
     trash: Boolean
     memo: String
-    journal: [String]
+    journal: [Journal]
     icon: Int
   }
 `;
