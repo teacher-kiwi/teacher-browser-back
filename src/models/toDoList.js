@@ -19,19 +19,13 @@ const toDoListSchema = new Schema({
     default: false,
   },
   startDate: {
-    type: String,
+    type: Date,
   },
   endDate: {
-    type: String,
+    type: Date,
   },
-  ingToDo: {
-    type: Boolean
-  },
-  notToDo: {
-    type: Boolean
-  },
-  inComingToDo: {
-    type: Boolean
+  star: {
+    type: Number
   }
 });
 

@@ -1,6 +1,11 @@
 import { gql } from "apollo-server-core";
 
 export default gql`
+  type Link {
+    siteName: String
+    memo: String
+  }
+
   type User {
     _id: ID!
     email: String!
@@ -14,5 +19,6 @@ export default gql`
     allergy: [Int]
     tag: [String]
     favoriteNews: [String]
+    link: [Link]
   }
 `;
