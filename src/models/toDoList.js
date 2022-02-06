@@ -19,11 +19,14 @@ const toDoListSchema = new Schema({
     default: false,
   },
   startDate: {
-    type: String,
+    type: Date,
   },
   endDate: {
-    type: String,
+    type: Date,
   },
+  star: {
+    type: Number
+  }
 });
 
 const ToDoList = mongoose.model("ToDoList", toDoListSchema);
