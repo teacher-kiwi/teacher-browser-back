@@ -4,6 +4,7 @@ import { protectedMutationResovler } from "../../user/user.utils";
 export default {
   Mutation: {
     createSchedule: protectedMutationResovler(async (_, { schedule, userEmail, startDate, endDate, contents, color }, { loggedInUser }) => {
+
       const getStartDate = new Date(startDate).setHours(0, 0, 0, 0)
       const getEndDate = new Date(endDate).setHours(0, 0, 0, 0)
       const termDay = ((getEndDate - getStartDate) / 1000 / 60 / 60 / 24) - 1;
@@ -14,14 +15,25 @@ export default {
       }
       const allDate = [getStartDate, ...term, getEndDate]
 
-      const scheduleNum = []
+      let enableSortArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
       for (let i = 0; i < allDate.length; i++) {
-        const num = await Schedule.count({
+        const includesSchedule = await Schedule.find({
           userEmail: loggedInUser.email,
           allDate: allDate[i]
         })
-        scheduleNum.push(num)
+        includesSchedule.forEach(item => {
+          enableSortArr = enableSortArr.filter(sort => sort !== item.sort)
+        })
       }
+
+      if (enableSortArr.length === 0) {
+        return {
+          ok: false,
+          error: "생성된 일정이 너무 많습니다."
+        }
+      }
+
+      const enableSort = Math.min(...enableSortArr)
 
       await Schedule.create({
         schedule,
@@ -31,7 +43,7 @@ export default {
         endDate: getEndDate,
         term,
         allDate,
-        sort: Math.max(...scheduleNum),
+        sort: enableSort,
         ...(contents && { contents })
       });
       return { ok: true };
