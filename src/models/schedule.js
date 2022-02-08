@@ -23,7 +23,20 @@ const scheduleSchema = new Schema({
     required: true,
   },
   color: {
-    type: String
+    type: String,
+    required: true,
+  },
+  term: {
+    type: [Date],
+    required: true,
+  },
+  allDate: {
+    type: [Date],
+    required: true,
+  },
+  sort: {
+    type: Number,
+    required: true
   }
 });
 

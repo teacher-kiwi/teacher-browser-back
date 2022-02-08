@@ -7,6 +7,9 @@ export default gql`
     contents: String
     startDate: String!
     endDate: String!
-    color: String
+    color: String!
+    term: [String]!
+    allDate: [String]!
+    sort: Int!
   }
 `
