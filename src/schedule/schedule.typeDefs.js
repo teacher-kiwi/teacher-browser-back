@@ -12,5 +12,6 @@ export default gql`
     term: [String]!
     allDate: [String]!
     sort: Int!
+    isSort: Int
   }
 `
