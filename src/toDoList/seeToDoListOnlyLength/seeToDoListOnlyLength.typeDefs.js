@@ -2,6 +2,6 @@ import { gql } from "apollo-server-core";
 
 export default gql`
   type Query {
-    seeSchedule(scheduleId: String, date: String): [Schedule]
+    seeToDoListOnlyLength(userEmail: String!, date: String): Int
   }
-`;
+`
