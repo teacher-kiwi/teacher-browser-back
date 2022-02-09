@@ -1,0 +1,55 @@
+import Schedule from "../../models/schedule";
+import { protectedMutationResovler } from "../../user/user.utils";
+
+export default {
+  Mutation: {
+    editSchedule: protectedMutationResovler(async (_, { scheduleId, schedule, userEmail, startDate, endDate, contents, color }, { loggedInUser }) => {
+
+      await Schedule.deleteOne({ userEmail, _id: scheduleId })
+
+      const getStartDate = new Date(startDate).setHours(0, 0, 0, 0)
+      const getEndDate = new Date(endDate).setHours(0, 0, 0, 0)
+      const termDay = ((getEndDate - getStartDate) / 1000 / 60 / 60 / 24) - 1;
+      const term = []
+      for (let i = 0; i < termDay; i++) {
+        const day = getStartDate + (86400000 * (i + 1))
+        term.push(day)
+      }
+      const allDate = [getStartDate, ...term, getEndDate]
+
+      let enableSortArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      for (let i = 0; i < allDate.length; i++) {
+        const includesSchedule = await Schedule.find({
+          userEmail: loggedInUser.email,
+          allDate: allDate[i]
+        })
+        includesSchedule.forEach(item => {
+          enableSortArr = enableSortArr.filter(sort => sort !== item.sort)
+        })
+      }
+
+      if (enableSortArr.length === 0) {
+        return {
+          ok: false,
+          error: "생성된 일정이 너무 많습니다."
+        }
+      }
+
+      const enableSort = Math.min(...enableSortArr)
+
+      await Schedule.create({
+        schedule,
+        userEmail,
+        color,
+        startDate: getStartDate,
+        endDate: getEndDate,
+        term,
+        allDate,
+        sort: enableSort,
+        ...(contents && { contents })
+      });
+      return { ok: true };
+
+    }),
+  },
+};
