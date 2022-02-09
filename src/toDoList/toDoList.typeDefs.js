@@ -9,6 +9,7 @@ export default gql`
     isComplete: Boolean
     startDate: String
     endDate: String
+    allDate: [String]
     star: Int
   }
 `;
