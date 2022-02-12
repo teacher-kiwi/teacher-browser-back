@@ -3,6 +3,6 @@ import { gql } from "apollo-server-core";
 export default gql`
   type Query {
     seeToDoList(
-      isComplete: Boolean, id: String): [ToDoList]
+      isComplete: Boolean, id: String, date: String): [ToDoList]
   }
 `;
