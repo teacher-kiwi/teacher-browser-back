@@ -9,9 +9,7 @@ export default gql`
     isComplete: Boolean
     startDate: String
     endDate: String
-    ingToDo: Boolean
-    notToDo: Boolean
-    inComingToDo: Boolean
+    allDate: [String]
     star: Int
   }
 `;

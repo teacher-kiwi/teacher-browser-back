@@ -26,7 +26,10 @@ const toDoListSchema = new Schema({
   },
   star: {
     type: Number
-  }
+  },
+  allDate: {
+    type: [Date]
+  },
 });
 
 const ToDoList = mongoose.model("ToDoList", toDoListSchema);
