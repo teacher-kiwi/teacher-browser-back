@@ -8,19 +8,26 @@ export default {
       if (startDate) {
         const getStartDate = new Date(startDate).setHours(0, 0, 0, 0)
         const getEndDate = new Date(endDate).setHours(0, 0, 0, 0)
-        const termDay = ((getEndDate - getStartDate) / 1000 / 60 / 60 / 24) - 1;
-        const term = []
-        for (let i = 0; i < termDay; i++) {
-          const day = getStartDate + (86400000 * (i + 1))
-          term.push(day)
+
+        let allDate = null
+
+        if (getStartDate === getEndDate) {
+          allDate = [getStartDate]
+        } else {
+          const term = []
+          const termDay = ((getEndDate - getStartDate) / 1000 / 60 / 60 / 24) - 1;
+          for (let i = 0; i < termDay; i++) {
+            const day = getStartDate + (86400000 * (i + 1))
+            term.push(day)
+          }
+          allDate = [getStartDate, ...term, getEndDate]
         }
-        const allDate = [getStartDate, ...term, getEndDate]
         await ToDoList.create({
           toDo,
           userEmail,
           star,
-          startDate,
-          endDate,
+          startDate: getStartDate,
+          endDate: getEndDate,
           allDate,
           ...(contents && { contents })
         })
