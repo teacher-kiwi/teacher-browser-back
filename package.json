@@ -10,7 +10,8 @@
     "dev": "nodemon --exec babel-node src/server.js --delay 2",
     "studio": "npx prisma studio",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node src/server.js --delay 2"
+    "build": "babel src --out-dir build",
+    "start": "node build/server"
   },
   "repository": {
     "type": "git",

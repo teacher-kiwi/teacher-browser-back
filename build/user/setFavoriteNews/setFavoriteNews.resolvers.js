@@ -1,0 +1,85 @@
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _user = _interopRequireDefault(require("../../models/user"));
+
+var _user2 = require("../user.utils");
+
+var _default = {
+  Mutation: {
+    setFavoriteNews: (0, _user2.protectedMutationResovler)( /*#__PURE__*/function () {
+      var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref, _ref2) {
+        var news, userEmail, loggedInUser, user, existNews;
+        return _regenerator["default"].wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                news = _ref.news, userEmail = _ref.userEmail;
+                loggedInUser = _ref2.loggedInUser;
+                _context.next = 4;
+                return _user["default"].findOne({
+                  email: userEmail
+                });
+
+              case 4:
+                user = _context.sent;
+                existNews = user.favoriteNews.includes(news);
+
+                if (!existNews) {
+                  _context.next = 11;
+                  break;
+                }
+
+                _context.next = 9;
+                return _user["default"].updateOne({
+                  email: userEmail
+                }, {
+                  $pull: {
+                    favoriteNews: news
+                  }
+                });
+
+              case 9:
+                _context.next = 13;
+                break;
+
+              case 11:
+                _context.next = 13;
+                return _user["default"].updateOne({
+                  email: userEmail
+                }, {
+                  $addToSet: {
+                    favoriteNews: news
+                  }
+                });
+
+              case 13:
+                return _context.abrupt("return", {
+                  ok: true
+                });
+
+              case 14:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function (_x, _x2, _x3) {
+        return _ref3.apply(this, arguments);
+      };
+    }())
+  }
+};
+exports["default"] = _default;
