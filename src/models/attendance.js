@@ -12,7 +12,7 @@ const attendanceSchema = new Schema({
     required: true,
   },
   type: {
-    type: Boolean,
+    type: String,
     required: true,
   },
   date: {
