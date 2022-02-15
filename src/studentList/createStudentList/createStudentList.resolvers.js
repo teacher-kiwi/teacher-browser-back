@@ -4,7 +4,7 @@ import { protectedMutationResovler } from "../../user/user.utils";
 export default {
   Mutation: {
     createStudentList: protectedMutationResovler(async (_, { teacherEmail, listName }, { loggedInUser }) => {
-      const existStudentList = await StudentList.findOne({ email: teacherEmail, listName: listName.trim() });
+      const existStudentList = await StudentList.findOne({ teacherEmail, listName: listName.trim() });
       if (existStudentList) return { ok: false, error: "리스트 이름이 존재합니다." };
       if (listName.trim() === "") return { ok: false, error: "리스트 이름이 공백입니다." };
       //
