@@ -10,7 +10,8 @@
     "dev": "nodemon --exec babel-node src/server.js --delay 2",
     "studio": "npx prisma studio",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "build": "babel src --out-dir build",
+    "start": "node build/server"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/teacher-kiwi/teacher-browser-back#readme",
   "dependencies": {
+    "@babel/runtime": "^7.17.2",
     "@graphql-tools/load-files": "^6.5.2",
     "@graphql-tools/merge": "^8.2.1",
     "@prisma/client": "^3.5.0",

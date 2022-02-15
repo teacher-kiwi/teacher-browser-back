@@ -1,18 +1,21 @@
-require("dotenv").config()
-import mongoose from "mongoose"
+require("dotenv").config();
+import mongoose from "mongoose";
 
-const MONGO_URL = process.env.DATABASE_URL
+const MONGO_URL = process.env.DATABASE_URL;
 
 const dbConnect = () => {
-  mongoose.connect(MONGO_URL, {
-    dbName: "teacherBrowser",
-  }).then(() => {
-    {
-      console.log("MongoDB Connected");
-    }
-  }).catch(err => {
-    console.log(err);
-  })
-}
+  mongoose
+    .connect(MONGO_URL, {
+      dbName: "teachercan-db",
+    })
+    .then(() => {
+      {
+        console.log("MongoDB Connected");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-export default dbConnect
+export default dbConnect;
