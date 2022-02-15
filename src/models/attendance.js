@@ -20,7 +20,7 @@ const attendanceSchema = new Schema({
     required: true,
   },
   contents: {
-    type: Number
+    type: String
   }
 });
 
