@@ -7,8 +7,8 @@ export default gql`
       userEmail: String!
       toDo: String
       star: Int
-      startDate: String
-      endDate: String
+      startDate: Float
+      endDate: Float
       contents: String
     ): mutationResult
   }

@@ -7,9 +7,9 @@ export default gql`
     userEmail: String!
     contents: String
     isComplete: Boolean
-    startDate: String
-    endDate: String
-    allDate: [String]
+    startDate: Float
+    endDate: Float
+    allDate: [Float]
     star: Int
   }
 `;

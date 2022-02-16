@@ -5,8 +5,8 @@ export default gql`
     createToDoList(
       toDo: String!
       userEmail: String!
-      startDate: String
-      endDate: String
+      startDate: Float
+      endDate: Float
       contents: String
       star: Int
     ): mutationResult
