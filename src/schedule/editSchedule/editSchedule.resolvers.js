@@ -1,4 +1,5 @@
 import Schedule from "../../models/schedule";
+import { setKrTime } from "../../shared/dateFn";
 import { protectedMutationResovler } from "../../user/user.utils";
 
 export default {
