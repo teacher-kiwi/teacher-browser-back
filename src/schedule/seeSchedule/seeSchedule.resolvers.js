@@ -11,7 +11,7 @@ export default {
       if (dateArr) {
         let returnSchedule = []
         for (let i = 0; i < dateArr.length; i++) {
-          const schedule = await Schedule.find({ userEmail: loggedInUser.email, allDate: dateArr[i] }).sort({ sort: 1 });
+          const schedule = await Schedule.find({ userEmail: loggedInUser.email, allDate: setKrTime(dateArr[i]) }).sort({ sort: 1 });
           if (schedule.length === 0) {
 
           } else {
