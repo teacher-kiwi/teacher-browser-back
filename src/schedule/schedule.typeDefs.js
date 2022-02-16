@@ -6,11 +6,11 @@ export default gql`
     schedule: String!
     userEmail: String!
     contents: String
-    startDate: String!
-    endDate: String!
+    startDate: Float!
+    endDate: Float!
     color: String!
-    term: [String]!
-    allDate: [String]!
+    term: [Float]!
+    allDate: [Float]!
     sort: Int!
     isSort: Int
   }

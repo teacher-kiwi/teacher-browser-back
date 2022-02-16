@@ -5,8 +5,8 @@ export default gql`
     createSchedule(
       schedule: String!
       userEmail: String!
-      startDate: String!
-      endDate: String!
+      startDate: Float!
+      endDate: Float!
       contents: String
       color: String!
     ): mutationResult

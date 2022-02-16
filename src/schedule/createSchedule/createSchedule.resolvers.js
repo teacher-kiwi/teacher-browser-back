@@ -1,20 +1,17 @@
 import Schedule from "../../models/schedule";
-import { setKrTime } from "../../shared/dateFn";
 import { protectedMutationResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
     createSchedule: protectedMutationResovler(async (_, { schedule, userEmail, startDate, endDate, contents, color }, { loggedInUser }) => {
 
-      const getStartDate = setKrTime(startDate)
-      const getEndDate = setKrTime(endDate)
-      const termDay = ((getEndDate - getStartDate) / 1000 / 60 / 60 / 24) - 1;
+      const termDay = ((endDate - startDate) / 1000 / 60 / 60 / 24) - 1;
       const term = []
       for (let i = 0; i < termDay; i++) {
-        const day = getStartDate + (86400000 * (i + 1))
+        const day = startDate + (86400000 * (i + 1))
         term.push(day)
       }
-      const allDate = [getStartDate, ...term, getEndDate]
+      const allDate = [startDate, ...term, endDate]
 
       let enableSortArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
       for (let i = 0; i < allDate.length; i++) {
@@ -40,8 +37,8 @@ export default {
         schedule,
         userEmail,
         color,
-        startDate: getStartDate,
-        endDate: getEndDate,
+        startDate,
+        endDate,
         term,
         allDate,
         sort: enableSort,
