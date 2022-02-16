@@ -8,8 +8,8 @@ export default {
 
       if (startDate) {
 
-        const getStartDate = setKrTime(parseInt(startDate))
-        const getEndDate = setKrTime(parseInt(endDate))
+        const getStartDate = setKrTime(startDate)
+        const getEndDate = setKrTime(endDate)
 
         let allDate = null
 

@@ -1,4 +1,5 @@
 import ToDoList from "../../models/toDoList";
+import { setKrTime } from "../../shared/dateFn";
 import { protectedMutationResovler } from "../../user/user.utils";
 
 export default {
@@ -6,8 +7,8 @@ export default {
     createToDoList: protectedMutationResovler(async (_, { toDo, userEmail, startDate, endDate, contents, star }, { loggedInUser }) => {
 
       if (startDate) {
-        const getStartDate = setKrTime(parseInt(startDate))
-        const getEndDate = setKrTime(parseInt(endDate))
+        const getStartDate = setKrTime(startDate)
+        const getEndDate = setKrTime(endDate)
 
         let allDate = null
 
