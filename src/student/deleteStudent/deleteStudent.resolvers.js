@@ -1,3 +1,5 @@
+import Attendance from "../../models/attendance";
+import Journal from "../../models/journal";
 import Student from "../../models/student";
 import StudentList from "../../models/studentList";
 import { protectedMutationResovler } from "../../user/user.utils";
@@ -12,6 +14,8 @@ export default {
       }
       // 아예 삭제
       else {
+        await Attendance.deleteMany({ studentId });
+        await Journal.deleteMany({ ownerId: studentId });
         await Student.deleteOne({ _id: studentId });
         await StudentList.updateMany({ $pull: { studentId } });
       }

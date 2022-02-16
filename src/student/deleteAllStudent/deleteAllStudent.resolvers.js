@@ -1,3 +1,5 @@
+import Attendance from "../../models/attendance";
+import Journal from "../../models/journal";
 import Student from "../../models/student";
 import StudentList from "../../models/studentList";
 import { protectedMutationResovler } from "../../user/user.utils";
@@ -14,6 +16,10 @@ export default {
       await StudentList.updateMany({ teacherEmail }, { $pull: { studentId: { $in: ids } } });
       //
       // 마지막으로 휴지통에 있는 학생 다 지우기
+      for (let i = 0; i < ids.length; i++) {
+        await Attendance.deleteMany({ studentId: ids[i] });
+        await Journal.deleteMany({ ownerId: ids[i] });
+      }
       await Student.deleteMany({ teacherEmail, trash: true });
       return { ok: true };
     }),
