@@ -1,4 +1,5 @@
 import Schedule from "../../models/schedule";
+import { setKrTime } from "../../shared/dateFn";
 import { protectedQueryResovler } from "../../user/user.utils";
 
 export default {
@@ -27,7 +28,7 @@ export default {
         return returnSchedule
       }
       if (date) {
-        return await Schedule.find({ userEmail: loggedInUser.email, allDate: new Date(date).setHours(0, 0, 0, 0) }).sort({ sort: 1 });
+        return await Schedule.find({ userEmail: loggedInUser.email, allDate: setKrTime(date) }).sort({ sort: 1 });
       }
     }),
   },
