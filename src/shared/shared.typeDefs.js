@@ -10,4 +10,15 @@ export default gql`
     token: String
     error: String
   }
+  type scheduleMutationResult {
+    ok: Boolean!
+    schedule: Schedule!,
+    delSchedule: Schedule,
+    error: String
+  }
+  type enableSortNumResult {
+    ok: Boolean
+    num: Int
+    error: String
+  }
 `

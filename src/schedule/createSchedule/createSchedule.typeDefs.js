@@ -9,6 +9,6 @@ export default gql`
       endDate: Float!
       contents: String
       color: String!
-    ): mutationResult
+    ): scheduleMutationResult
   }
 `;

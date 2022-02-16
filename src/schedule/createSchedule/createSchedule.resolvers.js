@@ -33,7 +33,7 @@ export default {
 
       const enableSort = Math.min(...enableSortArr)
 
-      await Schedule.create({
+      const newSchedule = await Schedule.create({
         schedule,
         userEmail,
         color,
@@ -44,7 +44,10 @@ export default {
         sort: enableSort,
         ...(contents && { contents })
       });
-      return { ok: true };
+      return { 
+        ok: true,
+        schedule: newSchedule
+       };
     }),
   },
 };

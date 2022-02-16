@@ -5,6 +5,7 @@ export default {
   Mutation: {
     editSchedule: protectedMutationResovler(async (_, { scheduleId, schedule, userEmail, startDate, endDate, contents, color }, { loggedInUser }) => {
 
+      const delSchedule = await Schedule.findOne({ userEmail, _id: scheduleId })
       await Schedule.deleteOne({ userEmail, _id: scheduleId })
 
       const termDay = ((endDate - startDate) / 1000 / 60 / 60 / 24) - 1;
@@ -35,7 +36,7 @@ export default {
 
       const enableSort = Math.min(...enableSortArr)
 
-      await Schedule.create({
+      const newSchedule = await Schedule.create({
         schedule,
         userEmail,
         color,
@@ -46,7 +47,11 @@ export default {
         sort: enableSort,
         ...(contents && { contents })
       });
-      return { ok: true };
+      return {
+        ok: true,
+        schedule: newSchedule,
+        delSchedule
+      };
 
     }),
   },

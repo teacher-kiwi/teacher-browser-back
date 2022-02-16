@@ -12,6 +12,5 @@ export default gql`
     term: [Float]!
     allDate: [Float]!
     sort: Int!
-    isSort: Int
   }
 `
