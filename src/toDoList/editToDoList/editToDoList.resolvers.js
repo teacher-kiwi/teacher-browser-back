@@ -1,4 +1,5 @@
 import ToDoList from "../../models/toDoList";
+import { setKrTime } from "../../shared/dateFn";
 import { protectedMutationResovler } from "../../user/user.utils";
 
 export default {
@@ -7,8 +8,8 @@ export default {
 
       if (startDate) {
 
-        const getStartDate = new Date(startDate).setHours(0, 0, 0, 0)
-        const getEndDate = new Date(endDate).setHours(0, 0, 0, 0)
+        const getStartDate = setKrTime(parseInt(startDate))
+        const getEndDate = setKrTime(parseInt(endDate))
 
         let allDate = null
 
