@@ -5,10 +5,13 @@ export default {
   Query: {
     seeJournal: protectedQueryResovler(async (_, { teacherEmail, date, studentId, journalId }) => {
       if (date) {
-        return await Journal.find({ teacherEmail, date: new Date(date).setHours(0, 0, 0, 0) }).sort({ _id: 1 })
+        return await Journal.find({ teacherEmail, date }).sort({ _id: 1 })
       }
       if (journalId) {
         return await Journal.find({ teacherEmail, _id: journalId })
+      }
+      if (studentId) {
+        return await Journal.find({ teacherEmail, ownerId: studentId }).sort({ date: 1 })
       }
     })
   }

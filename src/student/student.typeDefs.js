@@ -13,6 +13,7 @@ export default gql`
     trash: Boolean
     memo: String
     journal: [Journal]
+    journalNum: Int
     icon: Int
   }
 `;

@@ -5,7 +5,7 @@ export default gql`
     _id: ID!
     ownerId: ID!
     teacherEmail: String!
-    date: String
-    text: String
+    date: Float!
+    text: String!
   }
 `;
