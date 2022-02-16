@@ -16,9 +16,4 @@ export default gql`
     delSchedule: Schedule,
     error: String
   }
-  type enableSortNumResult {
-    ok: Boolean
-    num: Int
-    error: String
-  }
 `
