@@ -6,7 +6,7 @@ export default gql`
     userEmail: String!
     studentId: String!
     type: String!
-    date: String!
+    date: Float!
     contents: String
   }
 `
