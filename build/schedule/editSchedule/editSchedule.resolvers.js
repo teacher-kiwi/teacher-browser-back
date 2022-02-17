@@ -27,7 +27,7 @@ var _default = {
   Mutation: {
     editSchedule: (0, _user.protectedMutationResovler)( /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref, _ref2) {
-        var scheduleId, schedule, userEmail, startDate, endDate, contents, color, loggedInUser, getStartDate, getEndDate, termDay, term, i, day, allDate, enableSortArr, _i, includesSchedule, enableSort;
+        var scheduleId, schedule, userEmail, startDate, endDate, contents, color, loggedInUser, delSchedule, termDay, term, i, day, allDate, enableSortArr, _i, includesSchedule, enableSort, newSchedule;
 
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
@@ -36,39 +36,45 @@ var _default = {
                 scheduleId = _ref.scheduleId, schedule = _ref.schedule, userEmail = _ref.userEmail, startDate = _ref.startDate, endDate = _ref.endDate, contents = _ref.contents, color = _ref.color;
                 loggedInUser = _ref2.loggedInUser;
                 _context.next = 4;
-                return _schedule["default"].deleteOne({
+                return _schedule["default"].findOne({
                   userEmail: userEmail,
                   _id: scheduleId
                 });
 
               case 4:
-                getStartDate = new Date(startDate).setHours(0, 0, 0, 0);
-                getEndDate = new Date(endDate).setHours(0, 0, 0, 0);
-                termDay = (getEndDate - getStartDate) / 1000 / 60 / 60 / 24 - 1;
+                delSchedule = _context.sent;
+                _context.next = 7;
+                return _schedule["default"].deleteOne({
+                  userEmail: userEmail,
+                  _id: scheduleId
+                });
+
+              case 7:
+                termDay = (endDate - startDate) / 1000 / 60 / 60 / 24 - 1;
                 term = [];
 
                 for (i = 0; i < termDay; i++) {
-                  day = getStartDate + 86400000 * (i + 1);
+                  day = startDate + 86400000 * (i + 1);
                   term.push(day);
                 }
 
-                allDate = [getStartDate].concat(term, [getEndDate]);
+                allDate = [startDate].concat(term, [endDate]);
                 enableSortArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
                 _i = 0;
 
-              case 12:
+              case 13:
                 if (!(_i < allDate.length)) {
-                  _context.next = 20;
+                  _context.next = 21;
                   break;
                 }
 
-                _context.next = 15;
+                _context.next = 16;
                 return _schedule["default"].find({
                   userEmail: loggedInUser.email,
                   allDate: allDate[_i]
                 });
 
-              case 15:
+              case 16:
                 includesSchedule = _context.sent;
                 includesSchedule.forEach(function (item) {
                   enableSortArr = enableSortArr.filter(function (sort) {
@@ -76,14 +82,14 @@ var _default = {
                   });
                 });
 
-              case 17:
+              case 18:
                 _i++;
-                _context.next = 12;
+                _context.next = 13;
                 break;
 
-              case 20:
+              case 21:
                 if (!(enableSortArr.length === 0)) {
-                  _context.next = 22;
+                  _context.next = 23;
                   break;
                 }
 
@@ -92,15 +98,15 @@ var _default = {
                   error: "생성된 일정이 너무 많습니다. 해당 기간의 일정을 지운 후 다시 생성하세요! 😭"
                 });
 
-              case 22:
+              case 23:
                 enableSort = Math.min.apply(Math, (0, _toConsumableArray2["default"])(enableSortArr));
-                _context.next = 25;
+                _context.next = 26;
                 return _schedule["default"].create(_objectSpread({
                   schedule: schedule,
                   userEmail: userEmail,
                   color: color,
-                  startDate: getStartDate,
-                  endDate: getEndDate,
+                  startDate: startDate,
+                  endDate: endDate,
                   term: term,
                   allDate: allDate,
                   sort: enableSort
@@ -108,12 +114,15 @@ var _default = {
                   contents: contents
                 }));
 
-              case 25:
+              case 26:
+                newSchedule = _context.sent;
                 return _context.abrupt("return", {
-                  ok: true
+                  ok: true,
+                  schedule: newSchedule,
+                  delSchedule: delSchedule
                 });
 
-              case 26:
+              case 28:
               case "end":
                 return _context.stop();
             }

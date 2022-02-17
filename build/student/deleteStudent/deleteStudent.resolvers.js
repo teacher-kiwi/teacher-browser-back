@@ -11,6 +11,10 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
+var _attendance = _interopRequireDefault(require("../../models/attendance"));
+
+var _journal = _interopRequireDefault(require("../../models/journal"));
+
 var _student = _interopRequireDefault(require("../../models/student"));
 
 var _studentList = _interopRequireDefault(require("../../models/studentList"));
@@ -54,29 +58,41 @@ var _default = {
                 });
 
               case 7:
-                _context.next = 13;
+                _context.next = 17;
                 break;
 
               case 9:
                 _context.next = 11;
-                return _student["default"].deleteOne({
-                  _id: studentId
+                return _attendance["default"].deleteMany({
+                  studentId: studentId
                 });
 
               case 11:
                 _context.next = 13;
+                return _journal["default"].deleteMany({
+                  ownerId: studentId
+                });
+
+              case 13:
+                _context.next = 15;
+                return _student["default"].deleteOne({
+                  _id: studentId
+                });
+
+              case 15:
+                _context.next = 17;
                 return _studentList["default"].updateMany({
                   $pull: {
                     studentId: studentId
                   }
                 });
 
-              case 13:
+              case 17:
                 return _context.abrupt("return", {
                   ok: true
                 });
 
-              case 14:
+              case 18:
               case "end":
                 return _context.stop();
             }

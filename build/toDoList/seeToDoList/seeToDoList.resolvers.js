@@ -50,7 +50,7 @@ var _default = {
                 _context.next = 9;
                 return _toDoList["default"].find({
                   userEmail: loggedInUser.email,
-                  allDate: new Date(date).setHours(0, 0, 0, 0)
+                  allDate: date
                 }, isComplete);
 
               case 9:

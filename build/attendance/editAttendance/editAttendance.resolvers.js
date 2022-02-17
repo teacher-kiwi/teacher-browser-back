@@ -11,42 +11,58 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _schedule = _interopRequireDefault(require("../../models/schedule"));
+var _attendance = _interopRequireDefault(require("../../models/attendance"));
 
 var _user = require("../../user/user.utils");
 
 var _default = {
   Mutation: {
-    deleteSchedule: (0, _user.protectedMutationResovler)( /*#__PURE__*/function () {
+    editAttendance: (0, _user.protectedMutationResovler)( /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref, _ref2) {
-        var scheduleId, userEmail, loggedInUser, delSchedule;
+        var attendId, type, date, contents, loggedInUser;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                scheduleId = _ref.scheduleId, userEmail = _ref.userEmail;
+                attendId = _ref.attendId, type = _ref.type, date = _ref.date, contents = _ref.contents;
                 loggedInUser = _ref2.loggedInUser;
-                _context.next = 4;
-                return _schedule["default"].findOne({
-                  userEmail: userEmail,
-                  _id: scheduleId
+
+                if (!contents) {
+                  _context.next = 7;
+                  break;
+                }
+
+                _context.next = 5;
+                return _attendance["default"].updateOne({
+                  userEmail: loggedInUser.email,
+                  _id: attendId
+                }, {
+                  type: type,
+                  date: date,
+                  contents: contents
                 });
 
-              case 4:
-                delSchedule = _context.sent;
-                _context.next = 7;
-                return _schedule["default"].deleteOne({
-                  userEmail: userEmail,
-                  _id: scheduleId
-                });
+              case 5:
+                _context.next = 9;
+                break;
 
               case 7:
-                return _context.abrupt("return", {
-                  ok: true,
-                  schedule: delSchedule
+                _context.next = 9;
+                return _attendance["default"].updateOne({
+                  userEmail: loggedInUser.email,
+                  _id: attendId
+                }, {
+                  type: type,
+                  date: date,
+                  contents: null
                 });
 
-              case 8:
+              case 9:
+                return _context.abrupt("return", {
+                  ok: true
+                });
+
+              case 10:
               case "end":
                 return _context.stop();
             }

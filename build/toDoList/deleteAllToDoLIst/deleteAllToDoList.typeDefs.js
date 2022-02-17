@@ -13,6 +13,6 @@ var _apolloServerCore = require("apollo-server-core");
 
 var _templateObject;
 
-var _default = (0, _apolloServerCore.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type Schedule {\n    _id: ID!\n    schedule: String!\n    userEmail: String!\n    contents: String\n    startDate: Float!\n    endDate: Float!\n    color: String!\n    term: [Float]!\n    allDate: [Float]!\n    sort: Int!\n  }\n"])));
+var _default = (0, _apolloServerCore.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type Mutation {\n    deleteAllToDoList(userEmail: String!): mutationResult\n  }\n"])));
 
 exports["default"] = _default;

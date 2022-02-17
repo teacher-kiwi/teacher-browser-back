@@ -16,23 +16,25 @@ var _toDoList = _interopRequireDefault(require("../../models/toDoList"));
 var _user = require("../../user/user.utils");
 
 var _default = {
-  Query: {
-    seeToDoListOnlyLength: (0, _user.protectedQueryResovler)( /*#__PURE__*/function () {
+  Mutation: {
+    deleteAllToDoList: (0, _user.protectedMutationResovler)( /*#__PURE__*/function () {
       var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref) {
-        var userEmail, date;
+        var userEmail;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                userEmail = _ref.userEmail, date = _ref.date;
+                userEmail = _ref.userEmail;
                 _context.next = 3;
-                return _toDoList["default"].count({
+                return _toDoList["default"].deleteMany({
                   userEmail: userEmail,
-                  allDate: date
+                  isComplete: true
                 });
 
               case 3:
-                return _context.abrupt("return", _context.sent);
+                return _context.abrupt("return", {
+                  ok: true
+                });
 
               case 4:
               case "end":

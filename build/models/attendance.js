@@ -10,8 +10,16 @@ exports["default"] = void 0;
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
 var Schema = _mongoose["default"].Schema;
-var journalSchema = new Schema({
-  ownerId: {
+var attendanceSchema = new Schema({
+  userEmail: {
+    type: String,
+    required: true
+  },
+  studentId: {
+    type: String,
+    required: true
+  },
+  type: {
     type: String,
     required: true
   },
@@ -19,18 +27,12 @@ var journalSchema = new Schema({
     type: Date,
     required: true
   },
-  text: {
-    type: String,
-    trim: true,
-    required: true
-  },
-  teacherEmail: {
-    type: String,
-    required: true
+  contents: {
+    type: String
   }
 });
 
-var Journal = _mongoose["default"].model("Journal", journalSchema);
+var Attendance = _mongoose["default"].model("Attendance", attendanceSchema);
 
-var _default = Journal;
+var _default = Attendance;
 exports["default"] = _default;

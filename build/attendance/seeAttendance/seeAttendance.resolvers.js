@@ -11,42 +11,57 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _schedule = _interopRequireDefault(require("../../models/schedule"));
+var _attendance = _interopRequireDefault(require("../../models/attendance"));
 
 var _user = require("../../user/user.utils");
 
 var _default = {
-  Mutation: {
-    deleteSchedule: (0, _user.protectedMutationResovler)( /*#__PURE__*/function () {
+  Query: {
+    seeAttendance: (0, _user.protectedQueryResovler)( /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref, _ref2) {
-        var scheduleId, userEmail, loggedInUser, delSchedule;
+        var date, studentId, attendId, loggedInUser;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                scheduleId = _ref.scheduleId, userEmail = _ref.userEmail;
+                date = _ref.date, studentId = _ref.studentId, attendId = _ref.attendId;
                 loggedInUser = _ref2.loggedInUser;
-                _context.next = 4;
-                return _schedule["default"].findOne({
-                  userEmail: userEmail,
-                  _id: scheduleId
+
+                if (!date) {
+                  _context.next = 6;
+                  break;
+                }
+
+                _context.next = 5;
+                return _attendance["default"].find({
+                  userEmail: loggedInUser.email,
+                  date: date
                 });
 
-              case 4:
-                delSchedule = _context.sent;
-                _context.next = 7;
-                return _schedule["default"].deleteOne({
-                  userEmail: userEmail,
-                  _id: scheduleId
+              case 5:
+                return _context.abrupt("return", _context.sent);
+
+              case 6:
+                if (!attendId) {
+                  _context.next = 10;
+                  break;
+                }
+
+                _context.next = 9;
+                return _attendance["default"].find({
+                  userEmail: loggedInUser.email,
+                  _id: attendId
                 });
 
-              case 7:
+              case 9:
+                return _context.abrupt("return", _context.sent);
+
+              case 10:
                 return _context.abrupt("return", {
-                  ok: true,
-                  schedule: delSchedule
+                  ok: true
                 });
 
-              case 8:
+              case 11:
               case "end":
                 return _context.stop();
             }

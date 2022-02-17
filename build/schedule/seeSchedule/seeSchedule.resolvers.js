@@ -130,7 +130,7 @@ var _default = {
                 _context2.next = 14;
                 return _schedule["default"].find({
                   userEmail: loggedInUser.email,
-                  allDate: new Date(date).setHours(0, 0, 0, 0)
+                  allDate: date
                 }).sort({
                   sort: 1
                 });

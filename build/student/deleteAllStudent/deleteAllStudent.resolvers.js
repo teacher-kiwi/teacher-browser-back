@@ -11,6 +11,10 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
+var _attendance = _interopRequireDefault(require("../../models/attendance"));
+
+var _journal = _interopRequireDefault(require("../../models/journal"));
+
 var _student = _interopRequireDefault(require("../../models/student"));
 
 var _studentList = _interopRequireDefault(require("../../models/studentList"));
@@ -21,7 +25,7 @@ var _default = {
   Mutation: {
     deleteAllStudent: (0, _user.protectedMutationResovler)( /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref, _ref2) {
-        var teacherEmail, loggedInUser, students, ids;
+        var teacherEmail, loggedInUser, students, ids, i;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -53,18 +57,43 @@ var _default = {
                 });
 
               case 8:
-                _context.next = 10;
+                i = 0;
+
+              case 9:
+                if (!(i < ids.length)) {
+                  _context.next = 17;
+                  break;
+                }
+
+                _context.next = 12;
+                return _attendance["default"].deleteMany({
+                  studentId: ids[i]
+                });
+
+              case 12:
+                _context.next = 14;
+                return _journal["default"].deleteMany({
+                  ownerId: ids[i]
+                });
+
+              case 14:
+                i++;
+                _context.next = 9;
+                break;
+
+              case 17:
+                _context.next = 19;
                 return _student["default"].deleteMany({
                   teacherEmail: teacherEmail,
                   trash: true
                 });
 
-              case 10:
+              case 19:
                 return _context.abrupt("return", {
                   ok: true
                 });
 
-              case 11:
+              case 20:
               case "end":
                 return _context.stop();
             }

@@ -25,7 +25,7 @@ var _default = {
   Mutation: {
     createToDoList: (0, _user.protectedMutationResovler)( /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref, _ref2) {
-        var toDo, userEmail, startDate, endDate, contents, star, loggedInUser, getStartDate, getEndDate, allDate, term, termDay, i, day;
+        var toDo, userEmail, startDate, endDate, contents, star, loggedInUser, allDate, term, termDay, i, day;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -34,47 +34,45 @@ var _default = {
                 loggedInUser = _ref2.loggedInUser;
 
                 if (!startDate) {
-                  _context.next = 10;
+                  _context.next = 8;
                   break;
                 }
 
-                getStartDate = new Date(startDate).setHours(0, 0, 0, 0);
-                getEndDate = new Date(endDate).setHours(0, 0, 0, 0);
                 allDate = null;
 
-                if (getStartDate === getEndDate) {
-                  allDate = [getStartDate];
+                if (startDate === endDate) {
+                  allDate = [startDate];
                 } else {
                   term = [];
-                  termDay = (getEndDate - getStartDate) / 1000 / 60 / 60 / 24 - 1;
+                  termDay = (endDate - startDate) / 1000 / 60 / 60 / 24 - 1;
 
                   for (i = 0; i < termDay; i++) {
-                    day = getStartDate + 86400000 * (i + 1);
+                    day = startDate + 86400000 * (i + 1);
                     term.push(day);
                   }
 
-                  allDate = [getStartDate].concat(term, [getEndDate]);
+                  allDate = [startDate].concat(term, [endDate]);
                 }
 
-                _context.next = 9;
+                _context.next = 7;
                 return _toDoList["default"].create(_objectSpread({
                   toDo: toDo,
                   userEmail: userEmail,
                   star: star,
-                  startDate: getStartDate,
-                  endDate: getEndDate,
+                  startDate: startDate,
+                  endDate: endDate,
                   allDate: allDate
                 }, contents && {
                   contents: contents
                 }));
 
-              case 9:
+              case 7:
                 return _context.abrupt("return", {
                   ok: true
                 });
 
-              case 10:
-                _context.next = 12;
+              case 8:
+                _context.next = 10;
                 return _toDoList["default"].create(_objectSpread({
                   toDo: toDo,
                   userEmail: userEmail,
@@ -83,12 +81,12 @@ var _default = {
                   contents: contents
                 }));
 
-              case 12:
+              case 10:
                 return _context.abrupt("return", {
                   ok: true
                 });
 
-              case 13:
+              case 11:
               case "end":
                 return _context.stop();
             }

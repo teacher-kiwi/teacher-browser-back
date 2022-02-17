@@ -25,7 +25,7 @@ var _default = {
   Mutation: {
     editToDoList: (0, _user.protectedMutationResovler)( /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref, _ref2) {
-        var _id, userEmail, toDo, star, startDate, endDate, contents, loggedInUser, getStartDate, getEndDate, allDate, term, termDay, i, day;
+        var _id, userEmail, toDo, star, startDate, endDate, contents, loggedInUser, allDate, term, termDay, i, day;
 
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
@@ -35,29 +35,27 @@ var _default = {
                 loggedInUser = _ref2.loggedInUser;
 
                 if (!startDate) {
-                  _context.next = 11;
+                  _context.next = 9;
                   break;
                 }
 
-                getStartDate = new Date(startDate).setHours(0, 0, 0, 0);
-                getEndDate = new Date(endDate).setHours(0, 0, 0, 0);
                 allDate = null;
 
-                if (getStartDate === getEndDate) {
-                  allDate = [getStartDate];
+                if (startDate === endDate) {
+                  allDate = [startDate];
                 } else {
                   term = [];
-                  termDay = (getEndDate - getStartDate) / 1000 / 60 / 60 / 24 - 1;
+                  termDay = (endDate - startDate) / 1000 / 60 / 60 / 24 - 1;
 
                   for (i = 0; i < termDay; i++) {
-                    day = getStartDate + 86400000 * (i + 1);
+                    day = startDate + 86400000 * (i + 1);
                     term.push(day);
                   }
 
-                  allDate = [getStartDate].concat(term, [getEndDate]);
+                  allDate = [startDate].concat(term, [endDate]);
                 }
 
-                _context.next = 9;
+                _context.next = 7;
                 return _toDoList["default"].updateOne({
                   _id: _id,
                   userEmail: userEmail
@@ -70,23 +68,23 @@ var _default = {
                 }), {}, {
                   star: star
                 }, startDate ? {
-                  startDate: getStartDate
+                  startDate: startDate
                 } : {
                   startDate: null
                 }), endDate ? {
-                  endDate: getEndDate
+                  endDate: endDate
                 } : {
                   endDate: null
                 }), {}, {
                   allDate: allDate
                 }));
 
-              case 9:
-                _context.next = 13;
+              case 7:
+                _context.next = 11;
                 break;
 
-              case 11:
-                _context.next = 13;
+              case 9:
+                _context.next = 11;
                 return _toDoList["default"].updateOne({
                   _id: _id,
                   userEmail: userEmail
@@ -103,12 +101,12 @@ var _default = {
                   allDate: []
                 }));
 
-              case 13:
+              case 11:
                 return _context.abrupt("return", {
                   ok: true
                 });
 
-              case 14:
+              case 12:
               case "end":
                 return _context.stop();
             }

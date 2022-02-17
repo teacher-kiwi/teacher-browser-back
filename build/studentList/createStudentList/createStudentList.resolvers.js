@@ -28,7 +28,7 @@ var _default = {
                 loggedInUser = _ref2.loggedInUser;
                 _context.next = 4;
                 return _studentList["default"].findOne({
-                  email: teacherEmail,
+                  teacherEmail: teacherEmail,
                   listName: listName.trim()
                 });
 
