@@ -51,5 +51,6 @@
     "@babel/preset-env": "^7.14.7",
     "nodemon": "^2.0.12",
     "prisma": "^3.5.0"
-  }
+  },
+  "proxy": "https://teachercan.herokuapp.com"
 }
