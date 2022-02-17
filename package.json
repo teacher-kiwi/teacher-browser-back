@@ -34,6 +34,7 @@
     "apollo-server-express": "^3.5.0",
     "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "graphql": "^15.7.2",
@@ -51,6 +52,5 @@
     "@babel/preset-env": "^7.14.7",
     "nodemon": "^2.0.12",
     "prisma": "^3.5.0"
-  },
-  "proxy": "https://teachercan.herokuapp.com"
+  }
 }

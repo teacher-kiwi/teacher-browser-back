@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors = require('cors')
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
@@ -20,6 +21,7 @@ async function startApolloServer(typeDefs, resolvers) {
     resolvers,
     playground: true,
     introspection: true,
+
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
     context: async ({ req }) => {
       return {
@@ -30,6 +32,7 @@ async function startApolloServer(typeDefs, resolvers) {
   await server.start();
   // 필요한 미들웨어 작성
   app.use(logger("tiny"));
+  app.use(cors())
 
   server.applyMiddleware({ app });
   await new Promise((r) => app.listen({ port: PORT }, r));
