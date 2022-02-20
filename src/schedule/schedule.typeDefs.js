@@ -12,5 +12,6 @@ export default gql`
     term: [Float]!
     allDate: [Float]!
     sort: Int!
+    months: [Int]!
   }
 `

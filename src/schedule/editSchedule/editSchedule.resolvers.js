@@ -3,7 +3,7 @@ import { protectedMutationResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
-    editSchedule: protectedMutationResovler(async (_, { scheduleId, schedule, userEmail, startDate, endDate, contents, color }, { loggedInUser }) => {
+    editSchedule: protectedMutationResovler(async (_, { scheduleId, schedule, userEmail, startDate, endDate, contents, color, months }, { loggedInUser }) => {
 
       const delSchedule = await Schedule.findOne({ userEmail, _id: scheduleId })
       await Schedule.deleteOne({ userEmail, _id: scheduleId })
@@ -44,6 +44,7 @@ export default {
         endDate,
         term,
         allDate,
+        months,
         sort: enableSort,
         ...(contents && { contents })
       });

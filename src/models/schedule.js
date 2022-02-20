@@ -37,6 +37,10 @@ const scheduleSchema = new Schema({
   sort: {
     type: Number,
     required: true
+  },
+  months: {
+    type: [Number],
+    required: true
   }
 });
 

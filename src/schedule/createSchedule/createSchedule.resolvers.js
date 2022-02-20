@@ -3,7 +3,7 @@ import { protectedMutationResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
-    createSchedule: protectedMutationResovler(async (_, { schedule, userEmail, startDate, endDate, contents, color }, { loggedInUser }) => {
+    createSchedule: protectedMutationResovler(async (_, { schedule, userEmail, startDate, endDate, contents, color, months }, { loggedInUser }) => {
 
       const termDay = ((endDate - startDate) / 1000 / 60 / 60 / 24) - 1;
       const term = []
@@ -41,13 +41,14 @@ export default {
         endDate,
         term,
         allDate,
+        months,
         sort: enableSort,
         ...(contents && { contents })
       });
-      return { 
+      return {
         ok: true,
         schedule: newSchedule
-       };
+      };
     }),
   },
 };

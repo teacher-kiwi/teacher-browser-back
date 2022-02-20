@@ -8,6 +8,7 @@ export default gql`
       userEmail: String!
       startDate: Float!
       endDate: Float!
+      months: [Int]!
       contents: String
       color: String!
     ): scheduleMutationResult
