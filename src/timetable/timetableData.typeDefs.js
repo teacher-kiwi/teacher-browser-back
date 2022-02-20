@@ -4,8 +4,8 @@ export default gql`
   type TimetableData {
     _id: ID
     teacherEmail: String
-    day: String
-    time: Int
+    index: Int
+    day: Int
     subName: String
     color: String
     memo: String

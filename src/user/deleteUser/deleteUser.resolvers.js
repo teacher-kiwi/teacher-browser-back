@@ -1,7 +1,13 @@
-import User from "../../models/user";
+import Attendance from "../../models/attendance";
+import Journal from "../../models/journal";
+import Schedule from "../../models/schedule";
 import Student from "../../models/student";
 import StudentList from "../../models/studentList";
+import TimeRecord from "../../models/timeRecord";
+import TimetableData from "../../models/timetableData";
+import TimetableTime from "../../models/timetableTime";
 import TodoList from "../../models/toDoList";
+import User from "../../models/user";
 
 import { protectedMutationResovler } from "../../user/user.utils";
 import Schedule from "../../models/schedule";
@@ -9,9 +15,15 @@ import Schedule from "../../models/schedule";
 export default {
   Mutation: {
     deleteUser: protectedMutationResovler(async (_, { teacherEmail }, { loggedInUser }) => {
-      await User.findOneAndDelete({ email: teacherEmail });
+      await Attendance.deleteMany({ userEmail: teacherEmail });
+      await Journal.deleteMany({ teacherEmail });
+      await Schedule.deleteMany({ userEmail: teacherEmail });
       await Student.deleteMany({ teacherEmail });
       await StudentList.deleteMany({ teacherEmail });
+      await TimeRecord.deleteMany({ userEmail: teacherEmail });
+      await TimetableData.deleteMany({ teacherEmail });
+      await TimetableTime.deleteMany({ teacherEmail });
+      await User.findOneAndDelete({ email: teacherEmail });
       await TodoList.deleteMany({ userEmail: teacherEmail });
       await Schedule.deleteMany({ userEmail: teacherEmail })
       return { ok: true };
