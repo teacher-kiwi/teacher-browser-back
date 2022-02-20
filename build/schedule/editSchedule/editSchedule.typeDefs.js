@@ -13,6 +13,6 @@ var _apolloServerCore = require("apollo-server-core");
 
 var _templateObject;
 
-var _default = (0, _apolloServerCore.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type Mutation {\n    editSchedule(\n      scheduleId: ID!\n      schedule: String!\n      userEmail: String!\n      startDate: Float!\n      endDate: Float!\n      contents: String\n      color: String!\n    ): scheduleMutationResult\n  }\n"])));
+var _default = (0, _apolloServerCore.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type Mutation {\n    editSchedule(\n      scheduleId: ID!\n      schedule: String!\n      userEmail: String!\n      startDate: Float!\n      endDate: Float!\n      months: [Int]!\n      contents: String\n      color: String!\n    ): scheduleMutationResult\n  }\n"])));
 
 exports["default"] = _default;

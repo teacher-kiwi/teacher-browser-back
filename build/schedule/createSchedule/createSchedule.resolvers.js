@@ -27,13 +27,13 @@ var _default = {
   Mutation: {
     createSchedule: (0, _user.protectedMutationResovler)( /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref, _ref2) {
-        var schedule, userEmail, startDate, endDate, contents, color, loggedInUser, termDay, term, i, day, allDate, enableSortArr, _i, includesSchedule, enableSort, newSchedule;
+        var schedule, userEmail, startDate, endDate, contents, color, months, loggedInUser, termDay, term, i, day, allDate, enableSortArr, _i, includesSchedule, enableSort, newSchedule;
 
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                schedule = _ref.schedule, userEmail = _ref.userEmail, startDate = _ref.startDate, endDate = _ref.endDate, contents = _ref.contents, color = _ref.color;
+                schedule = _ref.schedule, userEmail = _ref.userEmail, startDate = _ref.startDate, endDate = _ref.endDate, contents = _ref.contents, color = _ref.color, months = _ref.months;
                 loggedInUser = _ref2.loggedInUser;
                 termDay = (endDate - startDate) / 1000 / 60 / 60 / 24 - 1;
                 term = [];
@@ -94,6 +94,7 @@ var _default = {
                   endDate: endDate,
                   term: term,
                   allDate: allDate,
+                  months: months,
                   sort: enableSort
                 }, contents && {
                   contents: contents

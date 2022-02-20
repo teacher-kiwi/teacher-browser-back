@@ -52,7 +52,7 @@ var _default = {
 
                 return _context.abrupt("return", {
                   ok: false,
-                  error: "같은 이름의 학생이 존재합니다."
+                  error: "같은 이름의 학생이 존재합니다. 😅"
                 });
 
               case 8:

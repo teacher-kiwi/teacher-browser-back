@@ -13,6 +13,6 @@ var _apolloServerCore = require("apollo-server-core");
 
 var _templateObject;
 
-var _default = (0, _apolloServerCore.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  input InputTimetableData {\n    day: String!\n    time: Int!\n    subName: String!\n    color: String\n    memo: String\n  }\n\n  type Mutation {\n    setTimetableData(teacherEmail: String, timetableData: [InputTimetableData]): mutationResult\n  }\n"])));
+var _default = (0, _apolloServerCore.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  input InputTimetableData {\n    index: Int!\n    subName: String\n    color: String\n    memo: String\n  }\n\n  type Mutation {\n    setTimetableData(teacherEmail: String, timetableData: [InputTimetableData]): mutationResult\n  }\n"])));
 
 exports["default"] = _default;

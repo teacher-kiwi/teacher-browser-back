@@ -19,65 +19,67 @@ var _default = {
   Mutation: {
     setTimetableData: (0, _user.protectedMutationResovler)( /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(_, _ref, _ref2) {
-        var teacherEmail, timetableData, loggedInUser;
+        var teacherEmail, timetableData, loggedInUser, existedTimetableData, i;
         return _regenerator["default"].wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 teacherEmail = _ref.teacherEmail, timetableData = _ref.timetableData;
                 loggedInUser = _ref2.loggedInUser;
+                _context2.next = 4;
+                return _timetableData["default"].findOne({
+                  teacherEmail: teacherEmail
+                });
+
+              case 4:
+                existedTimetableData = _context2.sent;
+
+                if (existedTimetableData) {
+                  _context2.next = 13;
+                  break;
+                }
+
+                i = 0;
+
+              case 7:
+                if (!(i < 30)) {
+                  _context2.next = 13;
+                  break;
+                }
+
+                _context2.next = 10;
+                return _timetableData["default"].create({
+                  teacherEmail: teacherEmail,
+                  index: i,
+                  day: i % 5
+                });
+
+              case 10:
+                i++;
+                _context2.next = 7;
+                break;
+
+              case 13:
                 timetableData.forEach( /*#__PURE__*/function () {
                   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(data) {
-                    var timetableData;
                     return _regenerator["default"].wrap(function _callee$(_context) {
                       while (1) {
                         switch (_context.prev = _context.next) {
                           case 0:
                             _context.next = 2;
-                            return _timetableData["default"].findOne({
+                            return _timetableData["default"].updateOne({
                               teacherEmail: teacherEmail,
-                              day: data.day,
-                              time: data.time
+                              index: data.index
+                            }, {
+                              teacherEmail: teacherEmail,
+                              index: data.index,
+                              day: data.index % 5,
+                              subName: data.subName,
+                              color: data.color,
+                              memo: data.memo
                             });
 
                           case 2:
-                            timetableData = _context.sent;
-
-                            if (!timetableData) {
-                              _context.next = 8;
-                              break;
-                            }
-
-                            _context.next = 6;
-                            return _timetableData["default"].updateOne({
-                              teacherEmail: teacherEmail,
-                              day: data.day,
-                              time: data.time
-                            }, {
-                              teacherEmail: teacherEmail,
-                              day: data.day,
-                              time: data.time,
-                              subName: data.subName,
-                              color: data.color,
-                              memo: data.memo
-                            });
-
-                          case 6:
-                            _context.next = 10;
-                            break;
-
-                          case 8:
-                            _context.next = 10;
-                            return _timetableData["default"].create({
-                              teacherEmail: teacherEmail,
-                              day: data.day,
-                              time: data.time,
-                              subName: data.subName,
-                              color: data.color,
-                              memo: data.memo
-                            });
-
-                          case 10:
                           case "end":
                             return _context.stop();
                         }
@@ -93,7 +95,7 @@ var _default = {
                   ok: true
                 });
 
-              case 4:
+              case 15:
               case "end":
                 return _context2.stop();
             }

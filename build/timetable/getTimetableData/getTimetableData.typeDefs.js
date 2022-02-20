@@ -13,6 +13,6 @@ var _apolloServerCore = require("apollo-server-core");
 
 var _templateObject;
 
-var _default = (0, _apolloServerCore.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type Query {\n    getTimetableData(day: String): [TimetableData]\n  }\n"])));
+var _default = (0, _apolloServerCore.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type Query {\n    getTimetableData(day: Int): [TimetableData]\n  }\n"])));
 
 exports["default"] = _default;

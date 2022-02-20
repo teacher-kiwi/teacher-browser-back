@@ -42,7 +42,7 @@ var _default = {
 
                 return _context.abrupt("return", {
                   ok: false,
-                  error: "리스트 이름이 존재합니다."
+                  error: "리스트 이름이 존재합니다. 😅"
                 });
 
               case 7:
@@ -53,7 +53,7 @@ var _default = {
 
                 return _context.abrupt("return", {
                   ok: false,
-                  error: "리스트 이름이 공백입니다."
+                  error: "리스트 이름이 공백입니다. 😅"
                 });
 
               case 9:

@@ -15,17 +15,16 @@ var timetableDataSchema = new Schema({
     type: String,
     required: true
   },
-  day: {
-    type: String,
+  index: {
+    type: Number,
     required: true
   },
-  time: {
+  day: {
     type: Number,
     required: true
   },
   subName: {
-    type: String,
-    required: true
+    type: String
   },
   color: {
     type: String

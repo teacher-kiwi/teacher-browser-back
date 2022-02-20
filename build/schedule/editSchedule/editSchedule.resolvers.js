@@ -27,13 +27,13 @@ var _default = {
   Mutation: {
     editSchedule: (0, _user.protectedMutationResovler)( /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref, _ref2) {
-        var scheduleId, schedule, userEmail, startDate, endDate, contents, color, loggedInUser, delSchedule, termDay, term, i, day, allDate, enableSortArr, _i, includesSchedule, enableSort, newSchedule;
+        var scheduleId, schedule, userEmail, startDate, endDate, contents, color, months, loggedInUser, delSchedule, termDay, term, i, day, allDate, enableSortArr, _i, includesSchedule, enableSort, newSchedule;
 
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                scheduleId = _ref.scheduleId, schedule = _ref.schedule, userEmail = _ref.userEmail, startDate = _ref.startDate, endDate = _ref.endDate, contents = _ref.contents, color = _ref.color;
+                scheduleId = _ref.scheduleId, schedule = _ref.schedule, userEmail = _ref.userEmail, startDate = _ref.startDate, endDate = _ref.endDate, contents = _ref.contents, color = _ref.color, months = _ref.months;
                 loggedInUser = _ref2.loggedInUser;
                 _context.next = 4;
                 return _schedule["default"].findOne({
@@ -109,6 +109,7 @@ var _default = {
                   endDate: endDate,
                   term: term,
                   allDate: allDate,
+                  months: months,
                   sort: enableSort
                 }, contents && {
                   contents: contents

@@ -88,7 +88,7 @@ var _default = {
                 return _context.abrupt("return", _objectSpread({
                   ok: true
                 }, existStudent.length !== 0 && {
-                  error: "".concat(existStudent.join(", "), "\uC758 \uC774\uB984\uC740 \uC774\uBBF8 \uC874\uC7AC\uD569\uB2C8\uB2E4.")
+                  error: "".concat(existStudent.join(", "), "\uC758 \uC774\uB984\uC774 \uC911\uBCF5\uB429\uB2C8\uB2E4. \uD83D\uDE05")
                 }));
 
               case 21:

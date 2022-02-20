@@ -13,6 +13,6 @@ var _apolloServerCore = require("apollo-server-core");
 
 var _templateObject;
 
-var _default = (0, _apolloServerCore.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type Query {\n    seeSchedule(scheduleId: String, dateArr: [Float], date: Float): [Schedule]\n  }\n"])));
+var _default = (0, _apolloServerCore.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type Query {\n    seeSchedule(scheduleId: String, month: Int, date: Float): [Schedule]\n  }\n"])));
 
 exports["default"] = _default;
