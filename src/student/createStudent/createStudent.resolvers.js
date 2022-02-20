@@ -22,7 +22,7 @@ export default {
 
       return {
         ok: true,
-        ...(existStudent.length !== 0 && { error: `${existStudent.join(", ")}의 이름은 이미 존재합니다.` }),
+        ...(existStudent.length !== 0 && { error: `${existStudent.join(", ")}의 이름이 중복됩니다. 😅` }),
       };
     }),
   },
