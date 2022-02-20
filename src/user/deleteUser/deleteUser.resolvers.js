@@ -10,7 +10,6 @@ import TodoList from "../../models/toDoList";
 import User from "../../models/user";
 
 import { protectedMutationResovler } from "../../user/user.utils";
-import Schedule from "../../models/schedule";
 
 export default {
   Mutation: {
@@ -25,7 +24,7 @@ export default {
       await TimetableTime.deleteMany({ teacherEmail });
       await User.findOneAndDelete({ email: teacherEmail });
       await TodoList.deleteMany({ userEmail: teacherEmail });
-      await Schedule.deleteMany({ userEmail: teacherEmail })
+      await Schedule.deleteMany({ userEmail: teacherEmail });
       return { ok: true };
     }),
   },
