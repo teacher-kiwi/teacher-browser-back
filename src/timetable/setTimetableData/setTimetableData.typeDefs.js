@@ -2,7 +2,7 @@ import { gql } from "apollo-server-core";
 
 export default gql`
   input InputTimetableData {
-    day: String!
+    day: Int!
     time: Int!
     subName: String!
     color: String
