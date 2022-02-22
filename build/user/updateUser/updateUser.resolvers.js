@@ -19,12 +19,12 @@ var _default = {
   Mutation: {
     updateUser: (0, _user2.protectedMutationResovler)( /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref, _ref2) {
-        var userEmail, schoolName, schoolCode, areaCode, schoolAdress, bgTheme, alergy, loggedInUser;
+        var userEmail, schoolName, schoolCode, areaCode, schoolAdress, bgTheme, alergy, agreePolicy, loggedInUser;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                userEmail = _ref.userEmail, schoolName = _ref.schoolName, schoolCode = _ref.schoolCode, areaCode = _ref.areaCode, schoolAdress = _ref.schoolAdress, bgTheme = _ref.bgTheme, alergy = _ref.alergy;
+                userEmail = _ref.userEmail, schoolName = _ref.schoolName, schoolCode = _ref.schoolCode, areaCode = _ref.areaCode, schoolAdress = _ref.schoolAdress, bgTheme = _ref.bgTheme, alergy = _ref.alergy, agreePolicy = _ref.agreePolicy;
                 loggedInUser = _ref2.loggedInUser;
                 _context.next = 4;
                 return _user["default"].updateOne({
@@ -35,7 +35,8 @@ var _default = {
                   areaCode: areaCode,
                   schoolAdress: schoolAdress,
                   bgTheme: bgTheme,
-                  alergy: alergy
+                  alergy: alergy,
+                  agreePolicy: agreePolicy
                 });
 
               case 4:

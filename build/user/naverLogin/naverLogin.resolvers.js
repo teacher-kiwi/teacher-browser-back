@@ -27,8 +27,7 @@ var _default = {
             switch (_context2.prev = _context2.next) {
               case 0:
                 code = _ref.code, state = _ref.state;
-                console.log(process.env.NAVER_CLIENT_ID, process.env.NAVER_CLIENT_SECRET);
-                _context2.next = 4;
+                _context2.next = 3;
                 return (0, _axios["default"])("https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=".concat(process.env.NAVER_CLIENT_ID, "&client_secret=").concat(process.env.NAVER_CLIENT_SECRET, "&code=").concat(code, "&state=").concat(state)).then(function (_ref2) {
                   var data = _ref2.data;
 
@@ -98,11 +97,11 @@ var _default = {
                   }
                 });
 
-              case 4:
+              case 3:
                 result = _context2.sent;
                 return _context2.abrupt("return", result);
 
-              case 6:
+              case 5:
               case "end":
                 return _context2.stop();
             }

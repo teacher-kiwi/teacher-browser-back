@@ -33,14 +33,13 @@ var _default = {
 
               case 4:
                 time = _context.sent;
-                console.log(time);
 
                 if (!time) {
-                  _context.next = 12;
+                  _context.next = 11;
                   break;
                 }
 
-                _context.next = 9;
+                _context.next = 8;
                 return _timetableTime["default"].updateOne({
                   teacherEmail: teacherEmail
                 }, {
@@ -58,13 +57,13 @@ var _default = {
                   end6: end6
                 });
 
-              case 9:
+              case 8:
                 return _context.abrupt("return", {
                   ok: true
                 });
 
-              case 12:
-                _context.next = 14;
+              case 11:
+                _context.next = 13;
                 return _timetableTime["default"].create({
                   teacherEmail: teacherEmail,
                   start1: start1,
@@ -81,12 +80,12 @@ var _default = {
                   end6: end6
                 });
 
-              case 14:
+              case 13:
                 return _context.abrupt("return", {
                   ok: true
                 });
 
-              case 15:
+              case 14:
               case "end":
                 return _context.stop();
             }

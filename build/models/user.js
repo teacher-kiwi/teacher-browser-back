@@ -56,6 +56,9 @@ var userSchema = new Schema({
       siteName: String,
       memo: String
     }]
+  },
+  agreePolicy: {
+    type: Boolean
   }
 });
 
