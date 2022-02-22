@@ -10,6 +10,7 @@ export default gql`
       schoolAdress: String
       bgTheme: String
       alergy: [Int]
+      agreePolicy: Boolean
     ): mutationResult
   }
 `;
