@@ -3,7 +3,7 @@ import { protectedMutationResovler } from "../user.utils";
 
 export default {
   Mutation: {
-    updateUser: protectedMutationResovler(async (_, { userEmail, schoolName, schoolCode, areaCode, schoolAdress, bgTheme, alergy }, { loggedInUser }) => {
+    updateUser: protectedMutationResovler(async (_, { userEmail, schoolName, schoolCode, areaCode, schoolAdress, bgTheme, alergy, agreePolicy }, { loggedInUser }) => {
       await User.updateOne(
         { email: userEmail },
         {
@@ -13,6 +13,7 @@ export default {
           schoolAdress,
           bgTheme,
           alergy,
+          agreePolicy
         }
       );
       return { ok: true };

@@ -20,5 +20,6 @@ export default gql`
     tag: [String]
     favoriteNews: [String]
     link: [Link]
+    agreePolicy: Boolean
   }
 `;

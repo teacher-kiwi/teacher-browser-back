@@ -45,6 +45,9 @@ const userSchema = new Schema({
   },
   link: {
     type: [{ siteName: String, memo: String }]
+  },
+  agreePolicy: {
+    type: Boolean
   }
 });
 
