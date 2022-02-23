@@ -8,5 +8,6 @@ export default gql`
     type: String!
     date: Float!
     contents: String
+    month: Int!
   }
 `

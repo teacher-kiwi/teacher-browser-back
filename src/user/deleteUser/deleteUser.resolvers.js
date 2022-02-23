@@ -22,9 +22,9 @@ export default {
       await TimeRecord.deleteMany({ userEmail: teacherEmail });
       await TimetableData.deleteMany({ teacherEmail });
       await TimetableTime.deleteMany({ teacherEmail });
-      await User.findOneAndDelete({ email: teacherEmail });
       await TodoList.deleteMany({ userEmail: teacherEmail });
       await Schedule.deleteMany({ userEmail: teacherEmail });
+      await User.findOneAndDelete({ email: teacherEmail });
       return { ok: true };
     }),
   },

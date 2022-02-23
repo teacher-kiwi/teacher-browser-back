@@ -3,15 +3,15 @@ import { protectedQueryResovler } from "../../user/user.utils";
 
 export default {
   Query: {
-    seeJournal: protectedQueryResovler(async (_, { teacherEmail, date, studentId, journalId }) => {
+    seeJournal: protectedQueryResovler(async (_, {  date, studentId, journalId }, {loggedInUser}) => {
       if (date) {
-        return await Journal.find({ teacherEmail, date }).sort({ _id: 1 })
+        return await Journal.find({ teacherEmail: loggedInUser.email, date }).sort({ _id: 1 })
       }
       if (journalId) {
-        return await Journal.find({ teacherEmail, _id: journalId })
+        return await Journal.find({ teacherEmail: loggedInUser.email, _id: journalId })
       }
       if (studentId) {
-        return await Journal.find({ teacherEmail, ownerId: studentId }).sort({ date: 1 })
+        return await Journal.find({ teacherEmail: loggedInUser.email, ownerId: studentId }).sort({ date: 1 })
       }
     })
   }

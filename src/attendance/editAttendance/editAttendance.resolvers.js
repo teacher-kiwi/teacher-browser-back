@@ -3,7 +3,7 @@ import { protectedMutationResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
-    editAttendance: protectedMutationResovler(async (_, { attendId, type, date, contents }, { loggedInUser }) => {
+    editAttendance: protectedMutationResovler(async (_, { attendId, type, date, contents, month }, { loggedInUser }) => {
 
       if (contents) {
         await Attendance.updateOne(
@@ -14,7 +14,8 @@ export default {
           {
             type,
             date,
-            contents
+            contents,
+            month
           }
         )
       } else {
@@ -26,6 +27,7 @@ export default {
           {
             type,
             date,
+            month,
             contents: null
           }
         )
