@@ -50,7 +50,13 @@ var _default = {
                 _context.next = 9;
                 return _schedule["default"].find({
                   userEmail: loggedInUser.email,
-                  months: month
+                  $or: [{
+                    months: month
+                  }, {
+                    months: month - 1
+                  }, {
+                    months: month + 1
+                  }]
                 });
 
               case 9:
