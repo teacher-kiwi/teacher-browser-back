@@ -13,6 +13,6 @@ var _apolloServerCore = require("apollo-server-core");
 
 var _templateObject;
 
-var _default = (0, _apolloServerCore.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type Attendance {\n    _id: ID!\n    userEmail: String!\n    studentId: String!\n    type: String!\n    date: Float!\n    contents: String\n  }\n"])));
+var _default = (0, _apolloServerCore.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type Attendance {\n    _id: ID!\n    userEmail: String!\n    studentId: String!\n    type: String!\n    date: Float!\n    contents: String\n    month: Int!\n  }\n"])));
 
 exports["default"] = _default;

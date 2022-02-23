@@ -18,63 +18,64 @@ var _user = require("../../user/user.utils");
 var _default = {
   Query: {
     seeJournal: (0, _user.protectedQueryResovler)( /*#__PURE__*/function () {
-      var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref) {
-        var teacherEmail, date, studentId, journalId;
+      var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref, _ref2) {
+        var date, studentId, journalId, loggedInUser;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                teacherEmail = _ref.teacherEmail, date = _ref.date, studentId = _ref.studentId, journalId = _ref.journalId;
+                date = _ref.date, studentId = _ref.studentId, journalId = _ref.journalId;
+                loggedInUser = _ref2.loggedInUser;
 
                 if (!date) {
-                  _context.next = 5;
+                  _context.next = 6;
                   break;
                 }
 
-                _context.next = 4;
+                _context.next = 5;
                 return _journal["default"].find({
-                  teacherEmail: teacherEmail,
+                  teacherEmail: loggedInUser.email,
                   date: date
                 }).sort({
                   _id: 1
                 });
 
-              case 4:
+              case 5:
                 return _context.abrupt("return", _context.sent);
 
-              case 5:
+              case 6:
                 if (!journalId) {
-                  _context.next = 9;
+                  _context.next = 10;
                   break;
                 }
 
-                _context.next = 8;
+                _context.next = 9;
                 return _journal["default"].find({
-                  teacherEmail: teacherEmail,
+                  teacherEmail: loggedInUser.email,
                   _id: journalId
                 });
 
-              case 8:
+              case 9:
                 return _context.abrupt("return", _context.sent);
 
-              case 9:
+              case 10:
                 if (!studentId) {
-                  _context.next = 13;
+                  _context.next = 14;
                   break;
                 }
 
-                _context.next = 12;
+                _context.next = 13;
                 return _journal["default"].find({
-                  teacherEmail: teacherEmail,
+                  teacherEmail: loggedInUser.email,
                   ownerId: studentId
                 }).sort({
                   date: 1
                 });
 
-              case 12:
+              case 13:
                 return _context.abrupt("return", _context.sent);
 
-              case 13:
+              case 14:
               case "end":
                 return _context.stop();
             }
@@ -82,8 +83,8 @@ var _default = {
         }, _callee);
       }));
 
-      return function (_x, _x2) {
-        return _ref2.apply(this, arguments);
+      return function (_x, _x2, _x3) {
+        return _ref3.apply(this, arguments);
       };
     }())
   }

@@ -13,6 +13,6 @@ var _apolloServerCore = require("apollo-server-core");
 
 var _templateObject;
 
-var _default = (0, _apolloServerCore.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type Query {\n    seeJournal(teacherEmail: String!, date: Float, studentId: ID, journalId: String): [Journal]\n  }\n"])));
+var _default = (0, _apolloServerCore.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type Query {\n    seeJournal(date: Float, studentId: ID, journalId: String): [Journal]\n  }\n"])));
 
 exports["default"] = _default;

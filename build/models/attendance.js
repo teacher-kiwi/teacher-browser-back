@@ -29,6 +29,10 @@ var attendanceSchema = new Schema({
   },
   contents: {
     type: String
+  },
+  month: {
+    type: Number,
+    required: true
   }
 });
 

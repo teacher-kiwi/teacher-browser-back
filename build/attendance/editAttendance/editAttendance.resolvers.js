@@ -19,12 +19,12 @@ var _default = {
   Mutation: {
     editAttendance: (0, _user.protectedMutationResovler)( /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref, _ref2) {
-        var attendId, type, date, contents, loggedInUser;
+        var attendId, type, date, contents, month, loggedInUser;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                attendId = _ref.attendId, type = _ref.type, date = _ref.date, contents = _ref.contents;
+                attendId = _ref.attendId, type = _ref.type, date = _ref.date, contents = _ref.contents, month = _ref.month;
                 loggedInUser = _ref2.loggedInUser;
 
                 if (!contents) {
@@ -39,7 +39,8 @@ var _default = {
                 }, {
                   type: type,
                   date: date,
-                  contents: contents
+                  contents: contents,
+                  month: month
                 });
 
               case 5:
@@ -54,6 +55,7 @@ var _default = {
                 }, {
                   type: type,
                   date: date,
+                  month: month,
                   contents: null
                 });
 

@@ -25,18 +25,19 @@ var _default = {
   Mutation: {
     createAttendance: (0, _user.protectedMutationResovler)( /*#__PURE__*/function () {
       var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref) {
-        var userEmail, studentId, type, date, contents;
+        var userEmail, studentId, type, date, contents, month;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                userEmail = _ref.userEmail, studentId = _ref.studentId, type = _ref.type, date = _ref.date, contents = _ref.contents;
+                userEmail = _ref.userEmail, studentId = _ref.studentId, type = _ref.type, date = _ref.date, contents = _ref.contents, month = _ref.month;
                 _context.next = 3;
                 return _attendance["default"].create(_objectSpread({
                   userEmail: userEmail,
                   studentId: studentId,
                   type: type,
-                  date: date
+                  date: date,
+                  month: month
                 }, contents && {
                   contents: contents
                 }));

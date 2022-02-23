@@ -93,20 +93,20 @@ var _default = {
 
               case 18:
                 _context.next = 20;
-                return _user["default"].findOneAndDelete({
-                  email: teacherEmail
+                return _toDoList["default"].deleteMany({
+                  userEmail: teacherEmail
                 });
 
               case 20:
                 _context.next = 22;
-                return _toDoList["default"].deleteMany({
+                return _schedule["default"].deleteMany({
                   userEmail: teacherEmail
                 });
 
               case 22:
                 _context.next = 24;
-                return _schedule["default"].deleteMany({
-                  userEmail: teacherEmail
+                return _user["default"].findOneAndDelete({
+                  email: teacherEmail
                 });
 
               case 24:
