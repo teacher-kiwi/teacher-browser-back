@@ -8,7 +8,7 @@ export default {
         return await Schedule.find({ userEmail: loggedInUser.email, _id: scheduleId })
       }
       if (month) {
-        return await Schedule.find({ userEmail: loggedInUser.email, months: month })
+        return await Schedule.find({ userEmail: loggedInUser.email, $or: [{ months: month }, { months: month - 1 }, { months: month + 1 }] })
       }
       // if (dateArr) {
       //   let returnSchedule = []
