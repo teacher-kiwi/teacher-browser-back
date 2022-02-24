@@ -105,6 +105,7 @@ var _default = {
                   }());
                 })["catch"](function (_ref5) {
                   var response = _ref5.response;
+                  console.log("카카오로그인 실패", response.data.error_description);
                   return {
                     ok: false,
                     error: response.data.error_description
