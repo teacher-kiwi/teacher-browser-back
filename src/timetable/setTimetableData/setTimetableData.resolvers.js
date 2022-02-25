@@ -3,19 +3,27 @@ import { protectedMutationResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
-    setTimetableData: protectedMutationResovler(async (_, { teacherEmail, timetableData }, { loggedInUser }) => {
+    setTimetableData: protectedMutationResovler(async (_, { teacherEmail, index, subName, color, memo }, { loggedInUser }) => {
       const existedTimetableData = await TimetableData.findOne({ teacherEmail });
       if (!existedTimetableData) {
         for (let i = 0; i < 30; i++) {
           await TimetableData.create({ teacherEmail, index: i, day: i % 5 });
         }
       }
-      timetableData.forEach(async (data) => {
+
+      for (let i = 0; i < index.length; i++) {
         await TimetableData.updateOne(
-          { teacherEmail, index: data.index },
-          { teacherEmail, index: data.index, day: data.index % 5, subName: data.subName, color: data.color, memo: data.memo }
+          { teacherEmail, index: index[i] },
+          {
+            teacherEmail,
+            day: index[i] % 5,
+            subName,
+            ...(color ? { color } : { color: null }),
+            ...(memo ? { memo } : { memo: null })
+          }
         );
-      });
+      }
+
       return { ok: true };
     }),
   },
