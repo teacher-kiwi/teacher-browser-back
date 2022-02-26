@@ -11,7 +11,7 @@
     "studio": "npx prisma studio",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src --out-dir build",
-    "start": "node build/server"
+    "start": "babel src --out-dir build & node build/server"
   },
   "repository": {
     "type": "git",

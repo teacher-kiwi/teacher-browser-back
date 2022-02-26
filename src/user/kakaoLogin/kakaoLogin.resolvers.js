@@ -23,6 +23,7 @@ export default {
           });
         })
         .catch(({ response }) => {
+          console.log("카카오로그인 실패", response.data.error_description);
           return { ok: false, error: response.data.error_description };
         });
 
