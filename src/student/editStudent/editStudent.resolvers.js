@@ -19,11 +19,15 @@ export default {
         //
         // 번호에 숫자 이외의 문자가 있는지 검사
         if (studentNumber) {
-          const regex = /^[0-9]*$/g;
-          if (!regex.test(studentNumber)) return { ok: false, error: "학생 번호에 숫자 이외의 문자가 입력되었습니다." };
-          await Student.updateOne({ _id: studentId }, { studentNumber });
-          await Student.updateOne({ _id: studentId }, { $addToSet: { tag: parseInt(studentNumber) % 2 === 0 ? "짝수" : "홀수" } });
-          await Student.updateOne({ _id: studentId }, { $pull: { tag: parseInt(studentNumber) % 2 === 0 ? "홀수" : "짝수" } });
+          if (studentNumber === "delNum") {
+            await Student.updateOne({ _id: studentId }, { studentNumber: null });
+          } else {
+            const regex = /^[0-9]*$/g;
+            if (!regex.test(studentNumber)) return { ok: false, error: "학생 번호에 숫자 이외의 문자가 입력되었습니다." };
+            await Student.updateOne({ _id: studentId }, { studentNumber });
+            await Student.updateOne({ _id: studentId }, { $addToSet: { tag: parseInt(studentNumber) % 2 === 0 ? "짝수" : "홀수" } });
+            await Student.updateOne({ _id: studentId }, { $pull: { tag: parseInt(studentNumber) % 2 === 0 ? "홀수" : "짝수" } });
+          }
         }
         //
         // 성별 수정
@@ -34,7 +38,14 @@ export default {
         }
         //
         // 학생 정보 수정(이름, 부모번호, 태그, 메모, 아이콘)
-        await Student.updateOne({ _id: studentId }, { studentName, parentPhoneNum, $addToSet: { tag }, $pull: { tag: delTag }, memo, icon });
+        await Student.updateOne({ _id: studentId }, {
+          studentName,
+          parentPhoneNum,
+          $addToSet: { tag },
+          $pull: { tag: delTag },
+          memo,
+          icon
+        });
         //
         // 알러지 값이 있을 경우
         if (allergy) {
