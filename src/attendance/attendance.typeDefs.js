@@ -9,5 +9,6 @@ export default gql`
     date: Float!
     contents: String
     month: Int!
+    studentName: String
   }
 `
