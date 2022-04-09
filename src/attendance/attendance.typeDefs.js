@@ -11,4 +11,4 @@ export default gql`
     month: Int!
     studentName: String
   }
-`
+`;
