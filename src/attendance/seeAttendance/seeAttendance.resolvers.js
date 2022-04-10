@@ -3,7 +3,10 @@ import { protectedQueryResovler } from "../../user/user.utils";
 
 export default {
   Query: {
-    seeAttendance: protectedQueryResovler(async (_, { date, studentId, attendId }, { loggedInUser }) => {
+    seeAttendance: protectedQueryResovler(async (_, { date, studentId, attendId, month }, { loggedInUser }) => {
+      if (month) {
+        return await Attendance.find({ userEmail: loggedInUser.email, month })
+      }
       if (date) {
         return await Attendance.find({ userEmail: loggedInUser.email, date });
       }
