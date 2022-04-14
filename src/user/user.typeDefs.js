@@ -5,6 +5,11 @@ export default gql`
     siteName: String
     memo: String
   }
+  type DDay {
+    title: String
+    date: Float
+    ID: Float
+  }
 
   type User {
     _id: ID!
@@ -21,5 +26,7 @@ export default gql`
     favoriteNews: [String]
     link: [Link]
     agreePolicy: Boolean
+    dDay: [DDay]
+    isMoveDDay: Boolean
   }
 `;

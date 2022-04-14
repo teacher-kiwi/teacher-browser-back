@@ -41,14 +41,20 @@ const userSchema = new Schema({
     default: ["남학생", "여학생", "홀수", "짝수"],
   },
   favoriteNews: {
-    type: [String]
+    type: [String],
   },
   link: {
-    type: [{ siteName: String, memo: String }]
+    type: [{ siteName: String, memo: String }],
   },
   agreePolicy: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
+  dDay: {
+    type: [{ title: String, date: Number, ID: Number }],
+  },
+  isMoveDDay: {
+    type: Boolean,
+  },
 });
 
 const User = mongoose.model("User", userSchema);
