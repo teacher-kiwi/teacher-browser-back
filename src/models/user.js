@@ -55,6 +55,9 @@ const userSchema = new Schema({
   isMoveDDay: {
     type: Boolean,
   },
+  homeLinks: {
+    type: [{ title: String, link: String, ID: Number }],
+  },
 });
 
 const User = mongoose.model("User", userSchema);

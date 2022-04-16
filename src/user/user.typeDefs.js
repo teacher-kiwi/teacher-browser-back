@@ -10,6 +10,11 @@ export default gql`
     date: Float
     ID: Float
   }
+  type homeLink {
+    title: String
+    link: String
+    ID: Float
+  }
 
   type User {
     _id: ID!
@@ -28,5 +33,6 @@ export default gql`
     agreePolicy: Boolean
     dDay: [DDay]
     isMoveDDay: Boolean
+    homeLinks: [homeLink]
   }
 `;
