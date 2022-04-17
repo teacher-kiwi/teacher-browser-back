@@ -1,9 +1,4 @@
 import axios from "axios";
-import User from "../../models/user";
-import {
-  protectedMutationResovler,
-  protectedQueryResovler,
-} from "../user.utils";
 
 export default {
   Query: {
