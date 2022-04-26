@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const familyMonthSchema = new Schema({
+const familyStorySchema = new Schema({
   userEmail: {
     type: String,
     required: true,
@@ -36,6 +36,6 @@ const familyMonthSchema = new Schema({
   },
 });
 
-const FamilyMonth = mongoose.model("FamilyMonth", familyMonthSchema);
+const FamilyStory = mongoose.model("FamilyStory", familyStorySchema);
 
-export default FamilyMonth;
+export default FamilyStory;
