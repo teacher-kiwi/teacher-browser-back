@@ -10,6 +10,6 @@ export default gql`
     videoType: String!
     tag: [String]
     createdAt: Float!
-    contetns: String!
+    contents: String!
   }
 `;

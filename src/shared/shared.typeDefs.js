@@ -12,8 +12,13 @@ export default gql`
   }
   type scheduleMutationResult {
     ok: Boolean!
-    schedule: Schedule!,
-    delSchedule: Schedule,
+    schedule: Schedule!
+    delSchedule: Schedule
     error: String
   }
-`
+  type includeIdMutationResult {
+    ok: Boolean!
+    id: String
+    error: String
+  }
+`;
