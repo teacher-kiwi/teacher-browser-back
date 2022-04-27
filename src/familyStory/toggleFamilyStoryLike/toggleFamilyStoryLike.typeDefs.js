@@ -5,6 +5,6 @@ export default gql`
     toggleFamilyStoryLike(
       userEmail: String!
       familyStoryId: String!
-    ): mutationResult
+    ): includeMsgMutationResult
   }
 `;

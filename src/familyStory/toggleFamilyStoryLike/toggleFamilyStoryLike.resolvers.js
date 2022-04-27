@@ -14,15 +14,20 @@ export default {
             userEmail,
             familyStoryId,
           });
+          return {
+            ok: true,
+            message: "delete",
+          };
         } else {
           await FamilyStoryLike.create({
             userEmail,
             familyStoryId,
           });
+          return {
+            ok: true,
+            message: "create",
+          };
         }
-        return {
-          ok: true,
-        };
       }
     ),
   },

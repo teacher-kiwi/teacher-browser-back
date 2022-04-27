@@ -21,4 +21,9 @@ export default gql`
     id: String
     error: String
   }
+  type includeMsgMutationResult {
+    ok: Boolean!
+    message: String
+    error: String
+  }
 `;
