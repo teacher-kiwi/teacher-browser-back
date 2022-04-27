@@ -11,6 +11,10 @@ const familyStoryLikeSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true,
   },
+  familyStoryCreatedAt: {
+    type: Date,
+    required: true,
+  },
 });
 
 const FamilyStoryLike = mongoose.model(

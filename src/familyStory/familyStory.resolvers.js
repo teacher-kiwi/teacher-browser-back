@@ -1,3 +1,4 @@
+import FamilyStory from "../models/familyStory";
 import FamilyStoryLike from "../models/familyStoryLike";
 
 export default {
@@ -18,6 +19,12 @@ export default {
       } else {
         return false;
       }
+    },
+  },
+
+  FamilyStoryLike: {
+    familyStory: async ({ familyStoryId }) => {
+      return await FamilyStory.findById({ _id: familyStoryId });
     },
   },
 };

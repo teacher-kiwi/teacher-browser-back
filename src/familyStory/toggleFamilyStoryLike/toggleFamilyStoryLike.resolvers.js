@@ -1,3 +1,4 @@
+import FamilyStory from "../../models/familyStory";
 import FamilyStoryLike from "../../models/familyStoryLike";
 import { protectedMutationResovler } from "../../user/user.utils";
 
@@ -5,6 +6,9 @@ export default {
   Mutation: {
     toggleFamilyStoryLike: protectedMutationResovler(
       async (_, { userEmail, familyStoryId }) => {
+        const familyStory = await FamilyStory.findById({
+          _id: familyStoryId,
+        });
         const like = await FamilyStoryLike.findOne({
           userEmail,
           familyStoryId,
@@ -22,6 +26,7 @@ export default {
           await FamilyStoryLike.create({
             userEmail,
             familyStoryId,
+            familyStoryCreatedAt: familyStory.createdAt,
           });
           return {
             ok: true,

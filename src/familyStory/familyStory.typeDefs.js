@@ -21,10 +21,6 @@ export default gql`
     familyStoryId: ID!
     userEmail: String!
     #
-    url: String
-    titile: String
-    bgColor: String
-    videoType: String
-    createdAt: Float
+    familyStory: FamilyStory
   }
 `;
