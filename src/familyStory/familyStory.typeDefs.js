@@ -13,6 +13,7 @@ export default gql`
     contents: String!
     #
     likeNum: Int!
+    isLiked: Boolean
   }
 
   type FamilyStoryLike {
