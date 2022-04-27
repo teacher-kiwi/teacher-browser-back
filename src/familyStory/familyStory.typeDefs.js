@@ -11,5 +11,19 @@ export default gql`
     tag: [String]
     createdAt: Float!
     contents: String!
+    #
+    likeNum: Int!
+  }
+
+  type FamilyStoryLike {
+    _id: ID!
+    familyStoryId: ID!
+    userEmail: String!
+    #
+    url: String
+    titile: String
+    bgColor: String
+    videoType: String
+    createdAt: Float
   }
 `;
