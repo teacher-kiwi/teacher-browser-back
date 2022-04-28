@@ -2,6 +2,6 @@ import { gql } from "apollo-server-core";
 
 export default gql`
   type Query {
-    seeLikeFamilyStory(userEmail: String!): [FamilyStoryLike]
+    seeLikeFamilyStory(userEmail: String!, page: Int!): [FamilyStoryLike]
   }
 `;
