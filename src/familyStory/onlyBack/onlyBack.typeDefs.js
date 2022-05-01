@@ -10,4 +10,7 @@ export default gql`
   type Mutation {
     deleteAllFamilyStoryLike(userEmail: String!): mutationResult
   }
+  type Mutation {
+    deleteNotUserFamilyStory(_id: String!, userEmail: String!): mutationResult
+  }
 `;
