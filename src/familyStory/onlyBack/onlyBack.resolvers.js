@@ -1,4 +1,6 @@
+import FamilyStory from "../../models/familyStory";
 import FamilyStoryLike from "../../models/familyStoryLike";
+import { protectedMutationResovler } from "../../user/user.utils";
 
 export default {
   Mutation: {
@@ -8,5 +10,33 @@ export default {
         ok: true,
       };
     },
+    deleteAllFamilyStory: protectedMutationResovler(
+      async (_, { userEmail }) => {
+        if (userEmail === "nlom0218@naver.com" || "nlom0218@gmail.com") {
+          await FamilyStory.deleteMany();
+          return {
+            ok: true,
+          };
+        } else {
+          return {
+            ok: false,
+          };
+        }
+      }
+    ),
+    deleteAllFamilyStoryLike: protectedMutationResovler(
+      async (_, { userEmail }) => {
+        if (userEmail === "nlom0218@naver.com" || "nlom0218@gmail.com") {
+          await FamilyStoryLike.deleteMany();
+          return {
+            ok: true,
+          };
+        } else {
+          return {
+            ok: false,
+          };
+        }
+      }
+    ),
   },
 };
