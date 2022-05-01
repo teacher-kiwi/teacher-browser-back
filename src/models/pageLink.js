@@ -25,7 +25,7 @@ const pageLinkSchema = new Schema({
   updateAt: {
     type: Date,
     required: true,
-  }
+  },
 });
 
 const PageLink = mongoose.model("PageLink", pageLinkSchema);
