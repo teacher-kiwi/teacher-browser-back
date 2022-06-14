@@ -14,9 +14,10 @@ export default gql`
       delTag: String
       trash: Boolean
       memo: String
-      icon: Int,
-      studentIcon: String,
+      icon: Int
+      studentIcon: String
       restoreAll: Boolean
+      role: String
     ): mutationResult
   }
 `;
