@@ -15,5 +15,6 @@ export default gql`
     journal: [Journal]
     journalNum: Int
     icon: Int
+    role: String
   }
 `;
