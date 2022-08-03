@@ -12,7 +12,7 @@ const scheduleSchema = new Schema({
     required: true,
   },
   contents: {
-    type: String
+    type: String,
   },
   startDate: {
     type: Date,
@@ -36,12 +36,12 @@ const scheduleSchema = new Schema({
   },
   sort: {
     type: Number,
-    required: true
+    required: true,
   },
   months: {
     type: [Number],
-    required: true
-  }
+    required: true,
+  },
 });
 
 const Schedule = mongoose.model("Schedule", scheduleSchema);

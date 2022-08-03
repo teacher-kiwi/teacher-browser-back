@@ -4,4 +4,4 @@ export default gql`
   type Mutation {
     updateScheduleSort(userEmail: String!, scheduleId: ID!, sort: Int!): mutationResult
   }
-`
+`;

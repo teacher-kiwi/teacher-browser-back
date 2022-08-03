@@ -12,7 +12,7 @@ const toDoListSchema = new Schema({
     required: true,
   },
   contents: {
-    type: String
+    type: String,
   },
   isComplete: {
     type: Boolean,
@@ -25,10 +25,10 @@ const toDoListSchema = new Schema({
     type: Date,
   },
   star: {
-    type: Number
+    type: Number,
   },
   allDate: {
-    type: [Date]
+    type: [Date],
   },
 });
 

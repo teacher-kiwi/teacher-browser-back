@@ -10,11 +10,11 @@ export default {
         type,
         date,
         month,
-        ...(contents && { contents })
-      })
+        ...(contents && { contents }),
+      });
       return {
-        ok: true
-      }
-    })
-  }
-}
+        ok: true,
+      };
+    }),
+  },
+};

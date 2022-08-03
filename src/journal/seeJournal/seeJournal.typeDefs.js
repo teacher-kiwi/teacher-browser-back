@@ -4,4 +4,4 @@ export default gql`
   type Query {
     seeJournal(date: Float, studentId: ID, journalId: String): [Journal]
   }
-`
+`;

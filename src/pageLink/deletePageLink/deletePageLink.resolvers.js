@@ -1,12 +1,12 @@
-import PageLink from "../../models/pageLink"
+import PageLink from "../../models/pageLink";
 
 export default {
   Mutation: {
     deletePageLink: async (_, { pageTitle }) => {
-      await PageLink.deleteOne({ pageTitle })
+      await PageLink.deleteOne({ pageTitle });
       return {
-        ok: true
-      }
-    }
-  }
-}
+        ok: true,
+      };
+    },
+  },
+};

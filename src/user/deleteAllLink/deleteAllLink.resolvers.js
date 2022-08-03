@@ -4,10 +4,10 @@ import { protectedMutationResovler } from "../user.utils";
 export default {
   Mutation: {
     deleteAllLink: protectedMutationResovler(async (_, { userEmail }) => {
-      await User.updateOne({ email: userEmail }, { link: [] })
+      await User.updateOne({ email: userEmail }, { link: [] });
       return {
-        ok: true
-      }
-    })
-  }
-}
+        ok: true,
+      };
+    }),
+  },
+};

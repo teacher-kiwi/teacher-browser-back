@@ -14,4 +14,4 @@ export default gql`
     sort: Int!
     months: [Int]!
   }
-`
+`;

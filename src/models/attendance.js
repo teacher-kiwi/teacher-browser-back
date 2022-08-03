@@ -20,12 +20,12 @@ const attendanceSchema = new Schema({
     required: true,
   },
   contents: {
-    type: String
+    type: String,
   },
   month: {
     type: Number,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const Attendance = mongoose.model("Attendance", attendanceSchema);
