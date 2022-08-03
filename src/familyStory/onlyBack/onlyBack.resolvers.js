@@ -34,5 +34,17 @@ export default {
         };
       }
     }),
+    deleteNotUserFamilyStory: protectedMutationResovler(async (_, { userEmail, _id }) => {
+      if (userEmail === "nlom0218@naver.com" || "nlom0218@gmail.com") {
+        await FamilyStory.deleteOne({ _id });
+        return {
+          ok: true,
+        };
+      } else {
+        return {
+          ok: false,
+        };
+      }
+    }),
   },
 };
