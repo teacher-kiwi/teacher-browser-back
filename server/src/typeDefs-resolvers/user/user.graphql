@@ -1,3 +1,20 @@
+type Link {
+  siteName: String
+  memo: String
+}
+
+type DDay {
+  title: String
+  date: Float
+  ID: Float
+}
+
+type homeLink {
+  title: String
+  link: String
+  ID: Float
+}
+
 type User {
   _id: ID!
   email: String!

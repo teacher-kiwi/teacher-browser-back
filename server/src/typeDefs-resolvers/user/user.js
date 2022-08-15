@@ -20,9 +20,11 @@ resolver = {
       return await Student.count({ teacherEmail: teacher.email });
     },
   },
+
   Query: {
     me: protectedResolver(async (_, __, { loggedInUser }) => await User.findOne({ email: loggedInUser.email })),
   },
+
   Mutation: {
     createUser: async (_, { email, password }, context) => {
       const existUser = await User.findOne({ email }).exec();

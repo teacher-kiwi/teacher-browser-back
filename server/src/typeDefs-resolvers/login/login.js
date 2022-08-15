@@ -18,6 +18,7 @@ const resolver = {
       const token = await jwt.sign({ email: user.email }, process.env.SECRET_KEY);
       return { ok: true, token };
     },
+
     googleLogin: async (_, { access_token }) => {
       return axios(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${access_token}`).then(async (data) => {
         if (data.data) {
@@ -30,6 +31,7 @@ const resolver = {
         }
       });
     },
+
     kakaoLogin: async (_, { uri, code }) => {
       const url = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.KAKAO_CLIENT_ID}&redirect_uri=${uri}&code=${code}`;
       const config = { headers: { "Content-Type": "application/x-www-form-urlencoded" } };
@@ -55,6 +57,7 @@ const resolver = {
 
       return result;
     },
+
     naverLogin: async (_, { code, state }) => {
       const result = await axios(
         `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${process.env.NAVER_CLIENT_ID}&client_secret=${process.env.NAVER_CLIENT_SECRET}&code=${code}&state=${state}`,

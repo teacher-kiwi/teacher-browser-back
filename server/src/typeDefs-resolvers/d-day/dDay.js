@@ -2,7 +2,7 @@ const User = require("../../models/User");
 const { protectedResolver } = require("../../utils/_utils");
 
 const resolver = {
-  Mutaion: {
+  Mutation: {
     createDDay: protectedResolver(async (_, { userEmail, title, date, ID }) => {
       const user = await User.findOne({ email: userEmail });
       const userDDay = user.dDay;
