@@ -1,0 +1,48 @@
+type User {
+  _id: ID!
+  email: String!
+  password: String
+  schoolName: String
+  schoolCode: String
+  areaCode: String
+  schoolAdress: String
+  studentNum: Int
+  bgTheme: String
+  allergy: [Int]
+  tag: [String]
+  favoriteNews: [String]
+  link: [Link]
+  agreePolicy: Boolean
+  dDay: [DDay]
+  isMoveDDay: Boolean
+  homeLinks: [homeLink]
+}
+
+type Query {
+  me: User!
+}
+
+type Mutation {
+  createUser(email: String!, password: String!): mutationResult
+
+  updateUser(
+    userEmail: String!
+    schoolName: String
+    schoolCode: String
+    areaCode: String
+    schoolAdress: String
+    bgTheme: String
+    alergy: [Int]
+    agreePolicy: Boolean
+  ): mutationResult
+
+  deleteUser(teacherEmail: String!): mutationResult
+
+  createTag(userEmail: String!, tag: [String]!): mutationResult
+
+  deleteTag(userEmail: String!, tag: String!): mutationResult
+
+  deleteSchoolInfo(userEmail: String!): mutationResult
+
+  setFavoriteNews(news: String!, userEmail: String!): mutationResult
+}

@@ -1,0 +1,11 @@
+type Mutation {
+  createDDay(userEmail: String!, title: String!, date: Float!, ID: Float!): mutationResult
+
+  editDDay(userEmail: String!, ID: Float!, title: String!, date: Float!): mutationResult
+
+  deleteDDay(userEmail: String!, ID: Float!): mutationResult
+
+  deleteAllDDay(userEmail: String!): mutationResult
+
+  toggleIsMoveDDay(userEmail: String!, type: String!): mutationResult
+}

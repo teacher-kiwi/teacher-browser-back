@@ -1,0 +1,4 @@
+type mutationResult {
+  ok: Boolean!
+  error: String
+}
