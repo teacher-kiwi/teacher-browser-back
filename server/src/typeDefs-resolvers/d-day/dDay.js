@@ -1,9 +1,9 @@
 const User = require("../../models/User");
-const { protectedResolver } = require("../../utils/_utils");
+const { protectedMutation } = require("../../utils/_utils");
 
 const resolver = {
   Mutation: {
-    createDDay: protectedResolver(async (_, { userEmail, title, date, ID }) => {
+    createDDay: protectedMutation(async (_, { userEmail, title, date, ID }) => {
       const user = await User.findOne({ email: userEmail });
       const userDDay = user.dDay;
       const newDDay = [...userDDay, { title, date, ID }];
@@ -12,7 +12,7 @@ const resolver = {
       return { ok: true };
     }),
 
-    editDDay: protectedResolver(async (_, { userEmail, ID, title, date }) => {
+    editDDay: protectedMutation(async (_, { userEmail, ID, title, date }) => {
       const user = await User.findOne({ email: userEmail });
       const userDDay = user.dDay;
       const targetIndex = userDDay.findIndex((item) => item.ID === ID);
@@ -22,7 +22,7 @@ const resolver = {
       return { ok: true };
     }),
 
-    deleteDDay: protectedResolver(async (_, { userEmail, ID }) => {
+    deleteDDay: protectedMutation(async (_, { userEmail, ID }) => {
       const user = await User.findOne({ email: userEmail });
       const userDDay = user.dDay;
       const newUserDDay = userDDay.filter((item) => item.ID !== ID);
@@ -31,12 +31,12 @@ const resolver = {
       return { ok: true };
     }),
 
-    deleteAllDDay: protectedResolver(async (_, { userEmail }) => {
+    deleteAllDDay: protectedMutation(async (_, { userEmail }) => {
       await User.updateOne({ email: userEmail }, { dDay: [] });
       return { ok: true };
     }),
 
-    toggleIsMoveDDay: protectedResolver(async (_, { userEmail, type }) => {
+    toggleIsMoveDDay: protectedMutation(async (_, { userEmail, type }) => {
       if (type === "stop") {
         await User.updateOne({ email: userEmail }, { isMoveDDay: false });
       } else {

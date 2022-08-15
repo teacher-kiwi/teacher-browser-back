@@ -10,7 +10,12 @@ const utils = {
     return user;
   },
 
-  protectedResolver: (ourResolver) => async (root, args, context, info) => {
+  protectedQuery: (ourResolver) => async (root, args, context, info) => {
+    if (!context.loggedInUser) throw new Error("로그인이 필요합니다.");
+    return ourResolver(root, args, context, info);
+  },
+
+  protectedMutation: (ourResolver) => async (root, args, context, info) => {
     if (!context.loggedInUser) throw new Error("로그인이 필요합니다.");
     const user = await User.findOne({ email: args.teacherEmail || args.userEmail });
     if (!user) throw new Error("사용자를 찾을 수 없습니다.");

@@ -1,10 +1,10 @@
 const User = require("../../models/User");
 const bcrypt = require("bcrypt");
-const { protectedResolver } = require("../../utils/_utils");
+const { protectedMutation } = require("../../utils/_utils");
 
 const resolver = {
   Query: {
-    checkPw: protectedResolver(async (_, { userEmail, password }) => {
+    checkPw: protectedMutation(async (_, { userEmail, password }) => {
       const userData = await User.findOne({ email: userEmail });
       const hasPw = userData.password ? true : false;
       if (!password) {
@@ -23,7 +23,7 @@ const resolver = {
   },
 
   Mutation: {
-    changePw: protectedResolver(async (_, { userEmail, password, newPassword }) => {
+    changePw: protectedMutation(async (_, { userEmail, password, newPassword }) => {
       const user = await User.findOne({ email: userEmail });
       const passwordOk = await bcrypt.compare(password, user.password);
       if (!passwordOk) return { ok: false, error: "비밀번호가 틀립니다." };

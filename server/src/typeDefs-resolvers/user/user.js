@@ -11,7 +11,7 @@ const TimetableTime = require("../../models/TimetableTime");
 const ToDoList = require("../../models/ToDoList");
 const User = require("../../models/User");
 const bcrypt = require("bcrypt");
-const { protectedResolver } = require("../../utils/_utils");
+const { protectedQuery, protectedMutation } = require("../../utils/_utils");
 
 resolver = {
   User: {
@@ -22,7 +22,7 @@ resolver = {
   },
 
   Query: {
-    me: protectedResolver(async (_, __, { loggedInUser }) => await User.findOne({ email: loggedInUser.email })),
+    me: protectedQuery(async (_, __, { loggedInUser }) => await User.findOne({ email: loggedInUser.email })),
   },
 
   Mutation: {
@@ -47,17 +47,17 @@ resolver = {
       return { ok: true };
     },
 
-    updateUser: protectedResolver(
-      async (_, { userEmail, schoolName, schoolCode, areaCode, schoolAdress, bgTheme, alergy, agreePolicy }) => {
+    updateUser: protectedMutation(
+      async (_, { userEmail, schoolName, schoolCode, areaCode, schoolAdress, bgTheme, allergy, agreePolicy }) => {
         await User.updateOne(
           { email: userEmail },
-          { schoolName, schoolCode, areaCode, schoolAdress, bgTheme, alergy, agreePolicy },
+          { schoolName, schoolCode, areaCode, schoolAdress, bgTheme, allergy, agreePolicy },
         );
         return { ok: true };
       },
     ),
 
-    deleteUser: protectedResolver(async (_, { teacherEmail }) => {
+    deleteUser: protectedMutation(async (_, { teacherEmail }) => {
       await Attendance.deleteMany({ userEmail: teacherEmail });
       await FamilyStory.deleteMany({ userEmail: teacherEmail });
       await FamilyStoryLike.deleteMany({ userEmail: teacherEmail });
@@ -73,30 +73,28 @@ resolver = {
       return { ok: true };
     }),
 
-    createTag: protectedResolver(async (_, { userEmail, tag }) => {
+    createTag: protectedMutation(async (_, { userEmail, tag }) => {
       await User.updateOne({ email: userEmail }, { $addToSet: { tag } });
       return { ok: true };
     }),
 
-    deleteTag: protectedResolver(async (_, { userEmail, tag }) => {
+    deleteTag: protectedMutation(async (_, { userEmail, tag }) => {
       await User.updateOne({ email: userEmail }, { $pull: { tag } });
       await Student.updateMany({ teacherEmail: userEmail }, { $pull: { tag } });
       return { ok: true };
     }),
 
-    deleteSchoolInfo: protectedResolver(async (_, { userEmail }) => {
+    deleteSchoolInfo: protectedMutation(async (_, { userEmail }) => {
       await User.updateOne({ email: userEmail }, { schoolName: "", schoolCode: "", areaCode: "", schoolAdress: "" });
       return { ok: true };
     }),
 
-    setFavoriteNews: protectedResolver(async (_, { news, userEmail }) => {
+    setFavoriteNews: protectedMutation(async (_, { news, userEmail }) => {
+      const favoriteNews = news;
       const user = await User.findOne({ email: userEmail });
-      const existNews = user.favoriteNews.includes(news);
-      if (existNews) {
-        await User.updateOne({ email: userEmail }, { $pull: { favoriteNews: news } });
-      } else {
-        await User.updateOne({ email: userEmail }, { $addToSet: { favoriteNews: news } });
-      }
+      const hasNews = user.favoriteNews.includes(favoriteNews);
+      if (hasNews) await User.updateOne({ email: userEmail }, { $pull: { favoriteNews } });
+      else await User.updateOne({ email: userEmail }, { $addToSet: { favoriteNews } });
       return { ok: true };
     }),
   },

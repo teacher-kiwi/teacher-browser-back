@@ -1,5 +1,5 @@
 const User = require("../../models/User");
-const { protectedResolver } = require("../../utils/_utils");
+const { protectedMutation } = require("../../utils/_utils");
 
 const resolver = {
   Query: {
@@ -17,7 +17,7 @@ const resolver = {
   },
 
   Mutation: {
-    settingLink: protectedResolver(async (_, { userEmail, siteName, memo }) => {
+    settingLink: protectedMutation(async (_, { userEmail, siteName, memo }) => {
       const user = await User.findOne({ email: userEmail });
       if (!user.link || user.link.lenght === 0) {
         await User.updateOne({ email: userEmail }, { link });
@@ -35,7 +35,7 @@ const resolver = {
       return { ok: true };
     }),
 
-    createHomeLinks: protectedResolver(async (_, { userEmail, title, link, ID }) => {
+    createHomeLinks: protectedMutation(async (_, { userEmail, title, link, ID }) => {
       const user = await User.findOne({ email: userEmail });
       const userHomeLinks = user.homeLinks;
       const newHomeLinks = [...userHomeLinks, { title, link, ID }];
@@ -44,7 +44,7 @@ const resolver = {
       return { ok: true };
     }),
 
-    editHomeLink: protectedResolver(async (_, { userEmail, ID, title, link }) => {
+    editHomeLink: protectedMutation(async (_, { userEmail, ID, title, link }) => {
       const user = await User.findOne({ email: userEmail });
       const userHomeLinks = user.homeLinks;
       const targetIndex = userHomeLinks.findIndex((item) => item.ID === ID);
@@ -58,7 +58,7 @@ const resolver = {
       return { ok: true };
     }),
 
-    editPageLinkMemo: protectedResolver(async (_, { userEmail, memo, pageTitle }) => {
+    editPageLinkMemo: protectedMutation(async (_, { userEmail, memo, pageTitle }) => {
       const user = await User.findOne({ email: userEmail });
       const userLink = user.link;
       const newUserLink = userLink.map((item) => {
@@ -73,7 +73,7 @@ const resolver = {
       return { ok: true };
     }),
 
-    moveHomeLink: protectedResolver(async (_, { userEmail, sourceIndex, destinationIndex }) => {
+    moveHomeLink: protectedMutation(async (_, { userEmail, sourceIndex, destinationIndex }) => {
       const user = await User.findOne({ email: userEmail });
       const copyLinks = user.homeLinks;
       const moveObj = copyLinks[sourceIndex];
@@ -84,7 +84,7 @@ const resolver = {
       return { ok: true };
     }),
 
-    deleteHomeLink: protectedResolver(async (_, { userEmail, ID }) => {
+    deleteHomeLink: protectedMutation(async (_, { userEmail, ID }) => {
       const user = await User.findOne({ email: userEmail });
       const userHomeLinks = user.homeLinks;
       const newHomeLinks = userHomeLinks.filter((item) => item.ID !== ID);
@@ -93,7 +93,7 @@ const resolver = {
       return { ok: true };
     }),
 
-    deleteAllLink: protectedResolver(async (_, { userEmail }) => {
+    deleteAllLink: protectedMutation(async (_, { userEmail }) => {
       await User.updateOne({ email: userEmail }, { link: [] });
       return { ok: true };
     }),
