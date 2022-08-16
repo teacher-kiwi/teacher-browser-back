@@ -1,0 +1,29 @@
+type PageLink {
+  _id: ID!
+  pageTitle: String!
+  pageDescription: String!
+  pageURL: String!
+  folder: [String]!
+  type: String
+  updateAt: String!
+}
+
+type Query {
+  seePageLink(folder: String, pageTitle: String): [PageLink]
+
+  seeMyPageLink(userEmail: String!): [PageLink]
+}
+
+type Mutation {
+  createPageLink(
+    pageTitle: String!
+    pageDescription: String!
+    pageURL: String!
+    folder: [String]!
+    type: String
+  ): mutationResult
+
+  updatePageLink(pageTitle: String!, pageDescription: String, folder: [String]): mutationResult
+
+  deletePageLink(pageTitle: String!): mutationResult
+}

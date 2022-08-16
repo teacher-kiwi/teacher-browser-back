@@ -1,0 +1,46 @@
+type Schedule {
+  _id: ID!
+  schedule: String!
+  userEmail: String!
+  contents: String
+  startDate: Float!
+  endDate: Float!
+  color: String!
+  term: [Float]!
+  allDate: [Float]!
+  sort: Int!
+  months: [Int]!
+}
+
+type Query {
+  seeSchedule(scheduleId: String, month: Int, date: Float): [Schedule]
+
+  enableSortNum(scheduleId: String!, userEmail: String!): Int
+}
+
+type Mutation {
+  createSchedule(
+    schedule: String!
+    userEmail: String!
+    startDate: Float!
+    endDate: Float!
+    months: [Int]!
+    contents: String
+    color: String!
+  ): scheduleMutationResult
+
+  editSchedule(
+    scheduleId: ID!
+    schedule: String!
+    userEmail: String!
+    startDate: Float!
+    endDate: Float!
+    months: [Int]!
+    contents: String
+    color: String!
+  ): scheduleMutationResult
+
+  updateScheduleSort(userEmail: String!, scheduleId: ID!, sort: Int!): mutationResult
+
+  deleteSchedule(userEmail: String!, scheduleId: ID!): scheduleMutationResult
+}

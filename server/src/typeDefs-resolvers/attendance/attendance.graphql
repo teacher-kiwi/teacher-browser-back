@@ -1,0 +1,49 @@
+input DateMonth {
+  date: Float!
+  month: Int!
+}
+
+type Attendance {
+  _id: ID!
+  userEmail: String!
+  studentId: String!
+  type: String!
+  date: Float!
+  contents: String
+  month: Int!
+  studentName: String
+}
+
+type Query {
+  seeAttendance(date: Float, studentId: String, attendId: String, month: Int): [Attendance]
+}
+
+type Mutation {
+  createAttendance(
+    userEmail: String!
+    studentId: String!
+    type: String!
+    date: Float!
+    contents: String
+    month: Int!
+  ): mutationResult
+
+  createManyAttendance(
+    userEmail: String!
+    studentId: String!
+    type: String!
+    contents: String
+    dateMonthArr: [DateMonth]!
+  ): mutationResult
+
+  editAttendance(
+    attendId: String!
+    userEmail: String
+    type: String!
+    date: Float!
+    contents: String
+    month: Int!
+  ): mutationResult
+
+  deleteAttendance(userEmail: String!, attendId: String!): mutationResult
+}
