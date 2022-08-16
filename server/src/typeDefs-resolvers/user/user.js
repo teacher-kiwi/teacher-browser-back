@@ -73,17 +73,6 @@ resolver = {
       return { ok: true };
     }),
 
-    createTag: protectedMutation(async (_, { userEmail, tag }) => {
-      await User.updateOne({ email: userEmail }, { $addToSet: { tag } });
-      return { ok: true };
-    }),
-
-    deleteTag: protectedMutation(async (_, { userEmail, tag }) => {
-      await User.updateOne({ email: userEmail }, { $pull: { tag } });
-      await Student.updateMany({ teacherEmail: userEmail }, { $pull: { tag } });
-      return { ok: true };
-    }),
-
     deleteSchoolInfo: protectedMutation(async (_, { userEmail }) => {
       await User.updateOne({ email: userEmail }, { schoolName: "", schoolCode: "", areaCode: "", schoolAdress: "" });
       return { ok: true };

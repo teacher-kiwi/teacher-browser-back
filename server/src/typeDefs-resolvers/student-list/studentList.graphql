@@ -1,0 +1,29 @@
+type StudentList {
+  listId: ID!
+  teacherEmail: String!
+  listOrder: Int!
+  listName: String!
+  listIcon: String
+  studentId: [ID]
+  students(sort: String): [Student]
+}
+
+type Query {
+  seeStudentList(listId: ID): [StudentList]
+}
+
+type Mutation {
+  createStudentList(teacherEmail: String!, listName: String!): mutationResult
+
+  editStudentList(
+    teacherEmail: String!
+    listId: ID!
+    listName: String
+    listOrder: Int
+    listIcon: String
+  ): mutationResult
+
+  changeStudentListOrder(teacherEmail: String!, preOrder: Int!, postOrder: Int!): mutationResult
+
+  deleteStudentList(teacherEmail: String!, listId: ID!): mutationResult
+}

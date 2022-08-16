@@ -55,10 +55,6 @@ type Mutation {
 
   deleteUser(teacherEmail: String!): mutationResult
 
-  createTag(userEmail: String!, tag: [String]!): mutationResult
-
-  deleteTag(userEmail: String!, tag: String!): mutationResult
-
   deleteSchoolInfo(userEmail: String!): mutationResult
 
   setFavoriteNews(news: String!, userEmail: String!): mutationResult

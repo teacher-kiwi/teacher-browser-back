@@ -1,0 +1,19 @@
+type timeData {
+  timeId: Int!
+  minutes: Int!
+  seconds: Int!
+  milliseconds: Int!
+}
+
+type TimeRecord {
+  userEmail: String!
+  timeRecord: [timeData]
+}
+
+type Query {
+  seeTimeRecord: TimeRecord
+}
+
+type Mutation {
+  createTimeRecord(userEmail: String!, timeId: Int!, minutes: Int!, seconds: Int!, milliseconds: Int!): mutationResult
+}
