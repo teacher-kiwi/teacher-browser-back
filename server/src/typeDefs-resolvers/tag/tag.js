@@ -2,7 +2,7 @@ const User = require("../../models/User");
 const Student = require("../../models/Student");
 const { protectedQuery, protectedMutation } = require("../../utils/_utils");
 
-resolver = {
+const resolver = {
   Query: {
     seeAllTag: protectedQuery(async (_, __, { loggedInUser }) => {
       const allStudents = await Student.find({ teacherEmail: loggedInUser.email });
