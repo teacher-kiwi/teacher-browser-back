@@ -1,6 +1,7 @@
-"use strict";
 const dotenv = require("dotenv");
 dotenv.config();
+
+require("./src/config/db");
 
 const { ApolloServer } = require("apollo-server");
 const { typeDefs, resolvers } = require("./src/config/schema");

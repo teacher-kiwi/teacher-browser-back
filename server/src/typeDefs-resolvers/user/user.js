@@ -13,7 +13,7 @@ const User = require("../../models/User");
 const bcrypt = require("bcrypt");
 const { protectedQuery, protectedMutation } = require("../../utils/_utils");
 
-resolver = {
+const resolver = {
   User: {
     studentNum: async ({ email }) => {
       const teacher = await User.findOne({ email });
@@ -48,10 +48,13 @@ resolver = {
     },
 
     updateUser: protectedMutation(
-      async (_, { userEmail, schoolName, schoolCode, areaCode, schoolAdress, bgTheme, allergy, agreePolicy }) => {
+      async (
+        _,
+        { userEmail, nickname, schoolName, schoolCode, areaCode, schoolAdress, bgTheme, allergy, agreePolicy },
+      ) => {
         await User.updateOne(
           { email: userEmail },
-          { schoolName, schoolCode, areaCode, schoolAdress, bgTheme, allergy, agreePolicy },
+          { schoolName, nickname, schoolCode, areaCode, schoolAdress, bgTheme, allergy, agreePolicy },
         );
         return { ok: true };
       },
