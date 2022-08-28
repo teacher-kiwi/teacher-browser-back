@@ -1,0 +1,44 @@
+type ToDoList {
+  _id: ID!
+  toDo: String!
+  userEmail: String!
+  contents: String
+  isComplete: Boolean
+  startDate: Float
+  endDate: Float
+  allDate: [Float]
+  star: Int
+}
+
+type Query {
+  seeToDoList(isComplete: Boolean, id: String, date: Float): [ToDoList]
+
+  seeToDoListOnlyLength(userEmail: String!, date: Float): Int
+}
+
+type Mutation {
+  createToDoList(
+    toDo: String!
+    userEmail: String!
+    startDate: Float
+    endDate: Float
+    contents: String
+    star: Int
+  ): mutationResult
+
+  editToDoList(
+    _id: ID!
+    userEmail: String!
+    toDo: String
+    star: Int
+    startDate: Float
+    endDate: Float
+    contents: String
+  ): mutationResult
+
+  completeToDoList(_id: ID!, userEmail: String!): mutationResult
+
+  deleteToDoList(_id: ID!, userEmail: String!): mutationResult
+
+  deleteAllToDoList(userEmail: String!): mutationResult
+}

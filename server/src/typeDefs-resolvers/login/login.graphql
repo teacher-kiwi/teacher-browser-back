@@ -1,0 +1,15 @@
+type loginResult {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  loginUser(email: String!, password: String!): loginResult
+
+  googleLogin(access_token: String!): loginResult
+
+  kakaoLogin(uri: String!, code: String!): loginResult
+
+  naverLogin(code: String, state: String): loginResult
+}

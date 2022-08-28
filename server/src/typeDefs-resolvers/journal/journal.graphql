@@ -1,0 +1,19 @@
+type Journal {
+  _id: ID!
+  ownerId: ID!
+  teacherEmail: String!
+  date: Float!
+  text: String!
+}
+
+type Query {
+  seeJournal(date: Float, studentId: ID, journalId: String): [Journal]
+}
+
+type Mutation {
+  writeJournal(userEmail: ID!, ownerId: ID!, date: Float!, text: String!): mutationResult
+
+  editJournal(userEmail: ID!, journalId: ID, date: Float, text: String): mutationResult
+
+  deleteJournal(userEmail: ID!, journalId: ID): mutationResult
+}

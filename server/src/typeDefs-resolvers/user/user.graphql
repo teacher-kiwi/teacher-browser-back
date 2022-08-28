@@ -1,0 +1,63 @@
+type Link {
+  siteName: String
+  memo: String
+}
+
+type DDay {
+  title: String
+  date: Float
+  ID: Float
+}
+
+type homeLink {
+  title: String
+  link: String
+  ID: Float
+}
+
+type User {
+  _id: ID!
+  email: String!
+  nickname: String
+  password: String
+  schoolName: String
+  schoolCode: String
+  areaCode: String
+  schoolAdress: String
+  studentNum: Int
+  bgTheme: String
+  allergy: [Int]
+  tag: [String]
+  favoriteNews: [String]
+  link: [Link]
+  agreePolicy: Boolean
+  dDay: [DDay]
+  isMoveDDay: Boolean
+  homeLinks: [homeLink]
+}
+
+type Query {
+  me: User!
+}
+
+type Mutation {
+  createUser(email: String!, password: String!): mutationResult
+
+  updateUser(
+    userEmail: String!
+    nickname: String
+    schoolName: String
+    schoolCode: String
+    areaCode: String
+    schoolAdress: String
+    bgTheme: String
+    allergy: [Int]
+    agreePolicy: Boolean
+  ): mutationResult
+
+  deleteUser(teacherEmail: String!): mutationResult
+
+  deleteSchoolInfo(userEmail: String!): mutationResult
+
+  setFavoriteNews(news: String!, userEmail: String!): mutationResult
+}

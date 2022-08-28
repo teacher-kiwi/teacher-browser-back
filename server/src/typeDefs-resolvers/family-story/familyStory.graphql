@@ -1,0 +1,78 @@
+type FamilyStory {
+  _id: ID!
+  userEmail: String!
+  url: String!
+  title: String!
+  bgColor: String!
+  videoType: String!
+  tag: [String]
+  createdAt: Float!
+  contents: String!
+  likeNum: Int!
+  isLiked: Boolean
+}
+
+type FamilyStoryLike {
+  _id: ID!
+  familyStoryId: ID!
+  userEmail: String!
+  familyStory: FamilyStory
+}
+
+type Query {
+  seeFamilyStory(id: String!): FamilyStory
+
+  seeMyFamilyStory(userEmail: String!, page: Int!): [FamilyStory]
+
+  seeSearchFamilyStory(tag: String!, page: Int!): [FamilyStory]
+
+  seeRandomFamilyStory: [FamilyStory]
+
+  seeAllFamilyStory(page: Int!): [FamilyStory]
+
+  seeLikeFamilyStory(userEmail: String!, page: Int!): [FamilyStoryLike]
+
+  allFamilyStoryNum: Int
+
+  myFamilyStoryNum(userEmail: String!): Int
+
+  searchFamilyStoryNum(tag: String!): Int!
+
+  myFamilyStoryLikeNum(userEmail: String!): Int
+}
+
+type Mutation {
+  createFamilyStory(
+    userEmail: String!
+    url: String!
+    title: String!
+    bgColor: String!
+    videoType: String!
+    tag: [String]
+    createdAt: Float!
+    contents: String!
+  ): includeIdMutationResult
+
+  editFamilyStory(
+    id: String!
+    userEmail: String!
+    url: String!
+    title: String!
+    bgColor: String!
+    videoType: String!
+    tag: [String]
+    contents: String!
+  ): mutationResult
+
+  deleteFamilyStory(userEmail: String!, familyStoryId: String!): mutationResult
+
+  deleteFamilyStoryLike(_id: String!): mutationResult
+
+  deleteAllFamilyStory(userEmail: String!): mutationResult
+
+  deleteAllFamilyStoryLike(userEmail: String!): mutationResult
+
+  deleteNotUserFamilyStory(_id: String!, userEmail: String!): mutationResult
+
+  toggleFamilyStoryLike(userEmail: String!, familyStoryId: String!): includeMsgMutationResult
+}
