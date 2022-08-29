@@ -1,0 +1,32 @@
+name: Docker Image CD
+
+on:
+  push:
+    branches: ["dev"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Docker Login
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/teachercan-back
+      - name: Docker Push
+        run: docker push ${{ secrets.DOCKER_USER }}/teachercan-back
+
+      - name: AWS SSM Send-Command(docker pull & run)
+        uses: peterkimzz/aws-ssm-send-command@master
+        id: ssm
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          instance-ids: ${{ secrets.INSTANCE_ID }}
+          working-directory: /home/ubuntu/teachercan-back
+          command: sudo docker-compose down; sudo docker rmi $(sudo docker images -q); sudo docker pull ${{ secrets.DOCKER_USER }}/teachercan-back && sudo docker-compose up -d
