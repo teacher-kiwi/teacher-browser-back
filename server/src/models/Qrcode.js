@@ -15,12 +15,12 @@ const qrcodeSchema = new Schema({
     type: String,
     required: true,
   },
-  order: {
+  index: {
     type: Number,
     required: true,
   },
 });
 
-const Qrcode = mongoose.model("PageLink", qrcodeSchema);
+const Qrcode = mongoose.model("Qrcode", qrcodeSchema);
 
 module.exports = Qrcode;
