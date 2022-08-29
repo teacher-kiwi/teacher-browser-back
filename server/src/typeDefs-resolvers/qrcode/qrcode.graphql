@@ -1,0 +1,21 @@
+type Qrcode {
+  _id: ID!
+  userEmail: String!
+  title: String!
+  url: String!
+  index: Int!
+}
+
+type Query {
+  qrcodes(userEmail: String!): [Qrcode]
+}
+
+type Mutation {
+  createQrcode(userEmail: String!, title: String!, url: String!): mutationResult
+
+  updateQrcode(userEmail: String!, qrcodeId: ID!, title: String, url: String): mutationResult
+
+  deleteQrcode(userEmail: String!, qrcodeId: ID!): mutationResult
+
+  changeIndexQrcode(userEmail: String!, qrcodeId1: ID!, qrcodeId2: ID!): mutationResult
+}
