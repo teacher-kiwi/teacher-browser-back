@@ -1,3 +1,4 @@
+const User = require("../../models/User");
 const Student = require("../../models/Student");
 const StudentList = require("../../models/StudentList");
 const Journal = require("../../models/Journal");

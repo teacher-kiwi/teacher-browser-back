@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
 const testServer = require("../server");
 const request = require("supertest");
+const mongoose = require("mongoose");
+const { MongoMemoryServer } = require("mongodb-memory-server");
 
 const queryData = {
   createUser: {
@@ -63,15 +64,19 @@ const queryData = {
 };
 
 describe("user test!", () => {
+  let mongoServer;
   let server, url, token;
 
   beforeAll(async () => {
     ({ server, url } = await testServer.listen({ port: 0 }));
+    mongoServer = await MongoMemoryServer.create();
+    await mongoose.connect(mongoServer.getUri());
   });
 
-  afterAll(() => {
-    server.close();
-    mongoose.disconnect();
+  afterAll(async () => {
+    await mongoose.disconnect();
+    await mongoServer.stop();
+    await server.close();
   });
 
   test("thing does create!", async () => {
