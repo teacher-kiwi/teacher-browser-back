@@ -9,7 +9,8 @@ const resolvers = {
     createQrcode: protectedMutation(async (_, { userEmail, title, url }) => {
       try {
         const qrcodes = await Qrcode.find({ userEmail }).sort({ index: -1 });
-        await Qrcode.create({ userEmail, title, url, index: qrcodes[0].index + 1 });
+        if (qrcodes[0].index) await Qrcode.create({ userEmail, title, url, index: qrcodes[0].index + 1 });
+        else await Qrcode.create({ userEmail, title, url, index: 1 });
         return { ok: true };
       } catch (err) {
         return { ok: false, error: err.message };
