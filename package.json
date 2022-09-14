@@ -11,7 +11,7 @@
     "studio": "npx prisma studio",
     "test": "jest",
     "build": "babel src --out-dir build",
-    "start": "babel src --out-dir build & node build/server",
+    "start": "node server/bin.www.js",
     "rebuild": "set NODE_ENV=dev&& nodemon server/bin/www.js",
     "precommit": "lint-staged",
     "prepare": "husky install"
