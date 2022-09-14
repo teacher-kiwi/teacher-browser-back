@@ -4,4 +4,4 @@ export default gql`
   type Mutation {
     deleteAllStudent(teacherEmail: String!): mutationResult
   }
-`
+`;

@@ -6,16 +6,18 @@ export default {
     resetTimetableData: protectedMutationResovler(async (_, { teacherEmail, resetIndex }, { loggedInUser }) => {
       await TimetableData.updateOne(
         {
-          teacherEmail, index: resetIndex
+          teacherEmail,
+          index: resetIndex,
         },
         {
           subName: null,
           color: null,
-          memo: null
-        })
+          memo: null,
+        },
+      );
       return {
-        ok: true
-      }
-    })
-  }
-}
+        ok: true,
+      };
+    }),
+  },
+};

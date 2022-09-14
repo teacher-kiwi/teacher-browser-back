@@ -4,4 +4,4 @@ export default gql`
   type Mutation {
     setFavoriteNews(news: String!, userEmail: String!): mutationResult
   }
-`
+`;

@@ -1,0 +1,19 @@
+type Query {
+  validationLinkUrl(url: String!): Boolean
+}
+
+type Mutation {
+  settingLink(userEmail: String!, siteName: String!, memo: String): mutationResult
+
+  createHomeLinks(userEmail: String!, title: String!, link: String!, ID: Float!): mutationResult
+
+  editHomeLink(userEmail: String!, ID: Float!, title: String!, link: String!): mutationResult
+
+  editPageLinkMemo(userEmail: String!, memo: String!, pageTitle: String!): mutationResult
+
+  moveHomeLink(userEmail: String!, sourceIndex: Int!, destinationIndex: Int!): mutationResult
+
+  deleteHomeLink(userEmail: String!, ID: Float!): mutationResult
+
+  deleteAllLink(userEmail: String!): mutationResult
+}

@@ -5,22 +5,22 @@ import { protectedQueryResovler } from "../../user/user.utils";
 export default {
   Query: {
     seeMyPageLink: protectedQueryResovler(async (_, { userEmail }) => {
-      const user = await User.findOne({ email: userEmail })
+      const user = await User.findOne({ email: userEmail });
       if (!user.link) {
-        return []
+        return [];
       }
       if (user.link.length === 0) {
-        return []
+        return [];
       }
 
-      const myPageLink = []
-      const userLink = user.link
+      const myPageLink = [];
+      const userLink = user.link;
       for (let i = 0; i < userLink.length; i++) {
-        const pageTitle = userLink[i].siteName
-        const pageLink = await PageLink.findOne({ pageTitle })
-        myPageLink.push(pageLink)
+        const pageTitle = userLink[i].siteName;
+        const pageLink = await PageLink.findOne({ pageTitle });
+        myPageLink.push(pageLink);
       }
-      return myPageLink
-    })
-  }
-}
+      return myPageLink;
+    }),
+  },
+};

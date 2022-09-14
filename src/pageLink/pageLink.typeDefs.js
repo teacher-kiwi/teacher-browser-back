@@ -10,4 +10,4 @@ export default gql`
     type: String
     updateAt: String!
   }
-`
+`;

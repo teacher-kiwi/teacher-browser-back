@@ -4,4 +4,4 @@ export default gql`
   type Mutation {
     deleteAllLink(userEmail: String!): mutationResult
   }
-`
+`;

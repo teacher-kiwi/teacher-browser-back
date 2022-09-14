@@ -6,7 +6,7 @@ export default {
     createFamilyStory: async (
       _,
       { userEmail, url, title, bgColor, videoType, tag, createdAt, contents },
-      { loggedInUser }
+      { loggedInUser },
     ) => {
       const user = await User.findOne({ email: userEmail });
       if (!loggedInUser && user) {

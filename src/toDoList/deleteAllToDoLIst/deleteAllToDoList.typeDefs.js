@@ -4,4 +4,4 @@ export default gql`
   type Mutation {
     deleteAllToDoList(userEmail: String!): mutationResult
   }
-`
+`;

@@ -13,4 +13,4 @@ export default gql`
       color: String!
     ): scheduleMutationResult
   }
-`
+`;

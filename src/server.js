@@ -1,15 +1,17 @@
-require("dotenv").config();
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import http from "http";
 import logger from "morgan";
-import { resolvers, typeDefs } from "./schema";
+import dotenv from "dotenv";
+import { typeDefs, resolvers } from "./schema";
 import dbConnect from "./models/index";
 import { getUser } from "./user/user.utils";
+
+dotenv.config();
 dbConnect();
 
-const PORT = process.env.PORT;
+const { PORT } = process.env;
 
 // https://www.apollographql.com/docs/apollo-server/integrations/middleware/#apollo-server-express
 async function startApolloServer(typeDefs, resolvers) {
@@ -22,13 +24,13 @@ async function startApolloServer(typeDefs, resolvers) {
     introspection: true,
 
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-    context: async ({ req }) => {
-      return {
-        loggedInUser: await getUser(req.headers.token),
-      };
-    },
+    context: async ({ req }) => ({
+      loggedInUser: await getUser(req.headers.token),
+    }),
   });
+
   await server.start();
+
   // 필요한 미들웨어 작성
   app.use(logger("tiny"));
 

@@ -4,4 +4,4 @@ export default gql`
   type Mutation {
     deleteSchedule(userEmail: String!, scheduleId: ID!): scheduleMutationResult
   }
-`
+`;

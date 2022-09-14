@@ -4,4 +4,4 @@ export default gql`
   type Mutation {
     deletePageLink(pageTitle: String!): mutationResult
   }
-`
+`;

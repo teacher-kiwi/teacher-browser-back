@@ -3,12 +3,12 @@ import PageLink from "../../models/pageLink";
 export default {
   Mutation: {
     createPageLink: async (_, { pageTitle, pageDescription, pageURL, folder, type }) => {
-      const pageLink = await PageLink.findOne({ pageTitle })
+      const pageLink = await PageLink.findOne({ pageTitle });
       if (pageLink) {
         return {
           ok: false,
-          error: "같은 이름의 추천 페이지 존재"
-        }
+          error: "같은 이름의 추천 페이지 존재",
+        };
       }
       await PageLink.create({
         pageTitle,
@@ -16,11 +16,11 @@ export default {
         pageURL,
         folder,
         type,
-        updateAt: new Date()
-      })
+        updateAt: new Date(),
+      });
       return {
-        ok: true
-      }
-    }
-  }
-}
+        ok: true,
+      };
+    },
+  },
+};

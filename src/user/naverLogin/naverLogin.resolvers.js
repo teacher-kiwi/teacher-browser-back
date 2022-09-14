@@ -6,7 +6,7 @@ export default {
   Mutation: {
     naverLogin: async (_, { code, state }) => {
       const result = await axios(
-        `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${process.env.NAVER_CLIENT_ID}&client_secret=${process.env.NAVER_CLIENT_SECRET}&code=${code}&state=${state}`
+        `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${process.env.NAVER_CLIENT_ID}&client_secret=${process.env.NAVER_CLIENT_SECRET}&code=${code}&state=${state}`,
       ).then(({ data }) => {
         if (data.access_token) {
           return axios({

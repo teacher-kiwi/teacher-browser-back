@@ -7,15 +7,15 @@ export default {
       await Schedule.updateOne(
         {
           userEmail,
-          _id: scheduleId
+          _id: scheduleId,
         },
         {
-          sort
-        }
-      )
+          sort,
+        },
+      );
       return {
-        ok: true
-      }
-    })
-  }
-}
+        ok: true,
+      };
+    }),
+  },
+};

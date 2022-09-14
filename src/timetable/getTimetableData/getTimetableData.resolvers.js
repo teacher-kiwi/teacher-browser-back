@@ -12,12 +12,14 @@ export default {
           for (let i = 0; i < 30; i++) {
             await TimetableData.create({ teacherEmail: loggedInUser.email, index: i, day: i % 5 });
           }
-          const newTimetableData = await TimetableData.find({ teacherEmail: loggedInUser.email, day }).sort({ index: 1 });
+          const newTimetableData = await TimetableData.find({ teacherEmail: loggedInUser.email, day }).sort({
+            index: 1,
+          });
           return newTimetableData;
         }
       }
       if (index) {
-        return await TimetableData.find({ teacherEmail: loggedInUser.email, index })
+        return await TimetableData.find({ teacherEmail: loggedInUser.email, index });
       }
       const timetableData = await TimetableData.find({ teacherEmail: loggedInUser.email }).sort({ index: 1 });
       if (timetableData.length !== 0) {

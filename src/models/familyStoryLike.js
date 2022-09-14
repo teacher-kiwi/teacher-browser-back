@@ -17,9 +17,6 @@ const familyStoryLikeSchema = new Schema({
   },
 });
 
-const FamilyStoryLike = mongoose.model(
-  "FamilyStoryLike",
-  familyStoryLikeSchema
-);
+const FamilyStoryLike = mongoose.model("FamilyStoryLike", familyStoryLikeSchema);
 
 export default FamilyStoryLike;

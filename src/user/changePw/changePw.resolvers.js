@@ -9,7 +9,8 @@ export default {
       const passwordOk = await bcrypt.compare(password, user.password);
       if (!passwordOk) return { ok: false, error: "비밀번호가 틀립니다." };
 
-      if (newPassword.length < 7 || newPassword.length > 17) return { ok: false, error: "비밀번호는 8자리 이상 16자리 이하만 가능합니다." };
+      if (newPassword.length < 7 || newPassword.length > 17)
+        return { ok: false, error: "비밀번호는 8자리 이상 16자리 이하만 가능합니다." };
       if (newPassword.match(/[^a-zA-Z0-9`~!@@#$%^&*|₩₩₩'₩";:₩/?]/) !== null)
         return { ok: false, error: "비밀번호는 숫자와 영문 또는 특수문자만 입력할 수 있습니다." };
 

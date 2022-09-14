@@ -7,7 +7,8 @@ export default {
       const existUser = await User.findOne({ email }).exec();
       if (existUser) return { ok: false, error: "이메일이 존재합니다." };
 
-      if (password.length < 7 || password.length > 17) return { ok: false, error: "비밀번호는 8자리 이상 16자리 이하만 가능합니다." };
+      if (password.length < 7 || password.length > 17)
+        return { ok: false, error: "비밀번호는 8자리 이상 16자리 이하만 가능합니다." };
       if (password.match(/[^a-zA-Z0-9`~!@@#$%^&*|₩₩₩'₩";:₩/?]/) !== null)
         return { ok: false, error: "비밀번호는 숫자와 영문 또는 특수문자만 입력할 수 있습니다." };
 

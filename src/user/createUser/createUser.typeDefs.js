@@ -4,4 +4,4 @@ export default gql`
   type Mutation {
     createUser(email: String!, password: String!): mutationResult
   }
-`
+`;

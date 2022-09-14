@@ -11,7 +11,7 @@ export default {
           schoolCode: "",
           areaCode: "",
           schoolAdress: "",
-        }
+        },
       );
       return { ok: true };
     }),

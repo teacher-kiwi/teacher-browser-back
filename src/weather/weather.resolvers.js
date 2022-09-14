@@ -20,7 +20,7 @@ async function getPmGrade(lat, lng) {
             `?serviceKey=${process.env.DATA_API_KEY}` +
             `&returnType=json` +
             `&tmX=${tmCoord.x}` +
-            `&tmY=${tmCoord.y}`
+            `&tmY=${tmCoord.y}`,
         )
           .then(
             async ({
@@ -40,7 +40,7 @@ async function getPmGrade(lat, lng) {
                   `&numOfRows=100` +
                   `&stationName=${encodeURI(stationName)}` +
                   `&dataTerm=DAILY` +
-                  `&ver=1.3`
+                  `&ver=1.3`,
               )
                 .then(
                   ({
@@ -54,20 +54,22 @@ async function getPmGrade(lat, lng) {
                   }) => {
                     console.log("미세먼지 수치: ", pm10Grade1h);
                     return { pm10grade: pm10Grade1h };
-                  }
+                  },
                 )
                 .catch(({ response }) => console.log("미세먼지 수치 불러오기 실패", response));
-            }
+            },
           )
           .catch(({ response }) => console.log("측정소 불러오기 실패: ", response));
-      }
+      },
     )
     .catch(({ response }) => console.log("좌표 변환 실패: ", response.data.msg));
 }
 
 // 날씨 불러오기 함수
 async function getWeather(lat, lng) {
-  return await axios(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&appid=${process.env.WEATHER_API_KEY}`)
+  return await axios(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&appid=${process.env.WEATHER_API_KEY}`,
+  )
     .then(
       ({
         data: {
@@ -77,7 +79,7 @@ async function getWeather(lat, lng) {
       }) => {
         console.log("날씨: ", { icon, temp });
         return { icon, temp };
-      }
+      },
     )
     .catch(({ response }) => console.log("날씨 불러오기 실패: ", response.data.message));
 }
@@ -104,7 +106,7 @@ async function getAddress(lat, lng) {
         const address = { address1: region_2depth_name, address2: region_3depth_name };
         console.log("주소: ", address);
         return address;
-      }
+      },
     )
     .catch(({ response }) => console.log("주소 불러오기 실패", response.data.message));
 }

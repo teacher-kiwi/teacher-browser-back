@@ -21,7 +21,10 @@ export default {
           .collation({ locale: "ko", numericOrdering: true });
 
       // allergy 값이 있으면 allergy 모든 학생 보기
-      if (allergy) return await Student.find({ teacherEmail: loggedInUser.email, allergy }).sort(sortValue).collation({ locale: "ko", numericOrdering: true });
+      if (allergy)
+        return await Student.find({ teacherEmail: loggedInUser.email, allergy })
+          .sort(sortValue)
+          .collation({ locale: "ko", numericOrdering: true });
 
       // trash 값이 true이면 휴지통에 있는 학생 보기
       if (trash) return await Student.find({ teacherEmail: loggedInUser.email, trash: true });
@@ -29,7 +32,10 @@ export default {
       // studentId 값만 있으면 한 학생 보기
       if (studentId) return await Student.find({ _id: studentId, teacherEmail: loggedInUser.email });
       // 아무 값도 없으면 모든 학생 보기
-      else return await Student.find({ teacherEmail: loggedInUser.email, trash: false }).sort(sortValue).collation({ locale: "ko", numericOrdering: true });
+      else
+        return await Student.find({ teacherEmail: loggedInUser.email, trash: false })
+          .sort(sortValue)
+          .collation({ locale: "ko", numericOrdering: true });
     }),
   },
 };

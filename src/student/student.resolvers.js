@@ -7,7 +7,7 @@ export default {
       return journal;
     },
     journalNum: async ({ _id }) => {
-      return Journal.count({ ownerId: _id })
-    }
+      return Journal.count({ ownerId: _id });
+    },
   },
 };

@@ -1,0 +1,48 @@
+type Student {
+  _id: ID!
+  teacherEmail: String!
+  studentName: String!
+  studentNumber: String
+  studentGender: String!
+  allergy: [Int]
+  tag: [String]
+  listId: [ID]
+  trash: Boolean
+  memo: String
+  journal: [Journal]
+  journalNum: Int
+  icon: Int
+  role: String
+}
+
+type Query {
+  seeAllStudent(studentId: ID, allergy: Int, tag: [String], sort: String, trash: Boolean): [Student]
+}
+
+type Mutation {
+  createStudent(teacherEmail: String!, studentString: String!): mutationResult
+
+  addStudent(teacherEmail: String!, studentId: [ID!], listId: ID!): mutationResult
+
+  editStudent(
+    teacherEmail: String!
+    studentId: ID
+    studentName: String
+    studentNumber: String
+    studentGender: String
+    parentPhoneNum: String
+    allergy: [Int]
+    tag: [String]
+    delTag: String
+    trash: Boolean
+    memo: String
+    icon: Int
+    studentIcon: String
+    restoreAll: Boolean
+    role: String
+  ): mutationResult
+
+  deleteStudent(disconnectOnly: Boolean!, teacherEmail: String!, studentId: ID!, listId: ID): mutationResult
+
+  deleteAllStudent(teacherEmail: String!): mutationResult
+}
