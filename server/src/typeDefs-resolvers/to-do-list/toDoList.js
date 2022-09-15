@@ -107,4 +107,4 @@ const resolver = {
   },
 };
 
-module.exports - resolver;
+module.exports = resolver;
