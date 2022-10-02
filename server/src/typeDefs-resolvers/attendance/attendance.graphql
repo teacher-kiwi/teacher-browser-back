@@ -21,11 +21,10 @@ type Query {
 type Mutation {
   createAttendance(
     userEmail: String!
-    studentId: String!
+    studentId: [String!]!
     type: String!
-    date: Float!
     contents: String
-    month: Int!
+    dateMonthArr: [DateMonth]!
   ): mutationResult
 
   createManyAttendance(
