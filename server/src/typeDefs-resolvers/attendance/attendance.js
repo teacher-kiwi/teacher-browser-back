@@ -6,8 +6,12 @@ const { protectedQuery, protectedMutation } = require("../../utils/_utils");
 const resolver = {
   Attendance: {
     studentName: async ({ studentId }) => {
-      const student = await Student.findOne({ _id: studentId });
-      return student.studentName;
+      try {
+        const student = await Student.findOne({ _id: studentId });
+        return student.studentName;
+      } catch (err) {
+        throw err.massage;
+      }
     },
   },
 
@@ -22,12 +26,11 @@ const resolver = {
 
   Mutation: {
     createAttendance: protectedMutation(async (_, { userEmail, studentId, type, contents, dateMonthArr }) => {
+      const attendanceList = [];
       try {
         for (const studentIndex in studentId) {
-          console.log(studentId[studentIndex]);
           for (const dateIndex in dateMonthArr) {
-            console.log(dateMonthArr[dateIndex]);
-            await Attendance.create({
+            const attendance = await Attendance.create({
               userEmail,
               studentId: studentId[studentIndex],
               type,
@@ -35,13 +38,13 @@ const resolver = {
               date: dateMonthArr[dateIndex].date,
               month: dateMonthArr[dateIndex].month,
             });
+            attendanceList.push(attendance);
           }
         }
       } catch (err) {
         throw err.massage;
       }
-
-      return { ok: true };
+      return attendanceList;
     }),
 
     // createAttendance: protectedMutation(async (_, { userEmail, studentId, type, date, contents, month }) => {
