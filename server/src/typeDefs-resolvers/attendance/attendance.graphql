@@ -25,7 +25,7 @@ type Mutation {
     type: String!
     contents: String
     dateMonthArr: [DateMonth]!
-  ): mutationResult
+  ): [Attendance]
 
   createManyAttendance(
     userEmail: String!
