@@ -6,8 +6,12 @@ const { protectedQuery, protectedMutation } = require("../../utils/_utils");
 const resolver = {
   Attendance: {
     studentName: async ({ studentId }) => {
-      const student = await Student.findOne({ _id: studentId });
-      return student.studentName;
+      try {
+        const student = await Student.findOne({ _id: studentId });
+        return student.studentName;
+      } catch (err) {
+        throw err.massage;
+      }
     },
   },
 
@@ -21,17 +25,39 @@ const resolver = {
   },
 
   Mutation: {
-    createAttendance: protectedMutation(async (_, { userEmail, studentId, type, date, contents, month }) => {
-      await Attendance.create({
-        userEmail,
-        studentId,
-        type,
-        date,
-        month,
-        ...(contents && { contents }),
-      });
-      return { ok: true };
+    createAttendance: protectedMutation(async (_, { userEmail, studentId, type, contents, dateMonthArr }) => {
+      const attendanceList = [];
+      try {
+        for (const studentIndex in studentId) {
+          for (const dateIndex in dateMonthArr) {
+            const attendance = await Attendance.create({
+              userEmail,
+              studentId: studentId[studentIndex],
+              type,
+              ...(contents && { contents }),
+              date: dateMonthArr[dateIndex].date,
+              month: dateMonthArr[dateIndex].month,
+            });
+            attendanceList.push(attendance);
+          }
+        }
+      } catch (err) {
+        throw err.massage;
+      }
+      return attendanceList;
     }),
+
+    // createAttendance: protectedMutation(async (_, { userEmail, studentId, type, date, contents, month }) => {
+    //   await Attendance.create({
+    //     userEmail,
+    //     studentId,
+    //     type,
+    //     date,
+    //     month,
+    //     ...(contents && { contents }),
+    //   });
+    //   return { ok: true };
+    // }),
 
     createManyAttendance: protectedMutation(async (_, { userEmail, studentId, type, contents, dateMonthArr }) => {
       for (let i = 0; i < dateMonthArr.length; i++) {
