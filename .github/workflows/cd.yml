@@ -29,4 +29,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           instance-ids: ${{ secrets.INSTANCE_ID }}
           working-directory: /home/ubuntu/teachercan-back
-          command: sudo docker-compose down; sudo docker rmi $(sudo docker images -q); sudo docker pull ${{ secrets.DOCKER_USER }}/teachercan-back && sudo docker-compose up -d
+          command: sudo docker compose down; sudo docker rmi $(sudo docker images -q); sudo docker pull ${{ secrets.DOCKER_USER }}/teachercan-back && sudo docker compose up -d
