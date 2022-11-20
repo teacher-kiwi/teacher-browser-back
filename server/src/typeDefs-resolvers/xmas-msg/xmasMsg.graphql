@@ -1,0 +1,20 @@
+type XmasMsg {
+  _id: ID!
+  userEmail: String!
+  author: String!
+  text: String!
+}
+
+type Query {
+  xmasMsg(userEmail: String): [XmasMsg]
+}
+
+type Mutation {
+  createXmasMsg(userEmail: String!, author: String!, text: String!): mutationResult
+
+  updateXmasMsg(userEmail: String!, xmasMsgId: ID!, author: String, text: String): mutationResult
+
+  deleteXmasMsg(userEmail: String!, xmasMsgId: ID!): mutationResult
+
+  #   # changeIndexQrcode(userEmail: String!, qrcodeId1: ID!, qrcodeId2: ID!): mutationResult
+}
