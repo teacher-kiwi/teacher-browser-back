@@ -14,9 +14,9 @@ const resolvers = {
     },
   },
   Mutation: {
-    createXmasMsg: protectedMutation(async (_, { userEmail, author, text }) => {
+    createXmasMsg: protectedMutation(async (_, { userEmail, author, text, bg }) => {
       try {
-        await XmasMsg.create({ userEmail, author, text });
+        await XmasMsg.create({ userEmail, author, text, bg });
 
         return { ok: true };
       } catch (err) {
@@ -24,10 +24,11 @@ const resolvers = {
       }
     }),
 
-    updateXmasMsg: protectedMutation(async (_, { xmasMsgId, author, text }) => {
+    updateXmasMsg: protectedMutation(async (_, { xmasMsgId, author, text, bg }) => {
       const update = {};
       if (author) update.author = author;
       if (text) update.text = text;
+      if (bg) update.bg = bg;
       try {
         await XmasMsg.updateOne({ _id: xmasMsgId }, { $set: update });
         return { ok: true };

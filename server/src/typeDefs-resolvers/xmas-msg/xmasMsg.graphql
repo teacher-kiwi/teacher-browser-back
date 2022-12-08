@@ -8,6 +8,7 @@ type Msg {
   userEmail: String!
   author: String!
   text: String!
+  bg: Int!
 }
 
 type Query {
@@ -15,11 +16,9 @@ type Query {
 }
 
 type Mutation {
-  createXmasMsg(userEmail: String!, author: String!, text: String!): mutationResult
+  createXmasMsg(userEmail: String!, author: String!, text: String!, bg: Int): mutationResult
 
-  updateXmasMsg(userEmail: String!, xmasMsgId: ID!, author: String, text: String): mutationResult
+  updateXmasMsg(userEmail: String!, xmasMsgId: ID!, author: String, text: String, bg: Int): mutationResult
 
   deleteXmasMsg(userEmail: String!, xmasMsgId: ID!): mutationResult
-
-  #   # changeIndexQrcode(userEmail: String!, qrcodeId1: ID!, qrcodeId2: ID!): mutationResult
 }
