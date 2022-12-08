@@ -3,7 +3,15 @@ const { protectedMutation } = require("../../utils/_utils");
 
 const resolvers = {
   Query: {
-    xmasMsg: async (_, { userEmail }) => (userEmail ? await XmasMsg.find({ userEmail }) : await XmasMsg.find()),
+    xmasMsg: async (_, { userEmail, pageNumber }) => {
+      return {
+        msg: await XmasMsg.find(userEmail ? { userEmail } : null)
+          .sort({ _id: -1 })
+          .skip(pageNumber >= 1 ? (pageNumber - 1) * 6 : null)
+          .limit(pageNumber >= 1 ? 6 : null),
+        count: await XmasMsg.find(userEmail ? { userEmail } : null).count(),
+      };
+    },
   },
   Mutation: {
     createXmasMsg: protectedMutation(async (_, { userEmail, author, text }) => {
@@ -36,17 +44,6 @@ const resolvers = {
         return { ok: false, error: err.message };
       }
     }),
-
-    //   changeIndexQrcode: protectedMutation(async (_, { qrcodeId1, qrcodeId2 }) => {
-    //     try {
-    //       const qrcode1 = await Qrcode.findById(qrcodeId1);
-    //       const qrcode2 = await Qrcode.findOneAndUpdate({ _id: qrcodeId2 }, { $set: { index: qrcode1.index } });
-    //       await Qrcode.updateOne({ _id: qrcodeId1 }, { $set: { index: qrcode2.index } });
-    //       return { ok: true };
-    //     } catch (err) {
-    //       return { ok: false, error: err.message };
-    //     }
-    //   }),
   },
 };
 
