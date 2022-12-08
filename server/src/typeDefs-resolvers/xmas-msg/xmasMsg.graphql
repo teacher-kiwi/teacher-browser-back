@@ -1,4 +1,9 @@
 type XmasMsg {
+  msg: [Msg]!
+  count: Int!
+}
+
+type Msg {
   _id: ID!
   userEmail: String!
   author: String!
@@ -6,7 +11,7 @@ type XmasMsg {
 }
 
 type Query {
-  xmasMsg(userEmail: String): [XmasMsg]
+  xmasMsg(userEmail: String, pageNumber: Int): XmasMsg
 }
 
 type Mutation {
