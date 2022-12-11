@@ -34,6 +34,7 @@ type User {
   dDay: [DDay]
   isMoveDDay: Boolean
   homeLinks: [homeLink]
+  defaultStudentListId: String
 }
 
 type Query {
@@ -60,4 +61,6 @@ type Mutation {
   deleteSchoolInfo(userEmail: String!): mutationResult
 
   setFavoriteNews(news: String!, userEmail: String!): mutationResult
+
+  setDefaultStudentListId(listId: String!, userEmail: String!): mutationResult
 }

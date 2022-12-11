@@ -1,0 +1,24 @@
+type XmasMsg {
+  msg: [Msg]!
+  count: Int!
+}
+
+type Msg {
+  _id: ID!
+  userEmail: String!
+  author: String!
+  text: String!
+  bg: Int!
+}
+
+type Query {
+  xmasMsg(userEmail: String, pageNumber: Int): XmasMsg
+}
+
+type Mutation {
+  createXmasMsg(userEmail: String!, author: String!, text: String!, bg: Int): mutationResult
+
+  updateXmasMsg(userEmail: String!, xmasMsgId: ID!, author: String, text: String, bg: Int): mutationResult
+
+  deleteXmasMsg(userEmail: String!, xmasMsgId: ID!): mutationResult
+}

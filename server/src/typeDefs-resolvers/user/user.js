@@ -89,6 +89,15 @@ const resolver = {
       else await User.updateOne({ email: userEmail }, { $addToSet: { favoriteNews } });
       return { ok: true };
     }),
+
+    setDefaultStudentListId: protectedMutation(async (_, { listId, userEmail }) => {
+      try {
+        await User.updateOne({ email: userEmail }, { $set: { defaultStudentListId: listId === "" ? null : listId } });
+        return { ok: true };
+      } catch (err) {
+        return { ok: false, error: err.message };
+      }
+    }),
   },
 };
 

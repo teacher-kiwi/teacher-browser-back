@@ -61,6 +61,9 @@ const userSchema = new Schema({
   homeLinks: {
     type: [{ title: String, link: String, ID: Number }],
   },
+  defaultStudentListId: {
+    type: String,
+  },
 });
 
 const User = mongoose.model("User", userSchema);
