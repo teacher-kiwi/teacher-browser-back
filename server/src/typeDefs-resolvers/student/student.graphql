@@ -15,12 +15,17 @@ type Student {
   role: String
 }
 
+input StudentInfo {
+  name: String!
+  gender: String!
+}
+
 type Query {
   seeAllStudent(studentId: ID, allergy: Int, tag: [String], sort: String, trash: Boolean): [Student]
 }
 
 type Mutation {
-  createStudent(teacherEmail: String!, studentString: String!): mutationResult
+  createStudent(teacherEmail: String!, students: [StudentInfo]): mutationResult
 
   addStudent(teacherEmail: String!, studentId: [ID!], listId: ID!): mutationResult
 

@@ -53,19 +53,18 @@ const resolver = {
   },
 
   Mutation: {
-    createStudent: protectedMutation(async (_, { teacherEmail, studentString }) => {
-      const studentArr = JSON.parse(studentString);
+    createStudent: protectedMutation(async (_, { teacherEmail, students }) => {
       const existStudent = [];
 
-      for (let i = 0; i < studentArr.length; i++) {
-        if (studentArr[i].name.trim() === "") continue;
-        const student = await Student.findOne({ teacherEmail, studentName: studentArr[i].name });
+      for (let i = 0; i < students.length; i++) {
+        if (students[i].name.trim() === "") continue;
+        const student = await Student.findOne({ teacherEmail, studentName: students[i].name });
         if (!student)
           await Student.create({
             teacherEmail,
-            studentName: studentArr[i].name,
-            studentGender: studentArr[i].gender,
-            tag: [studentArr[i].gender === "male" ? "남학생" : "여학생"],
+            studentName: students[i].name,
+            studentGender: students[i].gender,
+            tag: [students[i].gender === "male" ? "남학생" : "여학생"],
           });
         else existStudent.push(student.studentName);
       }
