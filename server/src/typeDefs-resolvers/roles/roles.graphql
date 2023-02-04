@@ -1,0 +1,42 @@
+type Roles {
+  _id: ID!
+  userEmail: String!
+  startDate: Float!
+  endDate: Float!
+  roles: [Role]
+}
+
+type Role {
+  _id: ID!
+  roles: ID!
+  title: String!
+  detail: String!
+  students: [Student]
+}
+
+input RoleInput {
+  roles: ID!
+  title: String!
+  detail: String!
+  students: [ID]
+}
+
+type Query {
+  roles(userEmail: String!): [Roles]
+}
+
+type Mutation {
+  createRoles(userEmail: String!, startDate: Float!, endDate: Float!): Roles
+
+  updateRoles(userEmail: String!, _id: ID!, startDate: Float, endDate: Float): Roles
+
+  deleteRoles(userEmail: String!, _id: ID!): mutationResult
+
+  addRole(userEmail: String!, data: [RoleInput!]): [Role]
+
+  updateRole(userEmail: String!, _id: ID!, title: String, detail: String): Role
+
+  addStudentRole(userEmail: String!, roleId: ID!, students: [ID!]): mutationResult
+
+  deleteStudentRole(userEmail: String!, roleId: ID!, students: [ID!]): mutationResult
+}
