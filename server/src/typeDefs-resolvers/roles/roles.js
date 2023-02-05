@@ -13,7 +13,15 @@ const resolvers = {
   },
 
   Query: {
-    roles: protectedMutation(async (_, { userEmail }) => await Roles.find({ userEmail })),
+    roles: protectedMutation(async (_, { userEmail, _id, date }) => {
+      const query = { userEmail };
+      if (_id) query._id = _id;
+      if (typeof date === "number") {
+        query.startDate = { $lte: date };
+        query.endDate = { $gt: date };
+      }
+      return await Roles.find(query);
+    }),
   },
 
   Mutation: {
