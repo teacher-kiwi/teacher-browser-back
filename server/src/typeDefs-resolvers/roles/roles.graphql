@@ -22,7 +22,7 @@ input RoleInput {
 }
 
 type Query {
-  roles(userEmail: String!): [Roles]
+  roles(userEmail: String!, _id: ID, date: Int): [Roles]
 }
 
 type Mutation {
