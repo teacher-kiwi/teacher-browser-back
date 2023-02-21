@@ -2,11 +2,8 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const rolesSchema = new Schema({
-  userEmail: {
-    type: String,
-    required: true,
-  },
+const dateSchema = new Schema({
+  order: Number,
   startDate: {
     type: Date,
     required: true,
@@ -15,6 +12,14 @@ const rolesSchema = new Schema({
     type: Date,
     required: true,
   },
+});
+
+const rolesSchema = new Schema({
+  userEmail: {
+    type: String,
+    required: true,
+  },
+  dates: [dateSchema],
 });
 
 const Roles = mongoose.model("Roles", rolesSchema);

@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
+const studentSchema = new Schema({
+  order: Number,
+  students: [String],
+});
+
 const roleSchema = new Schema({
   roles: {
     type: String,
@@ -15,9 +20,7 @@ const roleSchema = new Schema({
     type: String,
     required: true,
   },
-  students: {
-    type: [String],
-  },
+  students: [studentSchema],
 });
 
 const Role = mongoose.model("Role", roleSchema);

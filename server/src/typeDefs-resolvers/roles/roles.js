@@ -9,33 +9,41 @@ const resolvers = {
   },
 
   Role: {
-    students: async ({ students: studentList }) => await Student.find({ _id: { $in: studentList } }),
+    students: async ({ students: studentList }) =>
+      studentList.map(async ({ order, students }) => ({
+        order,
+        students: await Student.find({ _id: { $in: students } }),
+      })),
   },
 
   Query: {
-    roles: protectedMutation(async (_, { userEmail, _id, date }) => {
+    roles: protectedMutation(async (_, { userEmail, _id }) => {
       const query = { userEmail };
       if (_id) query._id = _id;
-      if (typeof date === "number") {
-        query.startDate = { $lte: date };
-        query.endDate = { $gt: date };
-      }
-      return await Roles.find(query);
+      // if (typeof date === "number") {
+      //   query.startDate = { $lte: date };
+      //   query.endDate = { $gt: date };
+      // }
+      return await Roles.findOne(query);
     }),
   },
 
   Mutation: {
-    createRoles: protectedMutation(async (_, { userEmail, startDate, endDate }) => {
+    createRoles: protectedMutation(async (_, { userEmail, startDate, endDate, data }) => {
       try {
-        return await Roles.create({ userEmail, startDate, endDate });
-      } catch (err) {
-        throw err.message;
-      }
-    }),
-
-    updateRoles: protectedMutation(async (_, { _id, startDate, endDate }) => {
-      try {
-        return await Roles.findOneAndUpdate({ _id }, { startDate, endDate });
+        if (await Roles.findOne({ userEmail })) {
+          throw new Error("이미 1인1역이 존재합니다.");
+        } else {
+          const roles = await Roles.create({ userEmail, dates: [{ order: 1, startDate, endDate }] });
+          const convertedData = data.map(({ title, detail, students }) => ({
+            title,
+            detail,
+            roles: roles._id,
+            students: { order: 1, students },
+          }));
+          await Role.insertMany(convertedData);
+          return roles;
+        }
       } catch (err) {
         throw err.message;
       }
@@ -51,39 +59,84 @@ const resolvers = {
       }
     }),
 
-    addRole: protectedMutation(async (_, { data }) => {
+    addNewDateRoles: protectedMutation(async (_, { userEmail, startDate, endDate, data }) => {
       try {
-        return await Role.create(data);
+        const roles = await Roles.findOne({ userEmail });
+        const newOrder = roles.dates[roles.dates.length - 1].order + 1;
+        if (roles) {
+          data.forEach(async ({ id, students }) => {
+            await Role.updateOne({ _id: id }, { $push: { students: { order: newOrder, students } } });
+          });
+
+          await Roles.findOneAndUpdate(
+            { userEmail },
+            {
+              $push: {
+                dates: {
+                  order: newOrder,
+                  startDate,
+                  endDate,
+                },
+              },
+            },
+            { new: true },
+          );
+          return { ok: true };
+        } else {
+          throw new Error("1인1역이 존재하지 않습니다.");
+        }
       } catch (err) {
         throw err.message;
       }
     }),
 
-    updateRole: protectedMutation(async (_, { _id, title, detail }) => {
+    updateRoles: protectedMutation(async (_, { userEmail, order, startDate, endDate, data }) => {
       try {
-        return await Role.findOneAndUpdate({ _id }, { title, detail });
+        await Roles.findOneAndUpdate(
+          { userEmail, "dates.order": order },
+          { $set: { "dates.$.startDate": startDate, "dates.$.endDate": endDate } },
+          { new: true },
+        );
+        // 역할(학생 명단) 수정 추가
+        return { ok: true };
       } catch (err) {
         throw err.message;
       }
     }),
 
-    addStudentRole: protectedMutation(async (_, { roleId, students }) => {
-      try {
-        await Role.updateOne({ _id: roleId }, { students });
-        return { ok: true };
-      } catch (err) {
-        return { ok: false, error: err.message };
-      }
-    }),
+    // addRole: protectedMutation(async (_, { data }) => {
+    //   try {
+    //     return await Role.create(data);
+    //   } catch (err) {
+    //     throw err.message;
+    //   }
+    // }),
 
-    deleteStudentRole: protectedMutation(async (_, { roleId, students }) => {
-      try {
-        await Role.updateOne({ _id: roleId }, { $pull: { students: { $in: students } } });
-        return { ok: true };
-      } catch (err) {
-        return { ok: false, error: err.message };
-      }
-    }),
+    // updateRole: protectedMutation(async (_, { _id, title, detail }) => {
+    //   try {
+    //     return await Role.findOneAndUpdate({ _id }, { title, detail });
+    //   } catch (err) {
+    //     throw err.message;
+    //   }
+    // }),
+
+    // addStudentRole: protectedMutation(async (_, { roleId, students }) => {
+    //   try {
+    //     await Role.updateOne({ _id: roleId }, { students });
+    //     return { ok: true };
+    //   } catch (err) {
+    //     return { ok: false, error: err.message };
+    //   }
+    // }),
+
+    // deleteStudentRole: protectedMutation(async (_, { roleId, students }) => {
+    //   try {
+    //     await Role.updateOne({ _id: roleId }, { $pull: { students: { $in: students } } });
+    //     return { ok: true };
+    //   } catch (err) {
+    //     return { ok: false, error: err.message };
+    //   }
+    // }),
   },
 };
 

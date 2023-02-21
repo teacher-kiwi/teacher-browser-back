@@ -1,9 +1,19 @@
+type Date {
+  order: Int
+  startDate: Float!
+  endDate: Float!
+}
+
 type Roles {
   _id: ID!
   userEmail: String!
-  startDate: Float!
-  endDate: Float!
+  dates: [Date]
   roles: [Role]
+}
+
+type RoleStudent {
+  order: Int
+  students: [Student]
 }
 
 type Role {
@@ -11,32 +21,38 @@ type Role {
   roles: ID!
   title: String!
   detail: String!
-  students: [Student]
+  students: [RoleStudent]
 }
 
 input RoleInput {
-  roles: ID!
   title: String!
   detail: String!
   students: [ID]
 }
 
+input RoleIdInput {
+  id: ID!
+  students: [ID]
+}
+
 type Query {
-  roles(userEmail: String!, _id: ID, date: Int): [Roles]
+  roles(userEmail: String!, _id: ID): Roles
 }
 
 type Mutation {
-  createRoles(userEmail: String!, startDate: Float!, endDate: Float!): Roles
-
-  updateRoles(userEmail: String!, _id: ID!, startDate: Float, endDate: Float): Roles
+  createRoles(userEmail: String!, startDate: Float!, endDate: Float!, data: [RoleInput!]): Roles
 
   deleteRoles(userEmail: String!, _id: ID!): mutationResult
 
-  addRole(userEmail: String!, data: [RoleInput!]): [Role]
+  addNewDateRoles(userEmail: String!, startDate: Float!, endDate: Float!, data: [RoleIdInput!]): mutationResult
 
-  updateRole(userEmail: String!, _id: ID!, title: String, detail: String): Role
+  updateRoles(userEmail: String!, order: Int!, startDate: Float, endDate: Float, data: [RoleIdInput]): mutationResult
 
-  addStudentRole(userEmail: String!, roleId: ID!, students: [ID!]): mutationResult
+  # addRole(userEmail: String!, data: [RoleInput!]): [Role]
 
-  deleteStudentRole(userEmail: String!, roleId: ID!, students: [ID!]): mutationResult
+  # updateRole(userEmail: String!, _id: ID!, title: String, detail: String): Role
+
+  # addStudentRole(userEmail: String!, roleId: ID!, students: [ID!]): mutationResult
+
+  # deleteStudentRole(userEmail: String!, roleId: ID!, students: [ID!]): mutationResult
 }
