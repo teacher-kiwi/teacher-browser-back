@@ -41,8 +41,8 @@ const studentSchema = new Schema({
   icon: {
     type: Number,
   },
-  role: {
-    type: String,
+  roleHistory: {
+    type: [Number],
   },
 });
 
