@@ -90,7 +90,7 @@ const resolvers = {
       }
     }),
 
-    updateRoles: protectedMutation(async (_, { userEmail, order, startDate, endDate, data }) => {
+    updateRoles: protectedMutation(async (_, { userEmail, order, startDate, endDate, data, addRole, deleteRole }) => {
       try {
         if ((startDate, endDate)) {
           await Roles.updateOne(
@@ -102,6 +102,19 @@ const resolvers = {
           data.forEach(async ({ id, students }) => {
             await Role.updateOne({ _id: id, "students.order": order }, { $set: { "students.$.students": students } });
           });
+        }
+        if (addRole) {
+          const { _id } = await Roles.findOne({ userEmail });
+          const convertedData = addRole.map(({ title, detail, students }) => ({
+            title,
+            detail,
+            roles: _id,
+            students: { order, students },
+          }));
+          await Role.insertMany(convertedData);
+        }
+        if (deleteRole) {
+          await Role.deleteMany({ _id: { $in: deleteRole } });
         }
         return { ok: true };
       } catch (err) {
