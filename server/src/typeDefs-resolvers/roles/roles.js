@@ -92,12 +92,17 @@ const resolvers = {
 
     updateRoles: protectedMutation(async (_, { userEmail, order, startDate, endDate, data }) => {
       try {
-        await Roles.findOneAndUpdate(
-          { userEmail, "dates.order": order },
-          { $set: { "dates.$.startDate": startDate, "dates.$.endDate": endDate } },
-          { new: true },
-        );
-        // 역할(학생 명단) 수정 추가
+        if ((startDate, endDate)) {
+          await Roles.updateOne(
+            { userEmail, "dates.order": order },
+            { $set: { "dates.$.startDate": startDate, "dates.$.endDate": endDate } },
+          );
+        }
+        if (data) {
+          data.forEach(async ({ id, students }) => {
+            await Role.updateOne({ _id: id, "students.order": order }, { $set: { "students.$.students": students } });
+          });
+        }
         return { ok: true };
       } catch (err) {
         throw err.message;

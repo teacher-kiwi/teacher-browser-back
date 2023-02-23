@@ -116,7 +116,6 @@ const resolver = {
           memo,
           restoreAll,
           studentIcon,
-          role,
         },
       ) => {
         // 바꿀 이름이 이미 있는지 검사
@@ -165,7 +164,6 @@ const resolver = {
             $pull: { tag: delTag },
             memo,
             icon,
-            role,
           },
         );
         // 알러지 값이 있을 경우
@@ -219,6 +217,28 @@ const resolver = {
       }
       await Student.deleteMany({ teacherEmail, trash: true });
       return { ok: true };
+    }),
+
+    checkRoleDone: protectedMutation(async (_, { data }) => {
+      try {
+        data.forEach(async ({ id, dates }) => {
+          await Student.updateOne({ _id: id }, { $addToSet: { roleHistory: dates } });
+        });
+        return { ok: true };
+      } catch (err) {
+        throw err.message;
+      }
+    }),
+
+    uncheckRoleDone: protectedMutation(async (_, { data }) => {
+      try {
+        data.forEach(async ({ id, dates }) => {
+          await Student.updateOne({ _id: id }, { $pullAll: { roleHistory: dates } });
+        });
+        return { ok: true };
+      } catch (err) {
+        throw err.message;
+      }
     }),
   },
 };
