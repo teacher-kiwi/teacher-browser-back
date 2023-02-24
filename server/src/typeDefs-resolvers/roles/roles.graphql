@@ -46,7 +46,15 @@ type Mutation {
 
   addNewDateRoles(userEmail: String!, startDate: Float!, endDate: Float!, data: [RoleIdInput!]): mutationResult
 
-  updateRoles(userEmail: String!, order: Int!, startDate: Float, endDate: Float, data: [RoleIdInput]): mutationResult
+  updateRoles(
+    userEmail: String!
+    order: Int!
+    startDate: Float
+    endDate: Float
+    data: [RoleIdInput]
+    addRole: [RoleInput]
+    deleteRole: [ID]
+  ): mutationResult
 
   # addRole(userEmail: String!, data: [RoleInput!]): [Role]
 
