@@ -12,7 +12,17 @@ type Student {
   journal: [Journal]
   journalNum: Int
   icon: Int
-  role: String
+  roleHistory: [Int]
+}
+
+input StudentInfo {
+  name: String!
+  gender: String!
+}
+
+input RoleDoneInput {
+  id: String!
+  dates: [Int]
 }
 
 type Query {
@@ -20,7 +30,7 @@ type Query {
 }
 
 type Mutation {
-  createStudent(teacherEmail: String!, studentString: String!): mutationResult
+  createStudent(teacherEmail: String!, students: [StudentInfo]): mutationResult
 
   addStudent(teacherEmail: String!, studentId: [ID!], listId: ID!): mutationResult
 
@@ -39,10 +49,13 @@ type Mutation {
     icon: Int
     studentIcon: String
     restoreAll: Boolean
-    role: String
   ): mutationResult
 
   deleteStudent(disconnectOnly: Boolean!, teacherEmail: String!, studentId: ID!, listId: ID): mutationResult
 
   deleteAllStudent(teacherEmail: String!): mutationResult
+
+  checkRoleDone(teacherEmail: String!, data: [RoleDoneInput]): mutationResult
+
+  uncheckRoleDone(teacherEmail: String!, data: [RoleDoneInput]): mutationResult
 }
