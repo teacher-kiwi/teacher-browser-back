@@ -1,5 +1,6 @@
 const Student = require("../../models/Student");
 const StudentList = require("../../models/StudentList");
+const User = require("../../models/User");
 const { protectedQuery, protectedMutation } = require("../../utils/_utils");
 
 const resolver = {
@@ -56,7 +57,7 @@ const resolver = {
   },
 
   Mutation: {
-    createStudentList: protectedMutation(async (_, { teacherEmail, listName }) => {
+    createStudentList: protectedMutation(async (_, { teacherEmail, listName, isDefault }) => {
       const existStudentList = await StudentList.findOne({ teacherEmail, listName: listName.trim() });
       if (existStudentList) return { ok: false, error: "리스트 이름이 존재합니다. 😅" };
       if (listName.trim() === "") return { ok: false, error: "리스트 이름이 공백입니다. 😅" };
@@ -70,7 +71,11 @@ const resolver = {
           break;
         }
       }
-      await StudentList.create({ teacherEmail, listName, listOrder: studentListNum });
+      const { _id: listId } = await StudentList.create({ teacherEmail, listName, listOrder: studentListNum });
+
+      if (isDefault) {
+        await User.updateOne({ email: teacherEmail }, { $set: { defaultStudentListId: listId } });
+      }
 
       return { ok: true };
     }),
