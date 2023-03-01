@@ -13,7 +13,7 @@ type Query {
 }
 
 type Mutation {
-  createStudentList(teacherEmail: String!, listName: String!): mutationResult
+  createStudentList(teacherEmail: String!, listName: String!, isDefault: Boolean): mutationResult
 
   editStudentList(
     teacherEmail: String!
