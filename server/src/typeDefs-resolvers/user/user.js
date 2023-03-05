@@ -70,7 +70,7 @@ const resolver = {
       await Journal.deleteMany({ teacherEmail });
       await Qrcode.deleteMany({ userEmail: teacherEmail });
       const roles = await Roles.findOneAndDelete({ userEmail: teacherEmail });
-      await Role.deleteMany({ roles: roles._id.toString() });
+      if (roles) await Role.deleteMany({ roles: roles._id.toString() });
       await Schedule.deleteMany({ userEmail: teacherEmail });
       await Student.deleteMany({ teacherEmail });
       await StudentList.deleteMany({ teacherEmail });
