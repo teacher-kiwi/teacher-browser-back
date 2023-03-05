@@ -1,6 +1,7 @@
 const User = require("../../models/User");
 const Student = require("../../models/Student");
 const StudentList = require("../../models/StudentList");
+const Attendance = require("../../models/Attendance");
 const Journal = require("../../models/Journal");
 const { protectedQuery, protectedMutation } = require("../../utils/_utils");
 
