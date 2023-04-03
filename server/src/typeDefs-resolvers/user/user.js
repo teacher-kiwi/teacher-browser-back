@@ -87,8 +87,8 @@ const resolver = {
       await Journal.deleteMany({ userEmail });
       const roles = await Roles.findOneAndDelete({ userEmail });
       if (roles) await Role.deleteMany({ roles: roles._id.toString() });
-      await Student.deleteMany({ userEmail });
-      await StudentList.deleteMany({ userEmail });
+//       await Student.deleteMany({ userEmail });
+//       await StudentList.deleteMany({ userEmail });
       await User.updateOne(
         { email: userEmail },
         { allergy: [], tag: ["남학생", "여학생", "홀수", "짝수"], defaultStudentListId: null },
