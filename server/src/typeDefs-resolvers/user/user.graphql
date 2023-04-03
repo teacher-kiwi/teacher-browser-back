@@ -37,8 +37,21 @@ type User {
   defaultStudentListId: String
 }
 
+type AttendanceData {
+  type: String
+  date: Float
+  contents: String
+}
+
+type AttendancesResult {
+  studentId: String
+  data: [AttendanceData]
+}
+
 type Query {
   me: User!
+
+  findAttendances(userEmail: String!): [AttendancesResult]
 }
 
 type Mutation {
