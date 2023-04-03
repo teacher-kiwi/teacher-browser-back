@@ -28,7 +28,7 @@ const resolver = {
     me: protectedQuery(async (_, __, { loggedInUser }) => await User.findOne({ email: loggedInUser.email })),
 
     findAttendances: protectedMutation(async (_, { userEmail }) => {
-      const attendances = await Attendance.find({ userEmail });
+      const attendances = await Attendance.find({ userEmail, month: { $gt: 2300 } });
       const set = new Set();
       attendances.forEach((attendance) => {
         set.add(attendance.studentId);
