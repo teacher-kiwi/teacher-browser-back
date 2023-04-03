@@ -84,7 +84,7 @@ const resolver = {
 
     deleteStudentInfo: protectedMutation(async (_, { userEmail }) => {
       await Attendance.deleteMany({ userEmail });
-      await Journal.deleteMany({ userEmail });
+//       await Journal.deleteMany({ userEmail });
       const roles = await Roles.findOneAndDelete({ userEmail });
       if (roles) await Role.deleteMany({ roles: roles._id.toString() });
 //       await Student.deleteMany({ userEmail });
