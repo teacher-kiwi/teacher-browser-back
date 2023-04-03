@@ -26,6 +26,30 @@ const resolver = {
 
   Query: {
     me: protectedQuery(async (_, __, { loggedInUser }) => await User.findOne({ email: loggedInUser.email })),
+
+    findAttendances: async (_, { userEmail }) => {
+      const attendances = await Attendance.find({ userEmail });
+      console.log(attendances);
+      const set = new Set();
+      attendances.forEach((attendance) => {
+        set.add(attendance.studentId);
+      });
+      const result = [];
+      set.forEach((id) => {
+        const att = attendances.filter((att) => att.studentId === id);
+        const data = att.map((obj) => ({ type: obj.type, date: obj.date, contents: obj.contents }));
+        result.push({ studentId: id, data });
+      });
+      console.log(result);
+      // return { ok: true };
+      return result;
+    },
+
+    // protectedMutation(async (_, { userEmail }) => {
+    //   const result = await Journal.find({ teacherEmail: userEmail });
+    //   console.log(result);
+    //   return { ok: true };
+    // }),
   },
 
   Mutation: {
@@ -84,11 +108,11 @@ const resolver = {
 
     deleteStudentInfo: protectedMutation(async (_, { userEmail }) => {
       await Attendance.deleteMany({ userEmail });
-      await Journal.deleteMany({ userEmail });
+      await Journal.deleteMany({ teacherEmail: userEmail });
       const roles = await Roles.findOneAndDelete({ userEmail });
       if (roles) await Role.deleteMany({ roles: roles._id.toString() });
-      await Student.deleteMany({ userEmail });
-      await StudentList.deleteMany({ userEmail });
+      await Student.deleteMany({ teacherEmail: userEmail });
+      await StudentList.deleteMany({ teacherEmail: userEmail });
       await User.updateOne(
         { email: userEmail },
         { allergy: [], tag: ["남학생", "여학생", "홀수", "짝수"], defaultStudentListId: null },
