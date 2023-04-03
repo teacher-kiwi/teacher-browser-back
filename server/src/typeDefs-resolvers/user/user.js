@@ -27,9 +27,8 @@ const resolver = {
   Query: {
     me: protectedQuery(async (_, __, { loggedInUser }) => await User.findOne({ email: loggedInUser.email })),
 
-    findAttendances: async (_, { userEmail }) => {
+    findAttendances: protectedMutation(async (_, { userEmail }) => {
       const attendances = await Attendance.find({ userEmail });
-      console.log(attendances);
       const set = new Set();
       attendances.forEach((attendance) => {
         set.add(attendance.studentId);
@@ -40,16 +39,8 @@ const resolver = {
         const data = att.map((obj) => ({ type: obj.type, date: obj.date, contents: obj.contents }));
         result.push({ studentId: id, data });
       });
-      console.log(result);
-      // return { ok: true };
       return result;
-    },
-
-    // protectedMutation(async (_, { userEmail }) => {
-    //   const result = await Journal.find({ teacherEmail: userEmail });
-    //   console.log(result);
-    //   return { ok: true };
-    // }),
+    }),
   },
 
   Mutation: {
